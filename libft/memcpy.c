@@ -1,0 +1,1 @@
+void	*memcpy(void *dst
