@@ -1,4 +1,6 @@
-void	*memset(void *b, int c, size_t len)
+#include "libft.h"
+
+void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*curr;
 	size_t			i;
@@ -11,4 +13,5 @@ void	*memset(void *b, int c, size_t len)
 		i++;
 		curr++;
 	}
+	return (b);
 }
