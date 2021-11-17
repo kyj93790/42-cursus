@@ -1,4 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 18:18:54 by yejikim           #+#    #+#             */
+/*   Updated: 2021/11/16 20:51:22 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+
+static int	is_space(char x)
+{
+	if ('\t' <= x && x <= '\r')
+		return (1);
+	if (x == ' ')
+		return (1);
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -8,11 +29,13 @@ int	ft_atoi(const char *str)
 
 	i = 0;
 	neg = 1;
-	if (*str == '+' || *str == '-')
-	{
+	while (str[i] && is_space(str[i]))
 		i++;
-		if (*str == '-')
+	if (str[i] && (str[i] == '+' || str[i] == '-'))
+	{
+		if (str[i] == '-')
 			neg = -1;
+		i++;
 	}
 	result = 0;
 	while (*(str + i))

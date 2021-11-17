@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 18:20:15 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 21:05:31 by yejikim          ###   ########.fr       */
+/*   Created: 2021/11/16 18:20:25 by yejikim           #+#    #+#             */
+/*   Updated: 2021/11/16 18:20:27 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void static	print_neg(int *n, int fd, int *digit)
 {
-	size_t	i;
+	char	x;
 
-	if (src == 0 || dst == 0)
-		return (0);
-	if (dst < src)
+	write(fd, "-", 1);
+	x = *n / *digit * -1 + '0';
+	write(fd, &x, 1);
+	*n = *n % *digit * -1;
+	*digit /= 10;
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	int		digit;
+	char	x;
+
+	digit = 1;
+	while (n / 10 / digit)
+		digit *= 10;
+	if (n < 0)
+		print_neg(&n, fd, &digit);
+	while (digit > 0)
 	{
-		i = 0;
-		while (i < len)
-		{
-			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
-			i++;
-		}
+		x = n / digit + '0';
+		write(fd, &x, 1);
+		n %= digit;
+		digit /= 10;
 	}
-	else
-	{
-		i = len;
-		while (i--)
-			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
-	}
-	return (dst);
 }

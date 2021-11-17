@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 18:20:57 by yejikim           #+#    #+#             */
+/*   Updated: 2021/11/16 21:03:38 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int static	is_same(const char *curr, const char *needle)
+static int	is_same(const char *curr, const char *needle)
 {
 	int	i;
 
@@ -19,7 +31,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	n_size;
 	int		i;
 
-	if (needle == 0)
+	if (*needle == '\0')
 		return ((char *)haystack);
 	n_size = ft_strlen(needle);
 	i = 0;

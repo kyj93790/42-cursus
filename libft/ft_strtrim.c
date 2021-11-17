@@ -1,6 +1,19 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 18:21:00 by yejikim           #+#    #+#             */
+/*   Updated: 2021/11/16 21:55:18 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int static	is_inset(char x, char const *set)
+#include "libft.h"
+#include <stdio.h>
+
+static int	is_inset(char x, char const *set)
 {
 	int	i;
 
@@ -14,25 +27,47 @@ int static	is_inset(char x, char const *set)
 	return (0);
 }
 
+static size_t	get_front(char const *s1, char const *set)
+{
+	long long	i;
+
+	i = 0;
+	while (s1[i] && is_inset(s1[i], set))
+		i++;
+	return (i);
+}
+
+static size_t	get_rear(char const *s1, char const *set)
+{
+	long long	i;
+
+	i = ft_strlen(s1);
+	i--;
+	while (i >= 0 && is_inset(s1[i], set))
+		i--;
+	return (i);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*pnew;
-	size_t	s1_len;
-	size_t	i;
-	size_t	index;
+	char		*pnew;
+	size_t		s1_len;
+	long long	f;
+	long long	r;
+	size_t		index;
 
 	s1_len = ft_strlen(s1);
 	pnew = (char *)malloc(sizeof(char) * (s1_len + 1));
 	if (pnew == 0)
 		return (0);
-	i = 0;
+	f = get_front(s1, set);
+	r = get_rear(s1, set);
 	index = 0;
-	while (i < s1_len)
+	while (f <= r)
 	{
-		if (!is_inset(*(s1 + i), set))
-			*(pnew + index++) = *(s1 + i);
-		i++;
+		pnew[index++] = *(s1 + f);
+		f++;
 	}
-	*(pnew + index) = '\0';
+	pnew[index] = '\0';
 	return (pnew);
 }
