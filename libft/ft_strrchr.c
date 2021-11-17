@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:58 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 20:16:02 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/17 21:42:45 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	long long	i;
 	const char	*loc;
+	const char	*result;
 
-	i = (long long)ft_strlen(s);
-	loc = s;
-	while (i >= 0)
-	{
-		if (*(loc + i) == c)
-			break ;
-		i--;
-	}
-	if (i < 0)
+	if (s == 0)
 		return (0);
-	return ((char *)(loc + i));
+	loc = s;
+	result = 0;
+	while (*loc)
+	{
+		if (*loc == (char)c)
+			result = loc;
+		loc++;
+	}
+	if (result == 0 && c != '\0')
+		return (0);
+	return ((char *)result);
 }

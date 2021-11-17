@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:21:14 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 21:50:42 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/17 20:16:07 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,14 @@ int	main(void)
 
 	printf("%s\n", ft_strtrim("", "anc"));
 	*/
-	
+/*	
 	char **result;
 
 	result = ft_split("          ", ' ');
 	int	i = 0;
 	while (result[i])
 		printf("%s\n", result[i++]);
-
+*/
+	printf("%lu\n", strlcat(0, "abc", 5));
 	return (0);
 }

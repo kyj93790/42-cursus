@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:47 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 18:20:49 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/17 19:47:01 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (s == 0)
+		return (0);
 	i = 0;
 	while (*(s + i))
 		i++;
