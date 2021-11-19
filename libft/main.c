@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:21:14 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/17 20:16:07 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/18 19:16:33 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ int	main(void)
 	while (result[i])
 		printf("%s\n", result[i++]);
 */
-	printf("%lu\n", strlcat(0, "abc", 5));
+//	printf("%lu\n", strlcat(0, "abc", 5));
+
+	printf("%s\n", (char *)memcpy(0,0,5));
+	printf("%s\n", (char *)ft_memcpy(0,0,5));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:21:03 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 21:23:32 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/18 14:15:28 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (pnew == 0)
 		return (0);
 	i = start;
-	while (i < s_len && (i < start + len) && *(s + i))
+	while (i < s_len && (i < start + len))
 	{
 		pnew[i - start] = *(s + i);
 		i++;

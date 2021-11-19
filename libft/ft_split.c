@@ -6,29 +6,39 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 21:56:40 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/18 18:28:41 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int static	count_word(char const *s, char c)
+static void	in_word(char const *s, int *i, char c)
+{
+	while (s[*i] && (s[*i] != c))
+		(*i)++;
+}
+
+static int	count_word(char const *s, char c)
 {
 	int	word_cnt;
 	int	i;
 
-	word_cnt = 1;
+	word_cnt = 0;
 	i = 0;
 	while (*(s + i))
 	{
-		if (*(s + i) == c)
+		if (*(s + i) != c)
+		{
+			in_word(s, &i, c);
 			word_cnt++;
-		i++;
+		}
+		else
+			i++;
 	}
 	return (word_cnt);
 }
 
-void static	free_mem(char **result)
+static void	free_mem(char **result)
 {
 	int	i;
 
@@ -38,7 +48,7 @@ void static	free_mem(char **result)
 	free(result);
 }
 
-char static	*curr_word(char **result, char const *s, int *i, char c)
+static char	*curr_word(char **result, char const *s, int *i, char c)
 {
 	char	*pnew;
 	int		j;
@@ -66,12 +76,12 @@ char static	*curr_word(char **result, char const *s, int *i, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	int		word_cnt;
 	int		i;
 	int		j;
 
-	word_cnt = count_word(s, c);
-	result = (char **)malloc(sizeof(char *) * (word_cnt + 1));
+	if (s == 0)
+		return (0);
+	result = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (result == 0)
 		return (0);
 	i = 0;

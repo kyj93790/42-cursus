@@ -6,12 +6,11 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:21:00 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 21:55:18 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/18 16:51:46 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	is_inset(char x, char const *set)
 {
