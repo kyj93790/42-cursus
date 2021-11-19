@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/18 18:28:41 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/19 14:10:04 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ static char	*curr_word(char **result, char const *s, int *i, char c)
 	int		k;
 
 	j = *i;
-	while (*(s + *i) != 0 && *(s + *i) != c)
-		(*i)++;
+	in_word(s, i, c);
 	pnew = (char *)malloc(sizeof(char) * (*i - j + 1));
 	if (pnew == 0)
 	{
@@ -90,9 +89,9 @@ char	**ft_split(char const *s, char c)
 	{
 		if (*(s + i) != c)
 		{
-			result[j] = curr_word(result, s, &i, c);
-			result[j + 1] = 0;
-			if (result[j++] == 0)
+			result[j] = 0;
+			result[j++] = curr_word(result, s, &i, c);
+			if (result == 0)
 				return (0);
 		}
 		else

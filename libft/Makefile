@@ -44,16 +44,22 @@ B_SRCS = ft_lstnew.c \
 		 ft_lstclear.c \
 		 ft_lstiter.c \
 		 ft_lstmap.c
-OBJECTS = $(SRCS:.c=.o)
-B_OBJECTS = $(B_SRCS:.c=.o)
+OBJECTS = $(SRCS:%.c=%.o)
+B_OBJECTS = $(B_SRCS:%.c=%.o)
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(OBJECTS) $(B_OBJECTS)
+else
+	OBJ_FILES = $(OBJECTS)
+endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJECTS)
+$(NAME) : $(OBJ_FILES)
 	ar rcs $(NAME) $(OBJECTS)
 
-bonus : $(OBJECTS) $(B_OBJECTS)
-	ar rcs $(NAME) $(OBJECTS) $(B_OBJECTS)
+bonus :
+	make WITH_BONUS=1 all
 
 clean :
 	rm -f $(OBJECTS) $(B_OBJECTS)
@@ -63,4 +69,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+.PHONY : all bonus clean fclean re

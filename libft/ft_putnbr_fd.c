@@ -6,13 +6,13 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:25 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/16 18:20:27 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/19 15:39:27 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void static	print_neg(int *n, int fd, int *digit)
+static void	print_neg(int *n, int fd, int *digit)
 {
 	char	x;
 
