@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:48:53 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/23 01:55:11 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/23 16:23:22 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*get_line(int fd, t_list *lst)
 		pnew = add_line(lst, pnew, nl);
 		if (pnew == NULL)
 			return (NULL);
-		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n') // encounter enter
+		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n')
 			break ;
 		lst->last = read(fd, lst->buffer, BUFFER_SIZE);
 		lst->curr = 0;

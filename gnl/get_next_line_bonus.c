@@ -6,39 +6,11 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:48:53 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/23 16:19:48 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/23 16:24:31 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-int	ft_lstadd(t_list **lst, int fd)
-{
-	if (*lst != NULL)
-	{
-		if ((*lst)->curr >= (*lst)->last)
-		{
-			(*lst)->last = read(fd, (*lst)->buffer, BUFFER_SIZE);
-			if ((*lst)->last <= 0)
-				return (0);
-			(*lst)->curr = 0;
-		}
-		return (1);
-	}
-	*lst = (t_list *)malloc(sizeof(t_list));
-	if (*lst == NULL)
-		return (0);
-	(*lst)->next = NULL;
-	(*lst)->fd = fd;
-	(*lst)->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if ((*lst)->buffer == NULL)
-		return (0);
-	(*lst)->last = read(fd, (*lst)->buffer, BUFFER_SIZE);
-	if ((*lst)->last <= 0)
-		return (0);
-	(*lst)->curr = 0;
-	return (1);
-}
 
 int	check_line(t_list *lst)
 {
@@ -92,7 +64,7 @@ char	*get_line(int fd, t_list *lst)
 		pnew = add_line(lst, pnew, nl);
 		if (pnew == NULL)
 			return (NULL);
-		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n') // encounter enter
+		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n')
 			break ;
 		lst->last = read(fd, lst->buffer, BUFFER_SIZE);
 		lst->curr = 0;
@@ -102,29 +74,13 @@ char	*get_line(int fd, t_list *lst)
 	return (pnew);
 }
 
-t_list	*ft_lstfind(t_list **lst, int fd)
-{
-	t_list	*curr;
-
-	curr = *lst;
-	while (curr)
-	{
-		if (curr->next == NULL)
-			return (curr);
-		else if (curr->next->fd == fd)
-			return (curr);
-		curr = curr->next;
-	}
-	return (curr);
-}
-
 t_list	*ft_lstgetone(t_list **lst, int fd)
 {
 	char	*pnew;
 	t_list	*curr;
 
 	pnew = NULL;
-	if (*lst == NULL || (*lst)->fd == fd)	// modified
+	if (*lst == NULL || (*lst)->fd == fd)
 	{
 		if (!ft_lstadd(lst, fd))
 		{
