@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:48:53 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/23 14:26:34 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/23 16:19:48 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_lstadd(t_list **lst, int fd)
 	*lst = (t_list *)malloc(sizeof(t_list));
 	if (*lst == NULL)
 		return (0);
+	(*lst)->next = NULL;
 	(*lst)->fd = fd;
 	(*lst)->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if ((*lst)->buffer == NULL)
@@ -36,7 +37,6 @@ int	ft_lstadd(t_list **lst, int fd)
 	if ((*lst)->last <= 0)
 		return (0);
 	(*lst)->curr = 0;
-	(*lst)->next = NULL;
 	return (1);
 }
 
@@ -124,7 +124,7 @@ t_list	*ft_lstgetone(t_list **lst, int fd)
 	t_list	*curr;
 
 	pnew = NULL;
-	if (*lst == NULL)
+	if (*lst == NULL || (*lst)->fd == fd)	// modified
 	{
 		if (!ft_lstadd(lst, fd))
 		{

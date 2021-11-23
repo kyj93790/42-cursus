@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:49:16 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/23 14:26:29 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/23 16:19:08 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	free_mem(t_list **lst, char **pnew, int fd)
 		else
 		{
 			curr = ft_lstfind(lst, fd);
+			if (curr->next == NULL)
+				return ;
 			temp = curr->next;
 			curr->next = temp->next;
 		}
