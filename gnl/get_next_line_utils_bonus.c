@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:49:16 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/22 23:50:19 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/23 14:26:29 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-int	ft_strlen(char *s)
-{
-	int	i;
-
-	if (s == NULL)
-		return (0);
-	i = 0;
-	while (*(s + i))
-		i++;
-	return (i);
-}
+#include "get_next_line_bonus.h"
 
 void	ft_strcpy(char *dst, char *src)
 {
@@ -42,17 +30,39 @@ void	ft_strcpy(char *dst, char *src)
 	*(dst + i) = '\0';
 }
 
-void	free_mem(t_list **lst, char **pnew)
+void	free_element(t_list *temp)
 {
+	if (temp)
+	{
+		if (temp->buffer)
+		{
+			free(temp->buffer);
+			temp->buffer = NULL;
+		}
+		free(temp);
+		temp = NULL;
+	}
+}
+
+void	free_mem(t_list **lst, char **pnew, int fd)
+{
+	t_list	*temp;
+	t_list	*curr;
+
 	if (*lst)
 	{
-		if ((*lst)->buffer)
+		if ((*lst)->fd == fd)
 		{
-			free((*lst)->buffer);
-			(*lst)->buffer = NULL;
+			temp = *lst;
+			*lst = temp->next;
 		}
-		free(*lst);
-		*lst = NULL;
+		else
+		{
+			curr = ft_lstfind(lst, fd);
+			temp = curr->next;
+			curr->next = temp->next;
+		}
+		free_element(temp);
 	}
 	if (*pnew)
 	{

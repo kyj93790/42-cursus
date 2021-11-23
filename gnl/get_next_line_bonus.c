@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:48:53 by yejin             #+#    #+#             */
-/*   Updated: 2021/11/23 01:55:11 by yejin            ###   ########.fr       */
+/*   Updated: 2021/11/23 14:26:34 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_lstadd(t_list **lst, int fd)
 {
@@ -28,6 +28,7 @@ int	ft_lstadd(t_list **lst, int fd)
 	*lst = (t_list *)malloc(sizeof(t_list));
 	if (*lst == NULL)
 		return (0);
+	(*lst)->fd = fd;
 	(*lst)->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if ((*lst)->buffer == NULL)
 		return (0);
@@ -59,7 +60,9 @@ char	*add_line(t_list *lst, char *pnew, int nl)
 	int		pnew_l;
 	int		i;
 
-	pnew_l = ft_strlen(pnew);
+	pnew_l = 0;
+	while (pnew && *(pnew + pnew_l))
+		pnew_l++;
 	result = (char *)malloc(sizeof(char) * (nl - lst->curr + pnew_l + 1));
 	if (result == 0)
 		return (0);
@@ -99,23 +102,65 @@ char	*get_line(int fd, t_list *lst)
 	return (pnew);
 }
 
+t_list	*ft_lstfind(t_list **lst, int fd)
+{
+	t_list	*curr;
+
+	curr = *lst;
+	while (curr)
+	{
+		if (curr->next == NULL)
+			return (curr);
+		else if (curr->next->fd == fd)
+			return (curr);
+		curr = curr->next;
+	}
+	return (curr);
+}
+
+t_list	*ft_lstgetone(t_list **lst, int fd)
+{
+	char	*pnew;
+	t_list	*curr;
+
+	pnew = NULL;
+	if (*lst == NULL)
+	{
+		if (!ft_lstadd(lst, fd))
+		{
+			free_mem(lst, &pnew, fd);
+			return (NULL);
+		}
+		return (*lst);
+	}
+	curr = ft_lstfind(lst, fd);
+	if (!ft_lstadd(&(curr->next), fd))
+	{
+		free_mem(lst, &pnew, fd);
+		return (NULL);
+	}
+	return (curr->next);
+}
+
 char	*get_next_line(int fd)
 {
 	static t_list	*lst;
+	t_list			*curr;
 	char			*pnew;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	pnew = NULL;
-	if (!ft_lstadd(&lst, fd))
+	curr = ft_lstgetone(&lst, fd);
+	if (curr == NULL)
 	{
-		free_mem(&lst, &pnew);
+		free_mem(&lst, &pnew, fd);
 		return (NULL);
 	}
-	pnew = get_line(fd, lst);
+	pnew = get_line(fd, curr);
 	if (pnew == NULL || *pnew == '\0')
 	{
-		free_mem(&lst, &pnew);
+		free_mem(&lst, &pnew, fd);
 		return (NULL);
 	}
 	return (pnew);
