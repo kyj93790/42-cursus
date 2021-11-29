@@ -89,7 +89,8 @@ char	*get_line(int fd, t_list *lst)
 		pnew = add_line(lst, pnew, nl);
 		if (pnew == NULL)
 			return (NULL);
-		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n')
+		// 버퍼 끝까지 가기 전에 엔터를 만나거나 || 버퍼 끝까지 가긴 했지만 버퍼 끝에 개행이 있었던 경우
+		if (nl != lst->last || (lst->buffer)[nl - 1] == '\n')	// enter를 만난 것.
 			break ;
 		lst->last = read(fd, lst->buffer, BUFFER_SIZE);
 		lst->curr = 0;

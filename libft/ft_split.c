@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/19 14:10:04 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:00:51 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	free_mem(char **result)
 
 	i = 0;
 	while (result[i])
-		free(result[i]);
+		free(result[i++]);
 	free(result);
 }
 

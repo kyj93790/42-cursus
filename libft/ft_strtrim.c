@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:21:00 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/19 11:49:44 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:04:11 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (f > r)
 		pnew = (char *)malloc(sizeof(char));
 	else
-		pnew = ft_substr(s1, f, r - f + 1);
+		pnew = (char *)malloc(sizeof(char) * (r - f + 2));
 	if (pnew == 0)
 		return (0);
 	index = 0;
 	while (f <= r)
 	{
-		pnew[index++] = *(s1 + f);
+		pnew[index++] = s1[f];
 		f++;
 	}
 	pnew[index] = '\0';
