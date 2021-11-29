@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	printf("%      07d\n", -4);
+	printf("%5.d", 123);
 	return (0);
-}
+} 
