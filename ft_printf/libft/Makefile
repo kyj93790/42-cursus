@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 NAME = libft.a
 SRCS = ft_isalpha.c \
 	   ft_isdigit.c \
