@@ -1,15 +1,5 @@
 #include "ft_printf.h"
 
-int	get_max(int a, int b, int c)
-{
-	if (a >= b && a >= c)
-		return (a);
-	else if (b >= c)
-		return (b);
-	else
-		return (c);
-}
-
 int	convert_char(t_result *res, t_info op, va_list ap)
 {
 	char	target;

@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/01 15:49:00 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/01 19:44:41 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ void free_mem(t_result *res)
 		free(res->result);
 	res->result = NULL;
 	res->cnt = 0;
+}
+
+int	get_max(int a, int b, int c)
+{
+	if (a >= b && a >= c)
+		return (a);
+	else if (b >= c)
+		return (b);
+	else
+		return (c);
 }
 
 int	ft_stradd(t_result *res, char *x, int len)
@@ -94,9 +104,8 @@ int	check_type(t_result *res, char type, t_info op, va_list ap)
 	ret = 0;
 	if (type == 'c')
 		ret = convert_char(res, op, ap);
-		/*
 	else if (s[i] == 's')
-		res = convert_string();
+		res = convert_string(); /*
 	else if (s[i] == 'p')
 		res = convert_ptr();
 	else if (s[i] == 'd' || s[i] == 'i')

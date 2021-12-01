@@ -32,7 +32,7 @@ int	test(const char *s, ...)
 */
 int main(void)
 {
-	printf("%d\n", printf("1234%0#-2c1234\n", 'c'));
-	printf("%d\n", ft_printf("1234%0#-2c1234\n",'c'));
+	printf("%d\n", printf("1234%2.9s1234\n", "abcd"));
+	//printf("%d\n", ft_printf("1234%-8s1234\n",0));
 	return (0);
 }
