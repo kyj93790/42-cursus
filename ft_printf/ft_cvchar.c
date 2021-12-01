@@ -10,7 +10,7 @@ int	get_max(int a, int b, int c)
 		return (c);
 }
 
-int	convert_char(t_info op, va_list ap)
+int	convert_char(t_result *res, t_info op, va_list ap)
 {
 	char	target;
 	char	*temp;
@@ -30,7 +30,7 @@ int	convert_char(t_info op, va_list ap)
 		temp[0] = target;
 	else
 		temp[max_size - 1] = target;
-	if (ft_stradd(temp) < 0)
+	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);
 }

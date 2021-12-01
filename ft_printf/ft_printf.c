@@ -6,42 +6,41 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/30 17:11:16 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/01 15:49:00 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void free_mem()
+void free_mem(t_result *res)
 {
-	if (g_result)
-		free(g_result);
-	g_result = NULL;
+	if (res->result)
+		free(res->result);
+	res->result = NULL;
+	res->cnt = 0;
 }
 
-int	ft_stradd(char *x)
+int	ft_stradd(t_result *res, char *x, int len)
 {
 	char	*pnew;
-	char	o_len;
-	char	x_len;
 
 	if (x == NULL)
 	{
-		free_mem();
+		free_mem(res);
 		return (-1);
 	}
-	o_len = ft_strlen(g_result);
-	x_len = ft_strlen(x);
-	pnew = (char *)malloc(sizeof(char) * (o_len + x_len + 1));
+	pnew = (char *)malloc(sizeof(char) * (res->cnt + len + 1));
 	if (pnew == NULL)
 	{
-		free_mem();
+		free_mem(res);
 		return (-1);
 	}
-	ft_strlcpy(pnew, g_result, o_len + 1);
-	ft_strlcat(pnew, x, o_len + x_len + 1);
-	free_mem();
-	g_result = pnew;
+	ft_memcpy(pnew, res->result, res->cnt);
+	ft_memcpy(pnew + res->cnt, x, len + 1);
+	if (res->result)
+		free(res->result);
+	res->result = pnew;
+	res->cnt += len;
 	return (1);
 }
 
@@ -88,13 +87,13 @@ int calc_field(const char *s, int *i)
 	return (res);
 }
 
-int	check_type(const char *s, int i, t_info op, va_list ap)
+int	check_type(t_result *res, char type, t_info op, va_list ap)
 {
-	int	res;
+	int	ret;
 
-	res = 0;
-	if (s[i] == 'c')
-		res = convert_char(op, ap);
+	ret = 0;
+	if (type == 'c')
+		ret = convert_char(res, op, ap);
 		/*
 	else if (s[i] == 's')
 		res = convert_string();
@@ -110,21 +109,21 @@ int	check_type(const char *s, int i, t_info op, va_list ap)
 		res = convert_upperhex();
 	else if (s[i] == '%')
 		res = convert_percent();*/
-	if (res < 0)
+	if (ret < 0)
 	{
-		free_mem();
+		free_mem(res);
 		return (-1);
 	}
 	return (1);
 }
 
-int	ft_convert(const char *s, int *i, va_list ap)
+int	ft_convert(t_result *res, const char *s, int *i, va_list ap)
 {
 	t_info	op;
 
 	init_flag(&op);
-	while (check_flag(s, *i, &op))
-		(*i)++;
+	while (check_flag(s, ++(*i), &op))
+		;
 	op.width = calc_field(s, i);
 	if (op.width < 0)
 		return (-1);
@@ -133,45 +132,45 @@ int	ft_convert(const char *s, int *i, va_list ap)
 		(*i)++;
 		calc_field(s, i);
 	}
-	check_type(s, (*i)++, op, ap);
+	check_type(res, s[(*i)], op, ap);
 	return (1);
 }
 
-void	print_result()
+void	print_result(t_result *res)
 {
 	int	i;
 
 	i = 0;
-	while (g_result[i])
-	{
-		write(1, &(g_result[i]), 1);
-		i++;
-	}
+	write(1, res->result, res->cnt);
 }
 
 int	ft_printf(const char *s, ...)
 {
+	t_result res;
 	int		i;
+	int		cnt;
 	va_list	ap;
 
 	i = -1;
 	va_start(ap, s);
-	g_result = NULL;
+	res.result = NULL;
+	res.cnt = 0;
 	while (s[++i])
 	{
 		if (s[i] != '%')
 		{
-			if (ft_stradd(ft_substr(s, i, 1)) < 0)
+			if (ft_stradd(&res, ft_substr(s, i, 1), 1) < 0)
 				return (-1);
 		}
 		else
 		{
-			if (ft_convert(s, &i, ap) < 0)
+			if (ft_convert(&res, s, &i, ap) < 0)
 				return (-1);
 		}
 	}
-	print_result();
-	free_mem();
+	print_result(&res);
+	cnt = res.cnt;
+	free_mem(&res);
 	va_end(ap);
-	return (ft_strlen(g_result));
+	return (cnt);
 }

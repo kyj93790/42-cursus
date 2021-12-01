@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:35:55 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/30 15:56:35 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/01 15:39:22 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-char	*g_result;
+typedef struct s_result {
+	char	*result;
+	int		cnt;
+}	t_result;
 
 typedef struct s_info {
 	int minus;
@@ -28,18 +31,18 @@ typedef struct s_info {
 	int hash;
 	int width;
 	int precision;
-} t_info;
+}	t_info;
 
 int		ft_printf(const char * s, ...);
 void	init_flag(t_info *op);
 int		get_max(int a, int b, int c);
-int		ft_stradd(char *x);
+int		ft_stradd(t_result *res, char *x, int len);
 int		check_flag(const char *s, int i, t_info *op);
 int 	calc_field(const char *s, int *i);
-int		check_type(const char *s, int i, t_info op, va_list ap);
-int		ft_convert(const char *s, int *i, va_list ap);
-int		convert_char(t_info op, va_list ap);
-void	print_result(void);
-void 	free_mem(void);
+int		check_type(t_result *res, char type, t_info op, va_list ap);
+int		ft_convert(t_result *res, const char *s, int *i, va_list ap);
+int		convert_char(t_result *res, t_info op, va_list ap);
+void	print_result(t_result *res);
+void 	free_mem(t_result *res);
 
 #endif
