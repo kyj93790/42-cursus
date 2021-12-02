@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/01 19:44:41 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/02 12:55:49 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	ft_stradd(t_result *res, char *x, int len)
 
 void	init_flag(t_info *op)
 {
-	op->minus = 0;
-	op->plus = 0;
-	op->space = 0;
-	op->zero = 0;
-	op->hash = 0;
-	op->width = 0;
-	op->precision = 0;
+	op->minus = -1;
+	op->plus = -1;
+	op->space = -1;
+	op->zero = -1;
+	op->hash = -1;
+	op->width = -1;
+	op->precision = -1;
 }
 
 int	check_flag(const char *s, int i, t_info *op)
@@ -89,7 +89,7 @@ int calc_field(const char *s, int *i)
 	res = 0;
 	while ('0' <= s[*i] && s[*i] <= '9')
 	{
-		res += res * 10 + (s[*i] - '0');
+		res = res * 10 + (s[*i] - '0');
 		if (res > 2147483646)
 			return (-1);
 		(*i)++;
@@ -99,26 +99,26 @@ int calc_field(const char *s, int *i)
 
 int	check_type(t_result *res, char type, t_info op, va_list ap)
 {
-	int	ret;
+	int	rt;
 
-	ret = 0;
+	rt = 0;
 	if (type == 'c')
-		ret = convert_char(res, op, ap);
-	else if (s[i] == 's')
-		res = convert_string(); /*
-	else if (s[i] == 'p')
-		res = convert_ptr();
-	else if (s[i] == 'd' || s[i] == 'i')
-		res = convert_int();
-	else if (s[i] == 'u')
-		res = convert_ui();
-	else if (s[i] == 'x')
-		res = convert_lowerhex();
-	else if (s[i] == 'X')
-		res = convert_upperhex();
-	else if (s[i] == '%')
-		res = convert_percent();*/
-	if (ret < 0)
+		rt = convert_char(res, op, ap);
+	else if (type == 's')
+		rt = convert_string(res, op, ap); /*
+	else if (type == 'p')
+		rt = convert_ptr();
+	else if (type == 'd' || s[i] == 'i')
+		rt = convert_int();
+	else if (type == 'u')
+		rt = convert_ui();
+	else if (type == 'x')
+		rt = convert_lowerhex();
+	else if (type == 'X')
+		rt = convert_upperhex();
+	else if (type == '%')
+		rt = convert_percent();*/
+	if (rt < 0)
 	{
 		free_mem(res);
 		return (-1);
@@ -139,7 +139,9 @@ int	ft_convert(t_result *res, const char *s, int *i, va_list ap)
 	if (s[*i] == '.')	// precision 있는지 여부.
 	{
 		(*i)++;
-		calc_field(s, i);
+		op.precision = calc_field(s, i);
+		if (op.precision < 0)
+			return (-1);
 	}
 	check_type(res, s[(*i)], op, ap);
 	return (1);
