@@ -35,7 +35,7 @@ int main(void)
 	printf("%d\n", printf("abcd%10.0s0000%10.0s\n", "Hello ", "Korld!"));
 	printf("%d\n", ft_printf("abcd%10.0s0000%10.0s\n", "Hello ", "Korld!"));
 	printf("\n");
-	printf("%d\n", printf("1234%-4.3s1234\n", 0));
-	printf("%d\n", ft_printf("1234%-4.3s1234\n", 0));
+	printf("%d\n", printf("1234%-4.3s1234\n", "abcdef"));
+	printf("%d\n", ft_printf("1234%-4.3s1234\n", "abcdef"));
 	return (0);
 }

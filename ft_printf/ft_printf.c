@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/02 12:55:49 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/03 14:31:02 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	ft_stradd(t_result *res, char *x, int len)
 	}
 	ft_memcpy(pnew, res->result, res->cnt);
 	ft_memcpy(pnew + res->cnt, x, len + 1);
-	if (res->result)
+	if (res->result)	// x에 대한 메모리 해제도 고려. (null)인 경우는 해제 x
 		free(res->result);
+	if (x)
+		free(x);
 	res->result = pnew;
 	res->cnt += len;
 	return (1);
