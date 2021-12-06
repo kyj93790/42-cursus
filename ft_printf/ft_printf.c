@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/03 14:31:02 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/06 17:44:38 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int	ft_stradd(t_result *res, char *x, int len)
 
 void	init_flag(t_info *op)
 {
-	op->minus = -1;
-	op->plus = -1;
-	op->space = -1;
-	op->zero = -1;
-	op->hash = -1;
+	op->minus = 0;
+	op->plus = 0;
+	op->space = 0;
+	op->zero = 0;
+	op->hash = 0;
 	op->width = -1;
 	op->precision = -1;
 }
@@ -107,11 +107,11 @@ int	check_type(t_result *res, char type, t_info op, va_list ap)
 	if (type == 'c')
 		rt = convert_char(res, op, ap);
 	else if (type == 's')
-		rt = convert_string(res, op, ap); /*
-	else if (type == 'p')
-		rt = convert_ptr();
-	else if (type == 'd' || s[i] == 'i')
-		rt = convert_int();
+		rt = convert_string(res, op, ap);
+	// else if (type == 'p')
+	// 	rt = convert_ptr(res, op, ap);
+	else if (type == 'd' || type == 'i')
+		rt = convert_int(res, op, ap); /*
 	else if (type == 'u')
 		rt = convert_ui();
 	else if (type == 'x')

@@ -29,7 +29,7 @@ int	convert_string(t_result *res, t_info op, va_list ap)
 
 	target = va_arg(ap, char *);
 	if (target == NULL)
-		target = ft_strdup("(null)");
+		target = "(null)";
 	t_len = ft_strlen(target);
 	if (op.precision >= 0 && t_len > op.precision)
 		t_len = op.precision;

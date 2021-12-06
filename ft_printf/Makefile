@@ -9,7 +9,7 @@ NAME = libftprintf.a
 LIBFT = libft
 AR = ar rcs
 
-SRC_FILE = ft_printf ft_convert_char ft_convert_string
+SRC_FILE = ft_printf ft_convert_char ft_convert_string ft_convert_int
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
 
