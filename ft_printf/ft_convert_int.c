@@ -1,13 +1,15 @@
 #include "ft_printf.h"
 
-int	ft_digit(int target)
+static int	ft_digit(long long target)
 {
-	int	digit;
-	int	cnt;
+	long long	digit;
+	int 		cnt;
 
 	digit = 1;
 	cnt = 1;
-	while ((target / (digit * 10)) != 0)
+	if (target < 0)
+		target *= -1;
+	while ((target / (digit * 10)) > 0)
 	{
 		digit *= 10;
 		cnt++;
@@ -15,50 +17,106 @@ int	ft_digit(int target)
 	return (cnt);
 }
 
-static void	fill_converted_int(int target, char *temp, t_info op)
+static int	get_max_size(t_info op, int target)
 {
-	//max_size 필요.
-	// -, +, ' '
-	// ., 0, width
+	int	t_len;
+	int	max_size;
 
+	t_len = ft_digit(target);
+	if (target < 0)
+		max_size = get_max(op.width, op.precision + 1, t_len + 1);
+	else if (op.plus == 1)
+		max_size = get_max(op.width, op.precision, t_len + 1);
+	else
+		max_size = get_max(op.width, op.precision, t_len);
+	if (op.space == 1 && op.width <= t_len && target > 0)
+		max_size++;
+	return (max_size);
 }
 
-// flag 를 고려해서 max_size 계산.
-// 부호의 출력 여부(+, 출력 인자가 음수), 공백 출력 여부(' ' -> 부호가 없는 경우에만 영향 있음.), 출력 인자의 길이, width, precision
-
-// 내부에 직접적으로 들어가는 친구의 길이를 계산
-// precision, +, 실제 출력 인자의 길이, -    --> 이 flag들을 이용해서 start index를 계산, 출력하도록 함.
-// precision이 들어오면 0 flag는 먹히지 않음.
-
-int	get_max_size(t_info op, int target)
+static void fill_from_front(int target, char *temp, t_info op, int len)
 {
+	int	i;
+	int	digit;
 
+	i = 1;
+	digit = 1;
+	while (i++ < len)
+		digit *= 10;
+	i = 0;
+	if (target < 0)
+	{
+		temp[i++] = '-';
+		temp[i++] = (target / digit) * -1 + '0';
+		target %= digit * -1;
+		digit /= 10;
+	}
+	else if (op.plus == 1)
+		temp[i++] = '+';
+	else if (op.space == 1)
+		i++;
+	while (digit > 0)
+	{
+		temp[i++] = (target / digit) + '0';
+		target %= digit;
+		digit /= 10;
+	}
+}
+
+static void	fill_from_rear(int target, char *temp, t_info op, int len)
+{
+	int			i;
+	long long	x;
+
+	i = get_max_size(op, target);
+	x = target;
+	if (x < 0)
+		x *= -1;
+	while (i-- && len--)
+	{
+		temp[i] = (x % 10) + '0';
+		x /= 10;
+	}
+	while (len > 0)	// precision으로 인한 zero 채우기
+		temp[i--] = '0';
+	if (op.precision < 0 && op.zero == 1)
+	{
+		while (i >= 0)
+			temp[i--] = '0';
+		i++;
+	}
+	if (target < 0)
+		temp[i] = '-';
+	else if (op.plus == 1)
+		temp[i] = '+';
+	else if (op.space == 1)
+		temp[i] = ' ';
 }
 
 int	convert_int(t_result *res, t_info op, va_list ap)
 {
 	char	*temp;
 	int		target;
-	int		t_len;
 	int		max_size;
+	int		len;	// 알맹이의 길이
 	int		i;
 
-	// target의 length 계산
-	t_len = ft_digit(target);
-	if (target < 0)
-	{
-		max_size = get_max(op.width, op.precision + 1, t_len + 1);
-		op.minus = 1;	// 부호를 출력하도록 함.
-	}
-	else
-		max_size = get_max(op.width, op.precision, t_len);
+	target = va_arg(ap, int);
+	max_size = get_max_size(op, target);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);
+	i = 0;
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	fill_converted_int(target, temp, op);
+	len = ft_digit(target);
+	if (op.precision > len)
+		len = op.precision;
+	if (op.minus == 1)	// 앞에서부터 채워 넣음.
+		fill_from_front(target, temp, op, len);
+	else
+		fill_from_rear(target, temp, op, len);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);

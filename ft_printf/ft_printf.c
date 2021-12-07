@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/06 17:44:38 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/07 17:10:31 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ int	check_type(t_result *res, char type, t_info op, va_list ap)
 		rt = convert_char(res, op, ap);
 	else if (type == 's')
 		rt = convert_string(res, op, ap);
-	// else if (type == 'p')
-	// 	rt = convert_ptr(res, op, ap);
+	else if (type == 'p')
+	 	rt = convert_ptr(res, op, ap);
 	else if (type == 'd' || type == 'i')
 		rt = convert_int(res, op, ap); /*
 	else if (type == 'u')
