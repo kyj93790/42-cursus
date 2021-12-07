@@ -9,7 +9,7 @@ static int	ft_digit(long long target)
 	cnt = 1;
 	if (target < 0)
 		target *= -1;
-	while ((target / (digit * 10)) > 0)
+	while ((target / 10 / digit) > 0)
 	{
 		digit *= 10;
 		cnt++;
@@ -98,7 +98,7 @@ int	convert_int(t_result *res, t_info op, va_list ap)
 	char	*temp;
 	int		target;
 	int		max_size;
-	int		len;	// 알맹이의 길이
+	int		t_len;	// 알맹이의 길이
 	int		i;
 
 	target = va_arg(ap, int);
@@ -110,13 +110,13 @@ int	convert_int(t_result *res, t_info op, va_list ap)
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	len = ft_digit(target);
-	if (op.precision > len)
-		len = op.precision;
+	t_len = ft_digit(target);
+	if (op.precision > t_len)
+		t_len = op.precision;
 	if (op.minus == 1)	// 앞에서부터 채워 넣음.
-		fill_from_front(target, temp, op, len);
+		fill_from_front(target, temp, op, t_len);
 	else
-		fill_from_rear(target, temp, op, len);
+		fill_from_rear(target, temp, op, t_len);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);
