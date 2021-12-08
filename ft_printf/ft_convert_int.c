@@ -34,14 +34,14 @@ static int	get_max_size(t_info op, int target)
 	return (max_size);
 }
 
-static void fill_from_front(int target, char *temp, t_info op, int len)
+static void fill_from_front(int target, char *temp, t_info op, int t_len)
 {
 	int	i;
 	int	digit;
 
 	i = 1;
 	digit = 1;
-	while (i++ < len)
+	while (i++ < t_len)
 		digit *= 10;
 	i = 0;
 	if (target < 0)
@@ -63,7 +63,7 @@ static void fill_from_front(int target, char *temp, t_info op, int len)
 	}
 }
 
-static void	fill_from_rear(int target, char *temp, t_info op, int len)
+static void	fill_from_rear(int target, char *temp, t_info op, int t_len)
 {
 	int			i;
 	long long	x;
@@ -72,12 +72,12 @@ static void	fill_from_rear(int target, char *temp, t_info op, int len)
 	x = target;
 	if (x < 0)
 		x *= -1;
-	while (i-- && len--)
+	while (i-- && t_len--)
 	{
 		temp[i] = (x % 10) + '0';
 		x /= 10;
 	}
-	while (len > 0)	// precision으로 인한 zero 채우기
+	while (t_len > 0)	// precision으로 인한 zero 채우기
 		temp[i--] = '0';
 	if (op.precision < 0 && op.zero == 1)
 	{
