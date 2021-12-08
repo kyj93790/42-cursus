@@ -55,11 +55,11 @@ static void	fill_from_rear(unsigned int target, char *temp, t_info op, int t_len
 
 int	convert_uint(t_result *res, t_info op, va_list ap)
 {
-	char	*temp;
-	int		target;
-	int		max_size;
-	int		t_len;	// 알맹이의 길이
-	int		i;
+	char				*temp;
+	unsigned int		target;
+	int					max_size;
+	int					t_len;	// 알맹이의 길이
+	int					i;
 
 	target = va_arg(ap, unsigned int);
 	t_len = ft_digit(target);

@@ -33,8 +33,8 @@ int	test(const char *s, ...)
 int main(void)
 {
 	char	s[] = "abcde";
-	printf("%d\n", printf("%-9.5u\n", 123));
-	printf("%d\n", ft_printf("%-9.5u\n", 123));
+	printf("%d\n", printf("%-#5.5x\n", 123));
+	printf("%d\n", ft_printf("%-#5.5x\n", 123));
 	// printf("%d\n", ft_printf("%p\n", -9223372036854775807L -1L));
 	// printf("%d\n", ft_printf("%p\n", -9223372036854775807L -1L));
 	//ft_printf("%s\n", 0);

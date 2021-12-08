@@ -16,7 +16,7 @@ static int	ft_digit(unsigned long long target)
 	return (cnt);
 }
 
-static void	fill_converted_ptr(unsigned long long target, char *temp, t_info op, int t_len)
+static void	fill_converted_upperhex(unsigned long long target, char *temp, t_info op, int t_len)
 {
 	int 				max_size;
 	int					i;
@@ -31,19 +31,17 @@ static void	fill_converted_ptr(unsigned long long target, char *temp, t_info op,
 	digit = 1;
 	while (target / 16 / digit > 0)
 		digit *= 16;
-	temp[0] = '0';
-	temp[1] = 'x';
-	j = 2;
+	j = 0;
 	while (j < t_len)
 	{
-		temp[i + j] = "0123456789abcdef"[target / digit];
+		temp[i + j] = "0123456789ABCDEF"[target / digit];
 		target %= digit;
 		digit /= 16;
 		j++;
 	}
 }
 
-int	convert_ptr(t_result *res, t_info op, va_list ap)
+int	convert_upperhex(t_result *res, t_info op, va_list ap)
 {
 	char					*temp;
 	unsigned long long		target;
@@ -51,8 +49,8 @@ int	convert_ptr(t_result *res, t_info op, va_list ap)
 	int						t_len;
 	int						i;
 
-	target = va_arg(ap, unsigned long long);
-	t_len = ft_digit(target) + 2;
+	target = va_arg(ap, unsigned int);
+	t_len = ft_digit(target);
 	max_size = get_max(op.width, 0, t_len);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
@@ -61,7 +59,7 @@ int	convert_ptr(t_result *res, t_info op, va_list ap)
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	fill_converted_ptr(target, temp, op, t_len);
+	fill_converted_upperhex(target, temp, op, t_len);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);

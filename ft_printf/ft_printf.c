@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/07 21:03:47 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/08 14:38:46 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ int	check_type(t_result *res, char type, t_info op, va_list ap)
 		rt = convert_int(res, op, ap);
 	else if (type == 'u')
 		rt = convert_uint(res, op, ap); 
-	else if (type == 'x') /*
-		rt = convert_lowerhex();
+	else if (type == 'x')
+		rt = convert_lowerhex(res, op, ap);
 	else if (type == 'X')
-		rt = convert_upperhex();
+		rt = convert_upperhex(res, op, ap);/*
 	else if (type == '%')
-		rt = convert_percent();*/
+		rt = convert_percent(res, op, ap);*/
 	if (rt < 0)
 	{
 		free_mem(res);

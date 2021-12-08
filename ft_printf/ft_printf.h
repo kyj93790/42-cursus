@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:35:55 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/07 20:48:06 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/08 10:53:46 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		convert_string(t_result *res, t_info op, va_list ap);
 int		convert_ptr(t_result *res, t_info op, va_list ap);
 int		convert_int(t_result *res, t_info op, va_list ap);
 int		convert_uint(t_result *res, t_info op, va_list ap);
+int		convert_lowerhex(t_result *res, t_info op, va_list ap);
+int		convert_upperhex(t_result *res, t_info op, va_list ap);
 void	print_result(t_result *res);
 void 	free_mem(t_result *res);
 

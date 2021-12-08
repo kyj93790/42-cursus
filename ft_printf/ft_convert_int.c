@@ -77,7 +77,7 @@ static void	fill_from_rear(int target, char *temp, t_info op, int t_len)
 		temp[i] = (x % 10) + '0';
 		x /= 10;
 	}
-	while (t_len > 0)	// precision으로 인한 zero 채우기
+	while (t_len-- >= 0)	// precision으로 인한 zero 채우기
 		temp[i--] = '0';
 	if (op.precision < 0 && op.zero == 1)
 	{
