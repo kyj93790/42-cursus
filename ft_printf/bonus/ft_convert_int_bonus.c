@@ -1,4 +1,16 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_int_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
+/*   Updated: 2021/12/09 18:59:06 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf_bonus.h"
 
 static int	ft_digit(long long target)
 {
@@ -48,7 +60,7 @@ static void fill_from_front(int target, char *temp, t_info op, int t_len)
 	{
 		temp[i++] = '-';
 		temp[i++] = (target / digit) * -1 + '0';
-		target %= digit * -1;
+		target = (target % digit) * -1;
 		digit /= 10;
 	}
 	else if (op.plus == 1)

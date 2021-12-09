@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_upperhex.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/09 15:00:25 by yejikim           #+#    #+#             */
+/*   Updated: 2021/12/09 17:04:38 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_digit(unsigned long long target)
@@ -33,12 +45,12 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op, in
 	if (op.hash == 1)
 	{
 		temp[i++] = '0';
-		temp[i++] = 'x';
+		temp[i++] = 'X';
 		t_len += 2;
 	}
 	while (i < t_len)
 	{
-		temp[i++] = "0123456789abcdef"[target / digit];
+		temp[i++] = "0123456789ABCDEF"[target / digit];
 		target %= digit;
 		digit /= 16;
 	}
@@ -53,7 +65,7 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 		t_len = op.precision;
 	while (i-- && t_len--)
 	{
-		temp[i] = "0123456789abcdef"[target % 16];
+		temp[i] = "0123456789ABCDEF"[target % 16];
 		target /= 16;
 	}
 	if (op.precision < 0 && op.zero == 1)
@@ -64,12 +76,12 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 	}
 	if (op.hash == 1)
 	{
-		temp[i--] = 'x';
+		temp[i--] = 'X';
 		temp[i] = '0';
 	}
 }
 
-int	convert_lowerhex(t_result *res, t_info op, va_list ap)
+int	convert_upperhex(t_result *res, t_info op, va_list ap)
 {
 	char					*temp;
 	unsigned long long		target;

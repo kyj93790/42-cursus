@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <limits.h>
+#include "ft_printf_bonus.h"
+/*
+int temp(va_list ap)
+{
+	int		arg;
+	int		sum;
+
+	sum = 0;
+	for(;;)
+	{
+		arg = va_arg(ap, int);
+		if (arg == 0)
+			break ;
+		sum += arg;
+	}
+	return (sum);
+}
+
+int	test(const char *s, ...)
+{
+	int		sum;
+	int		arg;
+	va_list	ap;
+
+	va_start(ap, s);
+	sum = temp(ap);
+	va_end(ap);
+	return (sum);
+}
+*/
+int main(void)
+{
+	//char	s[] = "abcde";
+	//printf("%d\n", printf("%-05%\n"));
+	printf("%d\n", printf(" %#lx ", LONG_MIN));
+	printf("%d\n", ft_printf(" %#lx ", LONG_MIN));
+	//printf("%d\n", printf("%+#05.3x\n", 123455));
+	//printf("%d\n", ft_printf("%+#05.3x\n", 123455));
+	//printf("%d\n", ft_printf("%#7.5%\n", 123));
+	//printf("%d\n", ft_printf("%#05%\n", 123));
+	// printf("%d\n", ft_printf("%p\n", -9223372036854775807L -1L));
+	// printf("%d\n", ft_printf("%p\n", -9223372036854775807L -1L));
+	//ft_printf("%s\n", 0);
+	// printf("%d\n", printf("abcd%10.0s0000%10.0s\n", "Hello ", "Korld!"));
+	// printf("%d\n", ft_printf("abcd%10.0s0000%10.0s\n", "Hello ", "Korld!"));
+	// printf("\n");
+	// printf("%d\n", printf("1234%-4.3s1234\n", "abcdef"));
+	// printf("%d\n", ft_printf("1234%-4.3s1234\n", "abcdef"));
+	return (0);
+}

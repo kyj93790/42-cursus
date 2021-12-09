@@ -1,31 +1,47 @@
 CC = gcc
-# ifdef WITH_DEBUG
-	CFLAGS = -g3 -Wall -Wextra -Werror
-# else
-# 	CFLAGS = -Wall -Wextra -Werror
-# endif
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 LIBFT = libft
 AR = ar rcs
 
-SRC_FILE = ft_printf ft_convert_char ft_convert_string ft_convert_int ft_convert_ptr ft_convert_uint ft_convert_lowerhex ft_convert_upperhex ft_convert_percent
-SRC = $(addsuffix .c, $(SRC_FILE))
-OBJ = $(addsuffix .o, $(SRC_FILE))
+SRC_FILE = ft_printf \
+			ft_convert_char \
+			ft_convert_string \
+			ft_convert_int \
+			ft_convert_ptr \
+			ft_convert_uint \
+			ft_convert_lowerhex \
+			ft_convert_upperhex \
+			ft_convert_percent
+SRC = $(addprefix mandatory/, $(addsuffix .c, $(SRC_FILE)))
+OBJ = $(addprefix mandatory/, $(addsuffix .o, $(SRC_FILE)))
+B_SRC = $(addprefix bonus/, $(addsuffix _bonus.c, $(SRC_FILE)))
+B_OBJ = $(addprefix bonus/, $(addsuffix _bonus.o, $(SRC_FILE)))
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(B_OBJ)
+else
+	OBJ_FILES = $(OBJ)
+endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ_FILES)
 	make -C $(LIBFT)
 	cp libft/libft.a .
 	mv libft.a $(NAME)
-	$(AR) $(NAME) $(OBJ)
+	$(AR) $(NAME) $(OBJ_FILES)
+
+bonus :
+	make WITH_BONUS=1 all
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
 	rm -rf $(OBJ)
+	rm -rf $(B_OBJ)
 	make fclean -C $(LIBFT)
 
 fclean : clean
@@ -33,7 +49,4 @@ fclean : clean
 
 re : fclean all
 
-debug :
-	make WITH_DEBUG=1 all
-
-.PHONY : all clean fclean debug re
+.PHONY : all clean fclean bonus re
