@@ -43,13 +43,10 @@ static void	fill_from_rear(unsigned int target, char *temp, t_info op, int t_len
 		temp[i] = (target % 10) + '0';
 		target /= 10;
 	}
-	while (t_len > 0)	// precision으로 인한 zero 채우기
-		temp[i--] = '0';
 	if (op.precision < 0 && op.zero == 1)
 	{
 		while (i >= 0)
 			temp[i--] = '0';
-		i++;
 	}
 }
 

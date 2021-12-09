@@ -23,8 +23,11 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op, in
 	unsigned long long	digit;
 
 	max_size = get_max(op.width, op.precision, t_len);
+	if (op.precision > t_len)
+		t_len = op.precision;
 	digit = 1;
-	while (target / 16 / digit > 0)
+	i = 1;
+	while (i++ < t_len)
 		digit *= 16;
 	i = 0;
 	if (op.hash == 1)
@@ -43,22 +46,26 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op, in
 
 static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int t_len)
 {
-	int					i;
+	int	i;
 
 	i = get_max(op.width, op.precision, t_len);
 	if (op.precision > t_len)
 		t_len = op.precision;
-	while (i-- && t_len-- && target > 0)
+	while (i-- && t_len--)
 	{
 		temp[i] = "0123456789abcdef"[target % 16];
 		target /= 16;
 	}
-	while (t_len-- >= 0)	// precision으로 인한 zero 채우기
-		temp[i--] = '0';
 	if (op.precision < 0 && op.zero == 1)
 	{
 		while (i >= 0)
 			temp[i--] = '0';
+		i += 2;	// # flag를 처리하기 위함
+	}
+	if (op.hash == 1)
+	{
+		temp[i--] = 'x';
+		temp[i] = '0';
 	}
 }
 
@@ -73,8 +80,6 @@ int	convert_lowerhex(t_result *res, t_info op, va_list ap)
 	target = va_arg(ap, unsigned int);
 	t_len = ft_digit(target);
 	max_size = get_max(op.width, op.precision, t_len);
-	if (op.hash == 1)
-		max_size += 2;
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);

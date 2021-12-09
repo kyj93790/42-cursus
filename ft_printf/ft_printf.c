@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:37:28 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/08 14:38:46 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/09 14:40:40 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ int	check_type(t_result *res, char type, t_info op, va_list ap)
 	else if (type == 'x')
 		rt = convert_lowerhex(res, op, ap);
 	else if (type == 'X')
-		rt = convert_upperhex(res, op, ap);/*
+		rt = convert_upperhex(res, op, ap);
 	else if (type == '%')
-		rt = convert_percent(res, op, ap);*/
+		rt = convert_percent(res, op);
 	if (rt < 0)
 	{
 		free_mem(res);
