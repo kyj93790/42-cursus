@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:44 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 19:25:57 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 01:18:24 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op)
 	while (i++ < t_len)
 		digit *= 16;
 	i = 0;
-	if (op.hash == 1)
+	if (op.hash == 1 && target != 0)
 	{
 		temp[i++] = '0';
 		temp[i++] = 'x';
@@ -58,17 +58,19 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op)
 
 static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int max_size)
 {
-	int	i;
-	int t_len;
+	int					i;
+	int					t_len;
+	unsigned long long	x;
 
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
 	i = max_size;
+	x = target;
 	while (i-- && t_len--)
 	{
-		temp[i] = "0123456789abcdef"[target % 16];
-		target /= 16;
+		temp[i] = "0123456789abcdef"[x % 16];
+		x /= 16;
 	}
 	if (op.precision < 0 && op.zero == 1)
 	{
@@ -76,7 +78,7 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 			temp[i--] = '0';
 		i += 2;	// # flag를 처리하기 위함
 	}
-	if (op.hash == 1)
+	if (op.hash == 1 && target != 0)
 	{
 		temp[i--] = 'x';
 		temp[i] = '0';
@@ -94,12 +96,12 @@ int	convert_lowerhex(t_result *res, t_info op, va_list ap)
 	target = va_arg(ap, unsigned int);
 	//printf("target : %llx\n", target);
 	t_len = ft_digit(target);
-	printf("t_len : %d\n", t_len);
-	if (op.hash == 1)
+	//printf("t_len : %d\n", t_len);
+	if (op.hash == 1 && target != 0)
 		max_size = get_max(op.width, op.precision, t_len + 2);
 	else
 		max_size = get_max(op.width, op.precision, t_len);
-	printf("max_size : %d\n", max_size);
+	//printf("max_size : %d\n", max_size);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);
