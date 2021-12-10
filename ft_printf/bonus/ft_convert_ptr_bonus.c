@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:57 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 14:58:59 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 16:46:04 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	fill_converted_ptr(unsigned long long target, char *temp, t_info op,
 	digit = 1;
 	while (target / 16 / digit > 0)
 		digit *= 16;
-	temp[0] = '0';
-	temp[1] = 'x';
-	j = 2;
+	j = 0;
+	temp[i + j++] = '0';
+	temp[i + j++] = 'x';
 	while (j < t_len)
 	{
 		temp[i + j] = "0123456789abcdef"[target / digit];
