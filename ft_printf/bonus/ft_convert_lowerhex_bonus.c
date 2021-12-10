@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:44 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 01:18:24 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 16:02:10 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op)
 	int					i;
 	unsigned long long	digit;
 
+	if (op.precision == 0 && target == 0)
+		return ;
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
@@ -62,6 +64,8 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 	int					t_len;
 	unsigned long long	x;
 
+	if (op.precision == 0 && target == 0)
+		return ;
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
@@ -102,6 +106,8 @@ int	convert_lowerhex(t_result *res, t_info op, va_list ap)
 	else
 		max_size = get_max(op.width, op.precision, t_len);
 	//printf("max_size : %d\n", max_size);
+	if (op.width == 0 && op.precision == 0 && target == 0)
+		max_size = 0;
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);

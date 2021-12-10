@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 18:59:06 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 16:01:25 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ static int	ft_digit(long long target)
 	return (cnt);
 }
 
-static int	get_max_size(t_info op, int target)
+static int	get_max_size(t_info op, long long target)
 {
 	int	t_len;
 	int	max_size;
 
+	if (op.width == 0 && op.precision == 0 && target == 0)
+		return (0);
 	t_len = ft_digit(target);
 	if (target < 0)
 		max_size = get_max(op.width, op.precision + 1, t_len + 1);
@@ -41,16 +43,18 @@ static int	get_max_size(t_info op, int target)
 		max_size = get_max(op.width, op.precision, t_len + 1);
 	else
 		max_size = get_max(op.width, op.precision, t_len);
-	if (op.space == 1 && op.width <= t_len && target > 0)
+	if (op.space == 1 && op.width <= t_len && target >= 0)
 		max_size++;
 	return (max_size);
 }
 
-static void fill_from_front(int target, char *temp, t_info op, int t_len)
+static void fill_from_front(long long target, char *temp, t_info op, int t_len)
 {
-	int	i;
-	int	digit;
+	int			i;
+	long long	digit;
 
+	if (op.precision == 0 && target == 0)
+		return ;
 	i = 1;
 	digit = 1;
 	while (i++ < t_len)
@@ -75,11 +79,13 @@ static void fill_from_front(int target, char *temp, t_info op, int t_len)
 	}
 }
 
-static void	fill_from_rear(int target, char *temp, t_info op, int t_len)
+static void	fill_from_rear(long long target, char *temp, t_info op, int t_len)
 {
 	int			i;
 	long long	x;
 
+	if (op.precision == 0 && target == 0)
+		return ;
 	i = get_max_size(op, target);
 	x = target;
 	if (x < 0)
@@ -105,11 +111,11 @@ static void	fill_from_rear(int target, char *temp, t_info op, int t_len)
 
 int	convert_int(t_result *res, t_info op, va_list ap)
 {
-	char	*temp;
-	int		target;
-	int		max_size;
-	int		t_len;	// 알맹이의 길이
-	int		i;
+	char		*temp;
+	long long	target;
+	int			max_size;
+	int			t_len;	// 알맹이의 길이
+	int			i;
 
 	target = va_arg(ap, int);
 	max_size = get_max_size(op, target);
