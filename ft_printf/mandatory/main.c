@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "ft_printf.h"
+#include <limits.h>
+#include "ft_printf_bonus.h"
 /*
 int temp(va_list ap)
 {
@@ -32,11 +33,12 @@ int	test(const char *s, ...)
 */
 int main(void)
 {
-	char	s[] = "abcde";
+	//char	s[] = "abcde";
 	//printf("%d\n", printf("%-05%\n"));
-	printf("%d\n", printf("%+#05.3%\n"));
-	//printf("%d\n", ft_printf("%-05%\n"));
-	printf("%d\n", ft_printf("%+#05.3%\n"));
+	printf("%d\n", printf(" %#lx ", LONG_MIN));
+	printf("%d\n", ft_printf(" %#lx ", LONG_MIN));
+	//printf("%d\n", printf("%+#05.3x\n", 123455));
+	//printf("%d\n", ft_printf("%+#05.3x\n", 123455));
 	//printf("%d\n", ft_printf("%#7.5%\n", 123));
 	//printf("%d\n", ft_printf("%#05%\n", 123));
 	// printf("%d\n", ft_printf("%p\n", -9223372036854775807L -1L));

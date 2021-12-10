@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_char.c                                  :+:      :+:    :+:   */
+/*   ft_convert_char_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 14:59:56 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 17:04:39 by yejikim          ###   ########.fr       */
+/*   Created: 2021/12/09 14:58:31 by yejikim           #+#    #+#             */
+/*   Updated: 2021/12/09 14:58:32 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	convert_char(t_result *res, t_info op, va_list ap)
 {

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:35:55 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 17:09:10 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/09 18:50:02 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
+
+# include <stdio.h>
 
 typedef struct s_result {
 	char	*result;

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_upperhex.c                              :+:      :+:    :+:   */
+/*   ft_convert_lowerhex_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 15:00:25 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 17:04:38 by yejikim          ###   ########.fr       */
+/*   Created: 2021/12/09 14:58:44 by yejikim           #+#    #+#             */
+/*   Updated: 2021/12/10 16:01:50 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 static int	ft_digit(unsigned long long target)
 {
@@ -28,13 +28,15 @@ static int	ft_digit(unsigned long long target)
 	return (cnt);
 }
 
-static void	fill_from_front(unsigned long long target, char *temp, t_info op, int t_len)
+static void	fill_from_front(unsigned long long target, char *temp, t_info op)
 {
-	int 				max_size;
+	int 				t_len;
 	int					i;
 	unsigned long long	digit;
 
-	max_size = get_max(op.width, op.precision, t_len);
+	if (op.precision == 0 && target == 0)
+		return ;
+	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
 	digit = 1;
@@ -42,7 +44,7 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op, in
 	while (i++ < t_len)
 		digit *= 16;
 	i = 0;
-	if (op.hash == 1)
+	if (op.hash == 1 && target != 0)
 	{
 		temp[i++] = '0';
 		temp[i++] = 'X';
@@ -56,17 +58,23 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op, in
 	}
 }
 
-static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int t_len)
+static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int max_size)
 {
-	int	i;
+	int					i;
+	int					t_len;
+	unsigned long long	x;
 
-	i = get_max(op.width, op.precision, t_len);
+	if (op.precision == 0 && target == 0)
+		return ;
+	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
+	i = max_size;
+	x = target;
 	while (i-- && t_len--)
 	{
-		temp[i] = "0123456789ABCDEF"[target % 16];
-		target /= 16;
+		temp[i] = "0123456789ABCDEF"[x % 16];
+		x /= 16;
 	}
 	if (op.precision < 0 && op.zero == 1)
 	{
@@ -74,7 +82,7 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 			temp[i--] = '0';
 		i += 2;	// # flag를 처리하기 위함
 	}
-	if (op.hash == 1)
+	if (op.hash == 1 && target != 0)
 	{
 		temp[i--] = 'X';
 		temp[i] = '0';
@@ -90,8 +98,16 @@ int	convert_upperhex(t_result *res, t_info op, va_list ap)
 	int						i;
 
 	target = va_arg(ap, unsigned int);
+	//printf("target : %llx\n", target);
 	t_len = ft_digit(target);
-	max_size = get_max(op.width, op.precision, t_len);
+	//printf("t_len : %d\n", t_len);
+	if (op.hash == 1 && target != 0)
+		max_size = get_max(op.width, op.precision, t_len + 2);
+	else
+		max_size = get_max(op.width, op.precision, t_len);
+	//printf("max_size : %d\n", max_size);	
+	if (op.width == 0 && op.precision == 0 && target == 0)
+		max_size = 0;
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);
@@ -100,9 +116,9 @@ int	convert_upperhex(t_result *res, t_info op, va_list ap)
 		temp[i++] = ' ';
 	temp[i] = '\0';
 	if (op.minus == 1)	// 앞에서부터 채워 넣음.
-		fill_from_front(target, temp, op, t_len);
+		fill_from_front(target, temp, op);
 	else
-		fill_from_rear(target, temp, op, t_len);
+		fill_from_rear(target, temp, op, max_size);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);
