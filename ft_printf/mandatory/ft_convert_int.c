@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 23:29:46 by yejin            ###   ########.fr       */
+/*   Updated: 2021/12/10 23:39:30 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	convert_int(t_result *res, t_info op, va_list ap)
 	t_ll	target;
 	int		max_size;
 	int		t_len;
-	int		i;
 
 	target = va_arg(ap, int);
 	max_size = get_max_size(op, target);

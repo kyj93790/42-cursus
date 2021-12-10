@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:44 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 23:29:53 by yejin            ###   ########.fr       */
+/*   Updated: 2021/12/10 23:41:13 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	convert_lowerhex(t_result *res, t_info op, va_list ap)
 	char	*temp;
 	t_ull	target;
 	int		max_size;
-	int		t_len;
 	int		i;
 
 	target = va_arg(ap, unsigned int);

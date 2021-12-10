@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 23:31:12 by yejin             #+#    #+#              #
-#    Updated: 2021/12/10 23:31:14 by yejin            ###   ########.fr        #
+#    Updated: 2021/12/10 23:47:41 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ LIBFT = libft
 AR = ar rcs
 
 SRC_FILE = ft_printf \
+			ft_printf_utils \
 			ft_convert_char \
 			ft_convert_string \
 			ft_convert_int \
