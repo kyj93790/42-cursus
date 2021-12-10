@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_percent_bonus.c                         :+:      :+:    :+:   */
+/*   ft_convert_percent.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:53 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 17:16:33 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 23:29:56 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	convert_percent(t_result *res, t_info op)
 {

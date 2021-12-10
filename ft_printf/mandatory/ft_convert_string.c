@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_string_bonus.c                          :+:      :+:    :+:   */
+/*   ft_convert_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:59:03 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/09 14:59:04 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 23:30:04 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-static void	fill_converted_string(char *target, char *temp, t_info op, int t_len)
+static void	fill_string(char *target, char *temp, t_info op, int t_len)
 {
 	int	max_size;
 	int	i;
@@ -53,7 +53,7 @@ int	convert_string(t_result *res, t_info op, va_list ap)
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	fill_converted_string(target, temp, op, t_len);
+	fill_string(target, temp, op, t_len);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);

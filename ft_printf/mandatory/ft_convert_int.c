@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_int_bonus.c                             :+:      :+:    :+:   */
+/*   ft_convert_int.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 16:01:25 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 23:29:46 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-static int	ft_digit(long long target)
+static int	ft_digit(t_ll target)
 {
-	long long	digit;
-	int 		cnt;
+	t_ll	digit;
+	int		cnt;
 
 	digit = 1;
 	cnt = 1;
@@ -29,7 +29,7 @@ static int	ft_digit(long long target)
 	return (cnt);
 }
 
-static int	get_max_size(t_info op, long long target)
+static int	get_max_size(t_info op, t_ll target)
 {
 	int	t_len;
 	int	max_size;
@@ -48,13 +48,11 @@ static int	get_max_size(t_info op, long long target)
 	return (max_size);
 }
 
-static void fill_from_front(long long target, char *temp, t_info op, int t_len)
+static void	fill_from_front(t_ll target, char *temp, t_info op, int t_len)
 {
-	int			i;
-	long long	digit;
+	int		i;
+	t_ll	digit;
 
-	if (op.precision == 0 && target == 0)
-		return ;
 	i = 1;
 	digit = 1;
 	while (i++ < t_len)
@@ -79,13 +77,11 @@ static void fill_from_front(long long target, char *temp, t_info op, int t_len)
 	}
 }
 
-static void	fill_from_rear(long long target, char *temp, t_info op, int t_len)
+static void	fill_from_rear(t_ll target, char *temp, t_info op, int t_len)
 {
-	int			i;
-	long long	x;
+	int		i;
+	t_ll	x;
 
-	if (op.precision == 0 && target == 0)
-		return ;
 	i = get_max_size(op, target);
 	x = target;
 	if (x < 0)
@@ -111,28 +107,28 @@ static void	fill_from_rear(long long target, char *temp, t_info op, int t_len)
 
 int	convert_int(t_result *res, t_info op, va_list ap)
 {
-	char		*temp;
-	long long	target;
-	int			max_size;
-	int			t_len;	// 알맹이의 길이
-	int			i;
+	char	*temp;
+	t_ll	target;
+	int		max_size;
+	int		t_len;
+	int		i;
 
 	target = va_arg(ap, int);
 	max_size = get_max_size(op, target);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);
-	i = 0;
-	while (i < max_size)
-		temp[i++] = ' ';
-	temp[i] = '\0';
+	ft_memset(temp, ' ', max_size);
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
-	if (op.minus == 1)	// 앞에서부터 채워 넣음.
-		fill_from_front(target, temp, op, t_len);
-	else
-		fill_from_rear(target, temp, op, t_len);
+	if (!(op.precision == 0 && target == 0))
+	{
+		if (op.minus == 1)
+			fill_from_front(target, temp, op, t_len);
+		else
+			fill_from_rear(target, temp, op, t_len);
+	}
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/10 23:31:12 by yejin             #+#    #+#              #
+#    Updated: 2021/12/10 23:31:14 by yejin            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -40,12 +52,12 @@ bonus :
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
-	rm -rf $(OBJ)
-	rm -rf $(B_OBJ)
+	rm -f $(OBJ)
+	rm -f $(B_OBJ)
 	make fclean -C $(LIBFT)
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re : fclean all
 

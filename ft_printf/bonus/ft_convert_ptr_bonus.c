@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert_ptr_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:57 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 16:46:04 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 23:01:40 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	ft_digit(unsigned long long target)
+static int	ft_digit(t_ull target)
 {
-	unsigned long long	digit;
-	int 				cnt;
+	t_ull	digit;
+	int		cnt;
 
 	digit = 1;
 	cnt = 1;
-
 	while (target / 16 / digit > 0)
 	{
 		digit *= 16;
@@ -28,12 +27,12 @@ static int	ft_digit(unsigned long long target)
 	return (cnt);
 }
 
-static void	fill_converted_ptr(unsigned long long target, char *temp, t_info op, int t_len)
+static void	fill_ptr(t_ull target, char *temp, t_info op, int t_len)
 {
-	int 				max_size;
-	int					i;
-	int					j;
-	unsigned long long	digit;
+	int		max_size;
+	int		i;
+	int		j;
+	t_ull	digit;
 
 	max_size = get_max(op.width, 0, t_len);
 	if (op.minus == 1)
@@ -57,13 +56,13 @@ static void	fill_converted_ptr(unsigned long long target, char *temp, t_info op,
 
 int	convert_ptr(t_result *res, t_info op, va_list ap)
 {
-	char					*temp;
-	unsigned long long		target;
-	int						max_size;
-	int						t_len;
-	int						i;
+	char	*temp;
+	t_ull	target;
+	int		max_size;
+	int		t_len;
+	int		i;
 
-	target = va_arg(ap, unsigned long long);
+	target = va_arg(ap, t_ull);
 	t_len = ft_digit(target) + 2;
 	max_size = get_max(op.width, 0, t_len);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
@@ -73,7 +72,7 @@ int	convert_ptr(t_result *res, t_info op, va_list ap)
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	fill_converted_ptr(target, temp, op, t_len);
+	fill_ptr(target, temp, op, t_len);
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);

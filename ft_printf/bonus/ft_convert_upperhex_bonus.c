@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_lowerhex_bonus.c                        :+:      :+:    :+:   */
+/*   ft_convert_upperhex_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:44 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 16:01:50 by yejikim          ###   ########.fr       */
+/*   Updated: 2021/12/10 23:14:50 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	ft_digit(unsigned long long target)
+static int	ft_digit(t_ull target)
 {
-	unsigned long long	digit;
-	int 				cnt;
+	t_ull	digit;
+	int		cnt;
 
 	digit = 1;
 	cnt = 1;
-
 	while (target / 16 / digit > 0)
 	{
 		digit *= 16;
@@ -28,14 +27,27 @@ static int	ft_digit(unsigned long long target)
 	return (cnt);
 }
 
-static void	fill_from_front(unsigned long long target, char *temp, t_info op)
+static int	get_max_size(t_info op, t_ll target)
 {
-	int 				t_len;
-	int					i;
-	unsigned long long	digit;
+	int	t_len;
+	int	max_size;
 
-	if (op.precision == 0 && target == 0)
-		return ;
+	t_len = ft_digit(target);
+	if (op.hash == 1 && target != 0)
+		max_size = get_max(op.width, op.precision, t_len + 2);
+	else
+		max_size = get_max(op.width, op.precision, t_len);
+	if (op.width == 0 && op.precision == 0 && target == 0)
+		max_size = 0;
+	return (max_size);
+}
+
+static void	fill_from_front(t_ull target, char *temp, t_info op)
+{
+	int		t_len;
+	int		i;
+	t_ull	digit;
+
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
@@ -58,14 +70,12 @@ static void	fill_from_front(unsigned long long target, char *temp, t_info op)
 	}
 }
 
-static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int max_size)
+static void	fill_from_rear(t_ull target, char *temp, t_info op, int max_size)
 {
-	int					i;
-	int					t_len;
-	unsigned long long	x;
+	int		i;
+	int		t_len;
+	t_ull	x;
 
-	if (op.precision == 0 && target == 0)
-		return ;
 	t_len = ft_digit(target);
 	if (op.precision > t_len)
 		t_len = op.precision;
@@ -80,7 +90,7 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 	{
 		while (i >= 0)
 			temp[i--] = '0';
-		i += 2;	// # flag를 처리하기 위함
+		i += 2;
 	}
 	if (op.hash == 1 && target != 0)
 	{
@@ -91,23 +101,14 @@ static void	fill_from_rear(unsigned long long target, char *temp, t_info op, int
 
 int	convert_upperhex(t_result *res, t_info op, va_list ap)
 {
-	char					*temp;
-	unsigned long long		target;
-	int						max_size;
-	int						t_len;
-	int						i;
+	char	*temp;
+	t_ull	target;
+	int		max_size;
+	int		t_len;
+	int		i;
 
 	target = va_arg(ap, unsigned int);
-	//printf("target : %llx\n", target);
-	t_len = ft_digit(target);
-	//printf("t_len : %d\n", t_len);
-	if (op.hash == 1 && target != 0)
-		max_size = get_max(op.width, op.precision, t_len + 2);
-	else
-		max_size = get_max(op.width, op.precision, t_len);
-	//printf("max_size : %d\n", max_size);	
-	if (op.width == 0 && op.precision == 0 && target == 0)
-		max_size = 0;
+	max_size = get_max_size(op, target);
 	temp = (char *)malloc(sizeof(char) * (max_size + 1));
 	if (temp == NULL)
 		return (-1);
@@ -115,10 +116,13 @@ int	convert_upperhex(t_result *res, t_info op, va_list ap)
 	while (i < max_size)
 		temp[i++] = ' ';
 	temp[i] = '\0';
-	if (op.minus == 1)	// 앞에서부터 채워 넣음.
-		fill_from_front(target, temp, op);
-	else
-		fill_from_rear(target, temp, op, max_size);
+	if (!(op.precision == 0 && target == 0))
+	{
+		if (op.minus == 1)
+			fill_from_front(target, temp, op);
+		else
+			fill_from_rear(target, temp, op, max_size);
+	}
 	if (ft_stradd(res, temp, max_size) < 0)
 		return (-1);
 	return (1);
