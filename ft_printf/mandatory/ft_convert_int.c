@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 23:39:30 by yejin            ###   ########.fr       */
+/*   Updated: 2022/01/03 14:46:07 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ static int	get_max_size(t_info op, t_ll target)
 	if (op.width == 0 && op.precision == 0 && target == 0)
 		return (0);
 	t_len = ft_digit(target);
-	if (target < 0)
+	if (target < 0 || op.plus == 1)
 		max_size = get_max(op.width, op.precision + 1, t_len + 1);
-	else if (op.plus == 1)
-		max_size = get_max(op.width, op.precision, t_len + 1);
 	else
 		max_size = get_max(op.width, op.precision, t_len);
 	if (op.space == 1 && op.width <= t_len && target >= 0)
@@ -61,9 +59,7 @@ static void	fill_from_front(t_ll target, char *temp, t_info op, int t_len)
 	if (target < 0)
 	{
 		temp[i++] = '-';
-		temp[i++] = (target / digit) * -1 + '0';
-		target = (target % digit) * -1;
-		digit /= 10;
+		target *= -1;
 	}
 	else if (op.plus == 1)
 		temp[i++] = '+';

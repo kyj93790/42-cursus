@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:58:38 by yejikim           #+#    #+#             */
-/*   Updated: 2021/12/10 23:39:45 by yejin            ###   ########.fr       */
+/*   Updated: 2022/01/03 14:51:18 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ static void	fill_from_front(t_ll target, char *temp, t_info op, int t_len)
 	if (target < 0)
 	{
 		temp[i++] = '-';
-		temp[i++] = (target / digit) * -1 + '0';
-		target = (target % digit) * -1;
-		digit /= 10;
+		target *= -1;
 	}
 	else if (op.plus == 1)
 		temp[i++] = '+';
