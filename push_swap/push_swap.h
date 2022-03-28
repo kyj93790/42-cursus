@@ -7,13 +7,13 @@
 
 typedef struct  s_stack {
     int data;
-    s_stack *next;
+    struct s_stack *next;
 }   t_stack;
 
 typedef struct s_HEAD {
-    s_stack *front;
+    t_stack *front;
     int count;
-    s_stack *back;
+    t_stack *back;
 }   t_HEAD;
 
 #endif
