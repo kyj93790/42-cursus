@@ -7,7 +7,7 @@ void	push_front(t_HEAD *head, int data, t_HEAD *another)
 	pnew = (t_stack *)malloc(sizeof(t_stack));
 	if (pnew == 0)
 	{
-		free_stack(*head, *another);
+		free_stack(head, another);
 		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
@@ -37,7 +37,7 @@ void	push_back(t_HEAD *head, int data, t_HEAD *another)
 	pnew = (t_stack *)malloc(sizeof(t_stack));
 	if (pnew == 0)
 	{
-		free_stack(*head, *another);
+		free_stack(head, another);
 		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
@@ -88,14 +88,10 @@ void	pop_back(t_HEAD *head)
 	(head->count)--;
 }
 
-void free_stack(t_HEAD stack1, t_HEAD stack2)
+void free_stack(t_HEAD *stack1, t_HEAD *stack2)
 {
-	while ((stack1.count)--)
-	{
-		pop_front(&stack1);
-	}
-	while ((stack2.count)--)
-	{
-		pop_front(&stack2);
-	}
+	while (stack1->count)
+		pop_front(stack1);
+	while (stack2->count)
+		pop_front(stack2);
 }
