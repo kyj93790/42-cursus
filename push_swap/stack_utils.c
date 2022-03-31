@@ -1,16 +1,26 @@
 #include "push_swap.h"
 
-void	push_front(t_HEAD *head, int data) {
+void	push_front(t_HEAD *head, int data, t_HEAD *another)
+{
 	t_stack	*pnew;
 
 	pnew = (t_stack *)malloc(sizeof(t_stack));
+	if (pnew == 0)
+	{
+		free_stack(*head, *another);
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
 	pnew->data = data;
-	if (head->count == 0) {
+	if (head->count == 0)
+	{
 		pnew->prev = pnew;
 		pnew->next = pnew;
 		head->front = pnew;
 		head->back = pnew;
-	} else {
+	}
+	else
+	{
 		pnew->next = head->front;
 		pnew->next->prev = pnew;
 		head->front = pnew;
@@ -20,17 +30,27 @@ void	push_front(t_HEAD *head, int data) {
 	(head->count)++;
 }
 
-void	push_back(t_HEAD *head, int data) {
+void	push_back(t_HEAD *head, int data, t_HEAD *another)
+{
 	t_stack	*pnew;
 
-	pnew = (t_stack *)malloc8(sizeof(t_stack));
+	pnew = (t_stack *)malloc(sizeof(t_stack));
+	if (pnew == 0)
+	{
+		free_stack(*head, *another);
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
 	pnew->data = data;
-	if (head->count == 0) {
+	if (head->count == 0)
+	{
 		pnew->prev = pnew;
 		pnew->next = pnew;
 		head->front = pnew;
 		head->back = pnew;
-	} else {
+	}
+	else
+	{
 		pnew->prev = head->back;
 		pnew->prev->next = pnew;
 		head->back = pnew;
@@ -40,10 +60,12 @@ void	push_back(t_HEAD *head, int data) {
 	(head->count)++;
 }
 
-void	pop_front(t_HEAD *head) {
+void	pop_front(t_HEAD *head)
+{
 	t_stack	*pCur;
 	
-	if (head->count == 0) return ;
+	if (head->count == 0)
+		return ;
 	pCur = head->front;
 	head->front = pCur->next;
 	head->front->prev = head->back;
@@ -52,14 +74,28 @@ void	pop_front(t_HEAD *head) {
 	(head->count)--;
 }
 
-void	pop_back(t_HEAD *head) {
+void	pop_back(t_HEAD *head)
+{
 	t_stack	*pCur;
 	
-	if (head->count == 0) return ;
+	if (head->count == 0)
+		return ;
 	pCur = head->back;
 	head->back = pCur->prev;
 	head->back->next = head->front;
 	head->front->prev = head->back;
 	free(pCur);
 	(head->count)--;
+}
+
+void free_stack(t_HEAD stack1, t_HEAD stack2)
+{
+	while ((stack1.count)--)
+	{
+		pop_front(&stack1);
+	}
+	while ((stack2.count)--)
+	{
+		pop_front(&stack2);
+	}
 }
