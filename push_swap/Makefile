@@ -6,7 +6,10 @@ FT_PRINTF = ft_printf
 
 SRC_FILE = push_swap \
 			stack_utils \
-			parse_arg
+			parse_arg \
+			sort_stack \
+			sort_utils \
+			stack_commands
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

@@ -24,11 +24,9 @@ int main(int argc, char *argv[])
 	B.front = NULL;
 	B.count = 0;
 	B.back = NULL;
-	// 만약 인자가 하나도 없으면 -> 정렬되었다고 간주 -> 함수 종료
 	if (argc < 2)
 		return (0);
 	parse_arg(&A, &B, argc, argv);
-	print_stack(A);
-	// sorting 알고리즘 call
+	atob(A.count, &A, &B);
 	return (0);
 }

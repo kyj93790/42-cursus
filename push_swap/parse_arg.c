@@ -1,17 +1,5 @@
 #include "push_swap.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	if (s == NULL)
-		return (0);
-	i = 0;
-	while (*(s + i))
-		i++;
-	return (i);
-}
-
 // 0이면 에러를 뜻함. 어차피 0이 들어올 수 없음. 문제 조건에서 !
 int	arg_to_int(char *arg)
 {
@@ -63,8 +51,10 @@ void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
 	i = 1;
 	while (i < argc)
 	{
+		// argument 하나에 여러 숫자가 들어있을 수 있음
+		// 이를 split 하여 처리할 것
 		data = arg_to_int(argv[i]);
-		if (data == 0 || check_dup(A, data))
+		if (data == 0 || check_dup(A, data)) // 중복체크 제대로 안되고 있음
 		{ // error
 			free_stack(A, B);
 			write(2, "Error\n", 6);
