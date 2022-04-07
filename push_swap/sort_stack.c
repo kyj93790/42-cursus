@@ -15,8 +15,9 @@ void	atob(int n, t_HEAD *A, t_HEAD *B)
 	i = 0;
 	while (i++ < cnt.rb)
 		rrr(A, B);
+	i--;
 	while (i++ < cnt.ra) // 이 부분 하는 게 맞는지 고민 필요
-		rrx(A);	
+		rrx(A);
 	atob(cnt.ra, A, B);
 	btoa(cnt.rb, A, B);
 	btoa(cnt.pb - cnt.rb, A, B);
@@ -41,6 +42,7 @@ void btoa(int n, t_HEAD *A, t_HEAD *B)
 	i = 0;
 	while (i++ < cnt.ra)
 		rrr(A, B);
+	i--;
 	while (i++ < cnt.rb)
 		rrx(B);
 	atob(cnt.ra, A, B);
@@ -100,7 +102,7 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
 	{
 		temp = curr->data;
 		curr = curr->prev;
-		if (temp < pv1)
+		if (temp < pv2)
 		{
 			rx(B);
 			cnt.rb++;
@@ -109,7 +111,7 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
 		{
 			px(A, B);
 			cnt.pa++;
-			if (temp < pv2)
+			if (temp < pv1)
 			{
 				rx(A);
 				cnt.ra++;
