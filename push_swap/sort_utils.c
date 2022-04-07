@@ -1,12 +1,27 @@
 #include "push_swap.h"
 
-void	ft_swap(int *a, int *b)
+void	bubble_sort(int n, int *arr)
 {
+	int	i;
+	int	j;
 	int	temp;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	i = 0;
+	while (i < n - 1)
+	{
+		j = i + 1;
+		while (j < n)
+		{
+			if (arr[i] > arr[j])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 // 현 stack에서 top부터 n개의 수를 정렬할 때 적절한 pivot 설정
@@ -25,16 +40,7 @@ void	getpivot(int n, t_HEAD *head, int *pv1, int *pv2)
 		temp[i++] = curr->data;
 		curr = curr->next;
 	}
-	i = 0;
-	while (i < n - 1)
-	{
-		j = i + 1;
-		while (j < n)
-		{
-			if (temp[i] > temp[j])
-				ft_swap(&temp[i], &temp[j]);
-		}
-	}
+	bubble_sort(n, temp);
 	*pv1 = temp[n/2];
 	*pv2 = temp[n/2/2];
 	free(temp);
