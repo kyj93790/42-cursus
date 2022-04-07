@@ -30,7 +30,6 @@ void	getpivot(int n, t_HEAD *head, int *pv1, int *pv2)
 	int		*temp;
 	t_stack	*curr;
 	int		i;
-	int		j;
 
 	temp = malloc(sizeof(int) * n);
 	curr = head->front;
