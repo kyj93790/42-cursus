@@ -2,17 +2,14 @@
 
 void	atob(int n, t_HEAD *A, t_HEAD *B)
 {
-	int		pv1;
-	int		pv2;
 	int		i;
 	t_cnt	cnt;
 
 	if (n <= 3)
 	{
-		sort_piece(n, A);
+		sort_pieceA(n, A);
 		return ;
 	}
-	getpivot(n, A, &pv1, &pv2);
 	init_cnt(&cnt);
 	cnt = div_atob(n, A, B);	// ra, pb, rb등을 적절하게 처리하여 분할해 줌
 	// rrr ra 처리
@@ -28,8 +25,6 @@ void	atob(int n, t_HEAD *A, t_HEAD *B)
 
 void btoa(int n, t_HEAD *A, t_HEAD *B)
 {
-	int 	pv1;
-	int		pv2;
 	int		i;
 	t_cnt	cnt;
 

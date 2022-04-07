@@ -32,7 +32,7 @@ void	getpivot(int n, t_HEAD *head, int *pv1, int *pv2)
 		while (j < n)
 		{
 			if (temp[i] > temp[j])
-				swap(&temp[i], &temp[j]);
+				ft_swap(&temp[i], &temp[j]);
 		}
 	}
 	*pv1 = temp[n/2];
