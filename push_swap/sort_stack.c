@@ -35,8 +35,10 @@ void btoa(int n, t_HEAD *A, t_HEAD *B)
 
 	if (n <= 3)
 	{
-		// sort_piece(n, B);	// B에 대해서는 A와 반대로(역순) 정렬해야 하므로 이를 다른 정렬 알고리즘으로 구현
-		// A로 차례로 push
+		sort_pieceB(n, A, B);	// B에 대해서는 A와 반대로(역순) 정렬해야 하므로 이를 다른 정렬 알고리즘으로 구현
+		i = 0;
+		while (i < n)
+			px(A, B);
 		return ;
 	}
 	init_cnt(&cnt);
