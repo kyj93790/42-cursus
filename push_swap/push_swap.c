@@ -14,6 +14,13 @@ void print_stack(t_HEAD head) {
 	printf("\n");
 }
 
+void exit_with_error(t_HEAD *A, t_HEAD *B)
+{
+	free_stack(A, B);
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
+
 int main(int argc, char *argv[])
 {
 	t_HEAD	A;

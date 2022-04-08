@@ -48,6 +48,7 @@ typedef struct	s_cnt
 }	t_cnt;
 
 void print_stack(t_HEAD head);
+void exit_with_error(t_HEAD *A, t_HEAD *B);
 
 // stack_utils
 void	push_front(t_HEAD *head, int data, t_HEAD *another);

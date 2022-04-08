@@ -38,6 +38,7 @@ int	check_dup(t_HEAD *A, int data) {
 	while (i < A->count) {
 		if (data == curr->data)
 			return (1);
+		curr = curr->next;
 		i++;
 	}
 	return (0);
@@ -45,22 +46,26 @@ int	check_dup(t_HEAD *A, int data) {
 
 void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
 {
-	int	i;
-	int	data;
+	int		i;
+	int		j;
+	int		data;
+	char	**result;
 
 	i = 1;
 	while (i < argc)
 	{
-		// argument 하나에 여러 숫자가 들어있을 수 있음
-		// 이를 split 하여 처리할 것
-		data = arg_to_int(argv[i]);
-		if (data == 0 || check_dup(A, data)) // 중복체크 제대로 안되고 있음
-		{ // error
-			free_stack(A, B);
-			write(2, "Error\n", 6);
-			exit(EXIT_FAILURE);
+		result = ft_split(argv[i], ' ');
+		if (result == 0)
+			exit_with_error(A, B);
+		j = 0;
+		while (result[j])
+		{
+			data = arg_to_int(result[j]);
+			if (data == 0 || check_dup(A, data)) // 중복체크 제대로 안되고 있음.
+				exit_with_error(A, B);
+			j++;
+			push_front(A, data, B);
 		}
-		push_front(A, data, B);
 		i++;
 	}
 }
