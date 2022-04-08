@@ -28,6 +28,11 @@ int	check_merge(char *s, t_CHEAD *cmd)
 	return (0);
 }
 
+int	check_pop(char *s, t_CHEAD *cmd)
+{
+	
+}
+
 void	cmd_push(char *s, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	t_command	*pnew;

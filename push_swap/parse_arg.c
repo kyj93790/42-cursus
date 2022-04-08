@@ -11,9 +11,10 @@ int	arg_to_int(char *arg)
 	len = ft_strlen(arg);
 	i = 0;
 	neg = 1;
-	if (arg[i] == '-')
+	if (arg[i] == '-' || arg[i] == '+')
 	{
-		neg = -1;
+		if (arg[i] == '-')
+			neg = -1;
 		i++;
 	}
 	result = 0;
@@ -66,6 +67,10 @@ void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
 			j++;
 			push_front(A, data, B, 0);
 		}
+		j = 0;
+		while (result[j])
+			free(result[j++]);
+		free(result);
 		i++;
 	}
 }
