@@ -22,25 +22,37 @@ void exit_with_error(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 	exit(EXIT_FAILURE);
 }
 
+void init(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+{
+	A->front = NULL;
+	A->count = 0;
+	A->back = NULL;
+	B->front = NULL;
+	B->count = 0;
+	B->back = NULL;
+	cmd->front = NULL;
+	cmd->count = 0;
+	cmd->back = NULL;
+}
+
 int main(int argc, char *argv[])
 {
 	t_HEAD		A;
 	t_HEAD		B;
 	t_CHEAD		cmd;
 
-	A.front = NULL;
-	A.count = 0;
-	A.back = NULL;
-	B.front = NULL;
-	B.count = 0;
-	B.back = NULL;
-	cmd.front = NULL;
-	cmd.count = 0;
-	cmd.back = NULL;
+	init(&A, &B, &cmd);
 	if (argc < 2)
 		return (0);
 	parse_arg(&A, &B, argc, argv);
-	atob(A.count, &A, &B, &cmd);
+	if (4 <= A.count && A.count <= 6)
+	{
+		div_atob(A.count, &A, &B, &cmd);
+		atob(A.count, &A, &B, &cmd);
+		btoa(B.count, &A, &B, &cmd);
+	}
+	else
+		atob(A.count, &A, &B, &cmd);
 	print_cmd(cmd);
 	free_stack(&A, &B);
 	free_cmd(&cmd);
