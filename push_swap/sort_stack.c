@@ -17,7 +17,7 @@ void	atob(int n, t_HEAD *A, t_HEAD *B)
 		rrr(A, B);
 	i--;
 	while (i++ < cnt.ra) // 이 부분 하는 게 맞는지 고민 필요
-		rrx(A);
+		rrx('A', A);
 	atob(cnt.ra, A, B);
 	btoa(cnt.rb, A, B);
 	btoa(cnt.pb - cnt.rb, A, B);
@@ -33,7 +33,7 @@ void btoa(int n, t_HEAD *A, t_HEAD *B)
 		sort_pieceB(n, B);
 		i = 0;
 		while (i++ < n)
-			px(A, B);
+			px('A', A, B);
 		return ;
 	}
 	init_cnt(&cnt);
@@ -44,7 +44,7 @@ void btoa(int n, t_HEAD *A, t_HEAD *B)
 		rrr(A, B);
 	i--;
 	while (i++ < cnt.rb)
-		rrx(B);
+		rrx('B', B);
 	atob(cnt.ra, A, B);
 	btoa(cnt.rb, A, B);
 }
@@ -68,16 +68,16 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B)
 		curr = curr->prev;
 		if (pv1 <= temp)
 		{
-			rx(A);
+			rx('A', A);
 			cnt.ra++;
 		}
 		else
 		{
-			px(B, A);
+			px('B', B, A);
 			cnt.pb++;
 			if (pv2 <= temp)
 			{
-				rx(B);
+				rx('B', B);
 				cnt.rb++;
 			}
 		}
@@ -104,16 +104,16 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
 		curr = curr->prev;
 		if (temp < pv2)
 		{
-			rx(B);
+			rx('B', B);
 			cnt.rb++;
 		}
 		else
 		{
-			px(A, B);
+			px('A', A, B);
 			cnt.pa++;
 			if (temp < pv1)
 			{
-				rx(A);
+				rx('A', A);
 				cnt.ra++;
 			}
 		}

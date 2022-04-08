@@ -71,32 +71,32 @@ void	sort_pieceA(int n, t_HEAD *A)
 	if (n == 1)
 		return ;
 	if (n == 2 && A->back->prev->data < A->back->data)
-		sx(A);
+		sx('A', A);
 	else if (n == 3)
 	{
 		if (A->back->prev->prev->data < A->back->prev->data && A->back->data < A->back->prev->data) // 두번째가 제일 큼
 		{
 			if (A->count != 3)
 			{
-				rx(A);
-				sx(A);
+				rx('A', A);
+				sx('A', A);
 			}
-			rrx(A);
+			rrx('A', A);
 		}
 		else if (A->back->prev->prev->data < A->back->data && A->back->prev->data < A->back->data) // 3번째가 제일 큼
 		{
 			if (A->count == 3)
-				rx(A);
+				rx('A', A);
 			else
 			{
-				sx(A);
-				rx(A);
-				sx(A);
-				rrx(A);
+				sx('A', A);
+				rx('A', A);
+				sx('A', A);
+				rrx('A', A);
 			}
 		}
 		if (A->back->prev->data < A->back->data)
-			sx(A);
+			sx('A', A);
 	}
 }
 
@@ -105,32 +105,32 @@ void	sort_pieceB(int n, t_HEAD *B)
 	if (n == 1)
 		return ;
 	if (n == 2 && B->back->prev->data > B->back->data)
-		sx(B);
+		sx('B', B);
 	else if (n == 3)
 	{
 		if (B->back->prev->data < B->back->prev->prev->data && B->back->prev->data < B->back->data) // 두번째가 제일 작음
 		{
 			if (B->count != 3)
 			{
-				rx(B);
-				sx(B);
+				rx('B', B);
+				sx('B', B);
 			}
-			rrx(B);
+			rrx('B', B);
 		}
 		else if (B->back->data < B->back->prev->prev->data && B->back->data < B->back->prev->data) // 세번째가 제일 작음
 		{
 			if (B->count == 3)
-				rx(B);
+				rx('B', B);
 			else
 			{
-				sx(B);
-				rx(B);
-				sx(B);
-				rrx(B);
+				sx('B', B);
+				rx('B', B);
+				sx('B', B);
+				rrx('B', B);
 			}
 		}
 		if (B->back->prev->data > B->back->data)
-			sx(B);
+			sx('B', B);
 	}
 }
 

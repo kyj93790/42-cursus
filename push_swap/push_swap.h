@@ -76,10 +76,10 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B);
 t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B);
 
 // stack_commands
-void	sx(t_HEAD *x);
-void	px(t_HEAD *x, t_HEAD *y);
-void	rx(t_HEAD *x);
-void	rrx(t_HEAD *x);
+void	sx(char op, t_HEAD *x);
+void	px(char op, t_HEAD *x, t_HEAD *y);
+void	rx(char op, t_HEAD *x);
+void	rrx(char op, t_HEAD *x);
 void	rrr(t_HEAD *x, t_HEAD *y);
 
 #endif

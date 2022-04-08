@@ -28,18 +28,18 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	parse_arg(&A, &B, argc, argv);
-	printf("---------BEFORE---------\n");
-	printf("<A> : ");
-	print_stack(A);
-	printf("<B> : ");
-	print_stack(B);
-	printf("------------------------\n");
+	// printf("---------BEFORE---------\n");
+	// printf("<A> : ");
+	// print_stack(A);
+	// printf("<B> : ");
+	// print_stack(B);
+	// printf("------------------------\n");
 	atob(A.count, &A, &B);
-	printf("---------AFTER---------\n");
-	printf("<A> : ");
-	print_stack(A);
-	printf("<B> : ");
-	print_stack(B);
-	printf("------------------------\n");
+	// printf("---------AFTER---------\n");
+	// printf("<A> : ");
+	// print_stack(A);
+	// printf("<B> : ");
+	// print_stack(B);
+	// printf("------------------------\n");
 	return (0);
 }
