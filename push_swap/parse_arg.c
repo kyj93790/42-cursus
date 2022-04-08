@@ -1,6 +1,11 @@
 #include "push_swap.h"
 
 // 0이면 에러를 뜻함. 어차피 0이 들어올 수 없음. 문제 조건에서 !
+
+// 0은 들어올 수 있음
+// +0, -0 가능
+// 부호가 있는데 뒤에 숫자가 없으면 error
+
 int	arg_to_int(char *arg)
 {
 	size_t	len;
@@ -13,6 +18,8 @@ int	arg_to_int(char *arg)
 	neg = 1;
 	if (arg[i] == '-' || arg[i] == '+')
 	{
+		if (arg[i+1] < '0' || '9' < arg[i+1])
+			
 		if (arg[i] == '-')
 			neg = -1;
 		i++;
