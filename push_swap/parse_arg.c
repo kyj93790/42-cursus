@@ -56,15 +56,15 @@ void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
 	{
 		result = ft_split(argv[i], ' ');
 		if (result == 0)
-			exit_with_error(A, B);
+			exit_with_error(A, B, 0);
 		j = 0;
 		while (result[j])
 		{
 			data = arg_to_int(result[j]);
 			if (data == 0 || check_dup(A, data)) // 중복체크 제대로 안되고 있음.
-				exit_with_error(A, B);
+				exit_with_error(A, B, 0);
 			j++;
-			push_front(A, data, B);
+			push_front(A, data, B, 0);
 		}
 		i++;
 	}

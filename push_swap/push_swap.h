@@ -28,9 +28,16 @@ typedef struct  s_HEAD
 
 typedef struct  s_command
 {
-	char				cmd[5];
+	char				*data;
     struct s_command	*next;
 } t_command;
+
+typedef struct s_CHEAD
+{
+	t_command *front;
+	int count;
+	t_command *back;
+} t_CHEAD;
 
 typedef struct	s_cnt
 {
@@ -48,14 +55,16 @@ typedef struct	s_cnt
 }	t_cnt;
 
 void print_stack(t_HEAD head);
-void exit_with_error(t_HEAD *A, t_HEAD *B);
+void exit_with_error(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 
 // stack_utils
-void	push_front(t_HEAD *head, int data, t_HEAD *another);
-void	push_back(t_HEAD *head, int data, t_HEAD *another);
+// cmd도 같이 free 시켜주는 부분 필요.
+// parsing 시에는 cmd가 아직 생성되어 있지 않으므로 null을 넣어 처리하지 않게 한다 !
+void	push_front(t_HEAD *head, int data, t_HEAD *another, t_CHEAD *cmd);
+void	push_back(t_HEAD *head, int data, t_HEAD *another, t_CHEAD *cmd);
 void	pop_front(t_HEAD *head);
 void	pop_back(t_HEAD *head);
-void	free_stack(t_HEAD *stack1, t_HEAD *stack2);
+void	free_stack(t_HEAD *A, t_HEAD *B);
 
 // parse_arg
 int		arg_to_int(char *arg);
@@ -65,26 +74,32 @@ void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[]);
 // sort_utils
 int		getpivotA(int n, t_HEAD *head, int *pv1, int *pv2);
 int		getpivotB(int n, t_HEAD *head, int *pv1, int *pv2);
-void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 void	init_cnt(t_cnt *cnt);
 
 // sort_stacks
-void	atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 // return 값을 맞춰주기
-t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
-t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 
 // stack_commands
-void	sa(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	sb(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	pa(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	pb(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	ra(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	rb(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	rra(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	rrb(t_HEAD *A, t_HEAD *B, t_command *cmd);
-void	rrr(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	sa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	sb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	pa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	pb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	ra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	rb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	rra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	rrb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	rrr(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+
+// cmd_utils
+int		check_merge(char *s, t_CHEAD *cmd);
+void	cmd_push(char *s, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	free_cmd(t_CHEAD *cmd);
+void	print_cmd(t_CHEAD cmd);
 
 #endif

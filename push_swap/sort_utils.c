@@ -72,71 +72,71 @@ int	getpivotB(int n, t_HEAD *head, int *pv1, int *pv2)
 }
 
 // 3개 이하인 case에 대해서 정렬해주는 알고리즘
-void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	if (n == 1)
 		return ;
 	if (n == 2 && A->back->prev->data < A->back->data)
-		sx('A', A);
+		sa(A, B, cmd);
 	else if (n == 3)
 	{
 		if (A->back->prev->prev->data < A->back->prev->data && A->back->data < A->back->prev->data) // 두번째가 제일 큼
 		{
 			if (A->count != 3)
 			{
-				rx('A', A);
-				sx('A', A);
+				ra(A, B, cmd);
+				sa(A, B, cmd);
 			}
-			rrx('A', A);
+			rra(A, B, cmd);
 		}
 		else if (A->back->prev->prev->data < A->back->data && A->back->prev->data < A->back->data) // 3번째가 제일 큼
 		{
 			if (A->count == 3)
-				rx('A', A);
+				ra(A, B, cmd);
 			else
 			{
-				sx('A', A);
-				rx('A', A);
-				sx('A', A);
-				rrx('A', A);
+				sa(A, B, cmd);
+				ra(A, B, cmd);
+				sa(A, B, cmd);
+				rra(A, B, cmd);
 			}
 		}
 		if (A->back->prev->data < A->back->data)
-			sx('A', A);
+			sa(A, B, cmd);
 	}
 }
 
-void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	if (n == 1)
 		return ;
 	if (n == 2 && B->back->prev->data > B->back->data)
-		sx('B', B);
+		sb(A, B, cmd);
 	else if (n == 3)
 	{
 		if (B->back->prev->data < B->back->prev->prev->data && B->back->prev->data < B->back->data) // 두번째가 제일 작음
 		{
 			if (B->count != 3)
 			{
-				rx('B', B);
-				sx('B', B);
+				rb(A, B, cmd);
+				sb(A, B, cmd);
 			}
-			rrx('B', B);
+			rrb(A, B, cmd);
 		}
 		else if (B->back->data < B->back->prev->prev->data && B->back->data < B->back->prev->data) // 세번째가 제일 작음
 		{
 			if (B->count == 3)
-				rx('B', B);
+				rb(A, B, cmd);
 			else
 			{
-				sx('B', B);
-				rx('B', B);
-				sx('B', B);
-				rrx('B', B);
+				sb(A, B, cmd);
+				rb(A, B, cmd);
+				sb(A, B, cmd);
+				rrb(A, B, cmd);
 			}
 		}
 		if (B->back->prev->data > B->back->data)
-			sx('B', B);
+			sb(A, B, cmd);
 	}
 }
 

@@ -9,7 +9,8 @@ SRC_FILE = push_swap \
 			parse_arg \
 			sort_stack \
 			sort_utils \
-			stack_commands
+			stack_commands \
+			cmd_utils
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

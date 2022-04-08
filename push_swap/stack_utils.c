@@ -1,12 +1,12 @@
 #include "push_swap.h"
 
-void	push_front(t_HEAD *head, int data, t_HEAD *another)
+void	push_front(t_HEAD *head, int data, t_HEAD *another, t_CHEAD *cmd)
 {
 	t_stack	*pnew;
 
 	pnew = (t_stack *)malloc(sizeof(t_stack));
 	if (pnew == 0)
-		exit_with_error(head, another);
+		exit_with_error(head, another, cmd);
 	pnew->data = data;
 	if (head->count == 0)
 	{
@@ -26,13 +26,13 @@ void	push_front(t_HEAD *head, int data, t_HEAD *another)
 	(head->count)++;
 }
 
-void	push_back(t_HEAD *head, int data, t_HEAD *another)
+void	push_back(t_HEAD *head, int data, t_HEAD *another, t_CHEAD *cmd)
 {
 	t_stack	*pnew;
 
 	pnew = (t_stack *)malloc(sizeof(t_stack));
 	if (pnew == 0)
-		exit_with_error(head, another);
+		exit_with_error(head, another, cmd);
 	pnew->data = data;
 	if (head->count == 0)
 	{

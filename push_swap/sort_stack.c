@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+void	atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	int		i;
 	t_cnt	cnt;
@@ -23,7 +23,7 @@ void	atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 	btoa(cnt.pb - cnt.rb, A, B, cmd);
 }
 
-void btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+void btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	int		i;
 	t_cnt	cnt;
@@ -49,7 +49,7 @@ void btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 	btoa(cnt.rb, A, B, cmd);
 }
 
-t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	int		pv1;
 	int		pv2;
@@ -58,8 +58,8 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	if (getpivotA(n, A, &pv1, &pv2))
-		exit_with_error(A, B);
+	if (getpivotA(n, A, &pv1, &pv2) == 0)
+		exit_with_error(A, B, cmd);
 	init_cnt(&cnt);
 	i = 0;
 	curr = A->back; // top부터 n개 처리
@@ -86,7 +86,7 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 	return (cnt);
 }
 
-t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
+t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
 	int		pv1;
 	int		pv2;
@@ -95,8 +95,8 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	if (getpivotB(n, B, &pv1, &pv2))
-		exit_with_error(A, B);
+	if (getpivotB(n, B, &pv1, &pv2) == 0)
+		exit_with_error(A, B, cmd);
 	init_cnt(&cnt);
 	i = 0;
 	curr = B->back;
