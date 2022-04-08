@@ -11,13 +11,16 @@ void	atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 		return ;
 	}
 	init_cnt(&cnt);
-	cnt = div_atob(n, A, B, cmd);	// ra, pb, rb등을 적절하게 처리하여 분할해 줌
+	cnt = div_atob(n, A, B, cmd);
 	i = 0;
 	while (i++ < cnt.rb)
-		rrr(A, B, cmd);
-	i--;
-	while (i++ < cnt.ra) // 이 부분 하는 게 맞는지 고민 필요
-		rra(A, B, cmd);
+        rrr(A, B, cmd);
+    i--;
+	if (n/2 != A->count)
+	{
+		while (i++ < cnt.ra)
+			rra(A, B, cmd);
+	}
 	atob(cnt.ra, A, B, cmd);
 	btoa(cnt.rb, A, B, cmd);
 	btoa(cnt.pb - cnt.rb, A, B, cmd);

@@ -42,6 +42,8 @@ void pb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 
 void ra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
+	if (A->count <= 1)
+		return ;
 	A->front = A->back;
 	A->back = A->back->prev;
 	cmd_push("ra", A, B, cmd);
@@ -49,6 +51,8 @@ void ra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 
 void rb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
+	if (B->count <= 1)
+		return ;
 	B->front = B->back;
 	B->back = B->back->prev;
 	cmd_push("rb", A, B, cmd);
@@ -56,6 +60,8 @@ void rb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 
 void rra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
+	if (A->count <= 1)
+		return ;
 	A->back = A->front;
 	A->front = A->front->next;
 	cmd_push("rra", A, B, cmd);
@@ -63,6 +69,8 @@ void rra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 
 void rrb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 {
+	if (B->count <= 1)
+		return ;
 	B->back = B->front;
 	B->front = B->front->next;
 	cmd_push("rrb", A, B, cmd);
