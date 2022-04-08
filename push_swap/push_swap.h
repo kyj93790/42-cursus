@@ -7,9 +7,6 @@
 # include <stdlib.h>
 # include "ft_printf/bonus/ft_printf_bonus.h"
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
-
 typedef long long t_ll;
 
 typedef struct	s_stack
