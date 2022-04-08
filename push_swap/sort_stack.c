@@ -1,55 +1,55 @@
 #include "push_swap.h"
 
-void	atob(int n, t_HEAD *A, t_HEAD *B)
+void	atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
 	int		i;
 	t_cnt	cnt;
 
 	if (n <= 3)
 	{
-		sort_pieceA(n, A);
+		sort_pieceA(n, A, B, cmd);
 		return ;
 	}
 	init_cnt(&cnt);
-	cnt = div_atob(n, A, B);	// ra, pb, rb등을 적절하게 처리하여 분할해 줌
+	cnt = div_atob(n, A, B, cmd);	// ra, pb, rb등을 적절하게 처리하여 분할해 줌
 	i = 0;
 	while (i++ < cnt.rb)
-		rrr(A, B);
+		rrr(A, B, cmd);
 	i--;
 	while (i++ < cnt.ra) // 이 부분 하는 게 맞는지 고민 필요
-		rrx('A', A);
-	atob(cnt.ra, A, B);
-	btoa(cnt.rb, A, B);
-	btoa(cnt.pb - cnt.rb, A, B);
+		rra(A, B, cmd);
+	atob(cnt.ra, A, B, cmd);
+	btoa(cnt.rb, A, B, cmd);
+	btoa(cnt.pb - cnt.rb, A, B, cmd);
 }
 
-void btoa(int n, t_HEAD *A, t_HEAD *B)
+void btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
 	int		i;
 	t_cnt	cnt;
 
 	if (n <= 3)
 	{
-		sort_pieceB(n, B);
+		sort_pieceB(n, A, B, cmd);
 		i = 0;
 		while (i++ < n)
-			px('A', A, B);
+			pa(A, B, cmd);
 		return ;
 	}
 	init_cnt(&cnt);
-	cnt = div_btoa(n, A, B);
-	atob(cnt.pa-cnt.ra, A, B);
+	cnt = div_btoa(n, A, B, cmd);
+	atob(cnt.pa-cnt.ra, A, B, cmd);
 	i = 0;
 	while (i++ < cnt.ra)
-		rrr(A, B);
+		rrr(A, B, cmd);
 	i--;
 	while (i++ < cnt.rb)
-		rrx('B', B);
-	atob(cnt.ra, A, B);
-	btoa(cnt.rb, A, B);
+		rrb(A, B, cmd);
+	atob(cnt.ra, A, B, cmd);
+	btoa(cnt.rb, A, B, cmd);
 }
 
-t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B)
+t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
 	int		pv1;
 	int		pv2;
@@ -58,7 +58,8 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B)
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	getpivotA(n, A, &pv1, &pv2);
+	if (getpivotA(n, A, &pv1, &pv2))
+		exit_with_error(A, B);
 	init_cnt(&cnt);
 	i = 0;
 	curr = A->back; // top부터 n개 처리
@@ -68,16 +69,16 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B)
 		curr = curr->prev;
 		if (pv1 <= temp)
 		{
-			rx('A', A);
+			ra(A, B, cmd);
 			cnt.ra++;
 		}
 		else
 		{
-			px('B', B, A);
+			pb(A, B, cmd);
 			cnt.pb++;
 			if (pv2 <= temp)
 			{
-				rx('B', B);
+				rb(A, B, cmd);
 				cnt.rb++;
 			}
 		}
@@ -85,7 +86,7 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B)
 	return (cnt);
 }
 
-t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
+t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
 	int		pv1;
 	int		pv2;
@@ -94,7 +95,8 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	getpivotB(n, B, &pv1, &pv2);
+	if (getpivotB(n, B, &pv1, &pv2))
+		exit_with_error(A, B);
 	init_cnt(&cnt);
 	i = 0;
 	curr = B->back;
@@ -104,16 +106,16 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B)
 		curr = curr->prev;
 		if (temp < pv2)
 		{
-			rx('B', B);
+			rb(A, B, cmd);
 			cnt.rb++;
 		}
 		else
 		{
-			px('A', A, B);
+			pa(A, B, cmd);
 			cnt.pa++;
 			if (temp < pv1)
 			{
-				rx('A', A);
+				ra(A, B, cmd);
 				cnt.ra++;
 			}
 		}

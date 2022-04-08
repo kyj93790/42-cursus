@@ -63,24 +63,28 @@ int		check_dup(t_HEAD *A, int data);
 void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[]);
 
 // sort_utils
-void	getpivotA(int n, t_HEAD *head, int *pv1, int *pv2);
-void	getpivotB(int n, t_HEAD *head, int *pv1, int *pv2);
-void	sort_pieceA(int n, t_HEAD *A);
-void	sort_pieceB(int n, t_HEAD *B);
+int		getpivotA(int n, t_HEAD *head, int *pv1, int *pv2);
+int		getpivotB(int n, t_HEAD *head, int *pv1, int *pv2);
+void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
 void	init_cnt(t_cnt *cnt);
 
 // sort_stacks
-void	atob(int n, t_HEAD *A, t_HEAD *B);
-void	btoa(int n, t_HEAD *A, t_HEAD *B);
+void	atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
 // return 값을 맞춰주기
-t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B);
-t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B);
+t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
+t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_command *cmd);
 
 // stack_commands
-void	sx(char op, t_HEAD *x);
-void	px(char op, t_HEAD *x, t_HEAD *y);
-void	rx(char op, t_HEAD *x);
-void	rrx(char op, t_HEAD *x);
-void	rrr(t_HEAD *x, t_HEAD *y);
+void	sa(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	sb(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	pa(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	pb(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	ra(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	rb(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	rra(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	rrb(t_HEAD *A, t_HEAD *B, t_command *cmd);
+void	rrr(t_HEAD *A, t_HEAD *B, t_command *cmd);
 
 #endif

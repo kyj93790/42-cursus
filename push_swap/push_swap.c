@@ -23,8 +23,9 @@ void exit_with_error(t_HEAD *A, t_HEAD *B)
 
 int main(int argc, char *argv[])
 {
-	t_HEAD	A;
-	t_HEAD	B;
+	t_HEAD		A;
+	t_HEAD		B;
+	t_command	*cmd;
 
 	A.front = NULL;
 	A.count = 0;
@@ -32,21 +33,10 @@ int main(int argc, char *argv[])
 	B.front = NULL;
 	B.count = 0;
 	B.back = NULL;
+	cmd = NULL;
 	if (argc < 2)
 		return (0);
 	parse_arg(&A, &B, argc, argv);
-	// printf("---------BEFORE---------\n");
-	// printf("<A> : ");
-	// print_stack(A);
-	// printf("<B> : ");
-	// print_stack(B);
-	// printf("------------------------\n");
-	atob(A.count, &A, &B);
-	// printf("---------AFTER---------\n");
-	// printf("<A> : ");
-	// print_stack(A);
-	// printf("<B> : ");
-	// print_stack(B);
-	// printf("------------------------\n");
+	atob(A.count, &A, &B, cmd);
 	return (0);
 }

@@ -1,58 +1,67 @@
 #include "push_swap.h"
 
-void sx(char op, t_HEAD *x)
+void sa(t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
-	// swap x
 	int	temp;
 
-	temp = x->back->data;
-	x->back->data = x->back->prev->data;
-	x->back->prev->data = temp;
-	if (op == 'A')
-		ft_printf("sa\n");
-	else if (op == 'B')
-		ft_printf("sb\n");
+	temp = A->back->data;
+	A->back->data = A->back->prev->data;
+	A->back->prev->data = temp;
 }
 
-void px(char op, t_HEAD *x, t_HEAD *y)
+void sb(t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
-	// push x (y->x로 push)
 	int	temp;
 
-	temp = y->back->data;
-	pop_back(y);
-	push_back(x, temp, y);
-	if (op == 'A')
-		ft_printf("pa\n");
-	else if (op == 'B')
-		ft_printf("pb\n");
+	temp = B->back->data;
+	B->back->data = B->back->prev->data;
+	B->back->prev->data = temp;
 }
 
-void rx(char op, t_HEAD *x)
+void pa(t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
-	// rotate x (top 방향으로 한 칸씩)
-	x->front = x->back;
-	x->back = x->back->prev;
-	if (op == 'A')
-		ft_printf("ra\n");
-	else if (op == 'B')
-		ft_printf("rb\n");
+	int	temp;
+
+	temp = B->back->data;
+	pop_back(B);
+	push_back(A, temp, B);
 }
 
-void rrx(char op, t_HEAD *x)
+void pb(t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
-	// reverse rotate x
-	x->back = x->front;
-	x->front = x->front->next;
-	if (op == 'A')
-		ft_printf("rra\n");
-	else if (op == 'B')
-		ft_printf("rrb\n");
+	int	temp;
+
+	temp = A->back->data;
+	pop_back(A);
+	push_back(B, temp, A);
 }
 
-void rrr(t_HEAD *x, t_HEAD *y)
+void ra(t_HEAD *A, t_HEAD *B, t_command *cmd)
 {
-	rrx(0, x);
-	rrx(0, y);
-	ft_printf("rrr\n");
+	A->front = A->back;
+	A->back = A->back->prev;
+}
+
+void rb(t_HEAD *A, t_HEAD *B, t_command *cmd)
+{
+	B->front = B->back;
+	B->back = B->back->prev;
+}
+
+void rra(t_HEAD *A, t_HEAD *B, t_command *cmd)
+{
+	A->back = A->front;
+	A->front = A->front->next;
+}
+
+void rrb(t_HEAD *A, t_HEAD *B, t_command *cmd)
+{
+	B->back = B->front;
+	B->front = B->front->next;
+}
+
+void rrr(t_HEAD *A, t_HEAD *B, t_command *cmd)
+{
+	rra(A, cmd);
+	rrb(B, cmd);
 }
