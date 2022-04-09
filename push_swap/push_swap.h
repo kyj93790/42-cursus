@@ -83,15 +83,15 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
 
 // stack_commands
-void	sa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	sb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	pa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	pb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	ra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	rb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	rra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	rrb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
-void	rrr(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd);
+void	sa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	sb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	pa(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	pb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	ra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	rb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	rra(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	rrb(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
+void	rrr(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd, t_cnt *cnt);
 
 // cmd_utils
 int		check_merge(char *s, t_CHEAD *cmd);

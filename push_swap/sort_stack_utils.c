@@ -77,32 +77,32 @@ void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 	if (n == 1)
 		return ;
 	if (n == 2 && A->back->prev->data < A->back->data)
-		sa(A, B, cmd);
+		sa(A, B, cmd, 0);
 	else if (n == 3)
 	{
 		if (A->back->prev->prev->data < A->back->prev->data && A->back->data < A->back->prev->data) // 두번째가 제일 큼
 		{
 			if (A->count != 3)
 			{
-				ra(A, B, cmd);
-				sa(A, B, cmd);
+				ra(A, B, cmd, 0);
+				sa(A, B, cmd, 0);
 			}
-			rra(A, B, cmd);
+			rra(A, B, cmd, 0);
 		}
 		else if (A->back->prev->prev->data < A->back->data && A->back->prev->data < A->back->data) // 3번째가 제일 큼
 		{
 			if (A->count == 3)
-				ra(A, B, cmd);
+				ra(A, B, cmd, 0);
 			else
 			{
-				sa(A, B, cmd);
-				ra(A, B, cmd);
-				sa(A, B, cmd);
-				rra(A, B, cmd);
+				sa(A, B, cmd, 0);
+				ra(A, B, cmd, 0);
+				sa(A, B, cmd, 0);
+				rra(A, B, cmd, 0);
 			}
 		}
 		if (A->back->prev->data < A->back->data)
-			sa(A, B, cmd);
+			sa(A, B, cmd, 0);
 	}
 }
 
@@ -111,32 +111,32 @@ void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 	if (n == 1)
 		return ;
 	if (n == 2 && B->back->prev->data > B->back->data)
-		sb(A, B, cmd);
+		sb(A, B, cmd, 0);
 	else if (n == 3)
 	{
 		if (B->back->prev->data < B->back->prev->prev->data && B->back->prev->data < B->back->data) // 두번째가 제일 작음
 		{
 			if (B->count != 3)
 			{
-				rb(A, B, cmd);
-				sb(A, B, cmd);
+				rb(A, B, cmd, 0);
+				sb(A, B, cmd, 0);
 			}
-			rrb(A, B, cmd);
+			rrb(A, B, cmd, 0);
 		}
 		else if (B->back->data < B->back->prev->prev->data && B->back->data < B->back->prev->data) // 세번째가 제일 작음
 		{
 			if (B->count == 3)
-				rb(A, B, cmd);
+				rb(A, B, cmd, 0);
 			else
 			{
-				sb(A, B, cmd);
-				rb(A, B, cmd);
-				sb(A, B, cmd);
-				rrb(A, B, cmd);
+				sb(A, B, cmd, 0);
+				rb(A, B, cmd, 0);
+				sb(A, B, cmd, 0);
+				rrb(A, B, cmd, 0);
 			}
 		}
 		if (B->back->prev->data > B->back->data)
-			sb(A, B, cmd);
+			sb(A, B, cmd, 0);
 	}
 }
 

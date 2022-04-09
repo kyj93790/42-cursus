@@ -5,11 +5,11 @@ NAME = push_swap
 FT_PRINTF = ft_printf
 
 SRC_FILE = push_swap \
-			stack_utils \
 			parse_arg \
 			sort_stack \
-			sort_utils \
+			sort_stack_utils \
 			stack_commands \
+			stack_commands_utils \
 			cmd_utils
 
 SRC = $(addsuffix .c, $(SRC_FILE))

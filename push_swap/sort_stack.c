@@ -14,12 +14,12 @@ void	atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 	cnt = div_atob(n, A, B, cmd);
 	i = 0;
 	while (i++ < cnt.rb)
-        rrr(A, B, cmd);
+        rrr(A, B, cmd, 0);
     i--;
 	if (n/2 != A->count)
 	{
 		while (i++ < cnt.ra)
-			rra(A, B, cmd);
+			rra(A, B, cmd, 0);
 	}
 	atob(cnt.ra, A, B, cmd);
 	btoa(cnt.rb, A, B, cmd);
@@ -36,7 +36,7 @@ void btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 		sort_pieceB(n, A, B, cmd);
 		i = 0;
 		while (i++ < n)
-			pa(A, B, cmd);
+			pa(A, B, cmd, 0);
 		return ;
 	}
 	init_cnt(&cnt);
@@ -44,10 +44,10 @@ void btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 	atob(cnt.pa-cnt.ra, A, B, cmd);
 	i = 0;
 	while (i++ < cnt.ra)
-		rrr(A, B, cmd);
+		rrr(A, B, cmd, 0);
 	i--;
 	while (i++ < cnt.rb)
-		rrb(A, B, cmd);
+		rrb(A, B, cmd, 0);
 	atob(cnt.ra, A, B, cmd);
 	btoa(cnt.rb, A, B, cmd);
 }
@@ -71,19 +71,12 @@ t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 		temp = curr->data;
 		curr = curr->prev;
 		if (pv1 <= temp)
-		{
-			ra(A, B, cmd);
-			cnt.ra++;
-		}
+			ra(A, B, cmd, &cnt);
 		else
 		{
-			pb(A, B, cmd);
-			cnt.pb++;
+			pb(A, B, cmd, &cnt);
 			if (pv2 <= temp)
-			{
-				rb(A, B, cmd);
-				cnt.rb++;
-			}
+				rb(A, B, cmd, &cnt);
 		}
 	}
 	return (cnt);
@@ -108,19 +101,12 @@ t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
 		temp = curr->data;
 		curr = curr->prev;
 		if (temp < pv2)
-		{
-			rb(A, B, cmd);
-			cnt.rb++;
-		}
+			rb(A, B, cmd, &cnt);
 		else
 		{
-			pa(A, B, cmd);
-			cnt.pa++;
+			pa(A, B, cmd, &cnt);
 			if (temp < pv1)
-			{
-				ra(A, B, cmd);
-				cnt.ra++;
-			}
+				ra(A, B, cmd, &cnt);
 		}
 	}
 	return (cnt);
