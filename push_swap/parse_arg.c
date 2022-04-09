@@ -6,7 +6,7 @@ int	arg_to_int(char *arg)
 	size_t	i;
 	t_ll	result;
 	int		neg;
-	
+
 	len = ft_strlen(arg);
 	i = 0;
 	neg = 1;
@@ -29,7 +29,7 @@ int	arg_to_int(char *arg)
 	return ((int)result);
 }
 
-int check_arg_error(char *arg)
+int	check_arg_error(char *arg)
 {
 	size_t	len;
 	size_t	i;
@@ -38,7 +38,7 @@ int check_arg_error(char *arg)
 	i = 0;
 	if (arg[i] == '-' || arg[i] == '+')
 	{
-		if (arg[i+1] < '0' || '9' < arg[i+1])
+		if (arg[i + 1] < '0' || '9' < arg[i + 1])
 			return (1);
 		i++;
 	}
@@ -51,13 +51,15 @@ int check_arg_error(char *arg)
 	return (0);
 }
 
-int	check_dup(t_HEAD *A, int data) {
+int	check_dup(t_HEAD *a, int data)
+{
 	int		i;
 	t_stack	*curr;
 
 	i = 0;
-	curr = A->front;
-	while (i < A->count) {
+	curr = a->front;
+	while (i < a->count)
+	{
 		if (data == curr->data)
 			return (1);
 		curr = curr->next;
@@ -66,12 +68,11 @@ int	check_dup(t_HEAD *A, int data) {
 	return (0);
 }
 
-void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
+void	parse_arg(t_HEAD *a, t_HEAD *b, int argc, char *argv[])
 {
 	int		i;
 	int		j;
 	int		data;
-	int		flag;
 	char	**result;
 
 	i = 0;
@@ -79,15 +80,14 @@ void	parse_arg(t_HEAD *A, t_HEAD *B, int argc, char *argv[])
 	{
 		result = ft_split(argv[i], ' ');
 		if (result == 0)
-			exit_with_error(A, B, 0);
+			exit_with_error(a, b, 0);
 		j = -1;
 		while (result[++j])
 		{
-			flag = 0;
 			data = arg_to_int(result[j]);
-			if (check_arg_error(result[j]) || check_dup(A, data))
-				exit_with_error(A, B, 0);
-			push_front(A, data, B, 0);
+			if (check_arg_error(result[j]) || check_dup(a, data))
+				exit_with_error(a, b, 0);
+			push_front(a, data, b, 0);
 		}
 		j = 0;
 		while (result[j])

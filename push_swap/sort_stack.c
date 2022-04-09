@@ -1,112 +1,108 @@
 #include "push_swap.h"
 
-void	atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+void	atob(int n, t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
 	int		i;
 	t_cnt	cnt;
 
 	if (n <= 3)
 	{
-		sort_pieceA(n, A, B, cmd);
+		sort_piece_a(n, a, b, cmd);
 		return ;
 	}
 	init_cnt(&cnt);
-	cnt = div_atob(n, A, B, cmd);
+	cnt = div_atob(n, a, b, cmd);
 	i = 0;
 	while (i++ < cnt.rb)
-        rrr(A, B, cmd, 0);
-    i--;
-	if (n/2 != A->count)
+		rrr(a, b, cmd, 0);
+	i--;
+	if (n / 2 != a->count)
 	{
 		while (i++ < cnt.ra)
-			rra(A, B, cmd, 0);
+			rra(a, b, cmd, 0);
 	}
-	atob(cnt.ra, A, B, cmd);
-	btoa(cnt.rb, A, B, cmd);
-	btoa(cnt.pb - cnt.rb, A, B, cmd);
+	atob(cnt.ra, a, b, cmd);
+	btoa(cnt.rb, a, b, cmd);
+	btoa(cnt.pb - cnt.rb, a, b, cmd);
 }
 
-void btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+void	btoa(int n, t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
 	int		i;
 	t_cnt	cnt;
 
 	if (n <= 3)
 	{
-		sort_pieceB(n, A, B, cmd);
+		sort_piece_b(n, a, b, cmd);
 		i = 0;
 		while (i++ < n)
-			pa(A, B, cmd, 0);
+			pa(a, b, cmd, 0);
 		return ;
 	}
 	init_cnt(&cnt);
-	cnt = div_btoa(n, A, B, cmd);
-	atob(cnt.pa-cnt.ra, A, B, cmd);
+	cnt = div_btoa(n, a, b, cmd);
+	atob(cnt.pa - cnt.ra, a, b, cmd);
 	i = 0;
 	while (i++ < cnt.ra)
-		rrr(A, B, cmd, 0);
+		rrr(a, b, cmd, 0);
 	i--;
 	while (i++ < cnt.rb)
-		rrb(A, B, cmd, 0);
-	atob(cnt.ra, A, B, cmd);
-	btoa(cnt.rb, A, B, cmd);
+		rrb(a, b, cmd, 0);
+	atob(cnt.ra, a, b, cmd);
+	btoa(cnt.rb, a, b, cmd);
 }
 
-t_cnt	div_atob(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+t_cnt	div_atob(int n, t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
 	int		pv1;
 	int		pv2;
-	int		i;
 	int		temp;
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	if (getpivotA(n, A, &pv1, &pv2) == 0)
-		exit_with_error(A, B, cmd);
+	if (getpivot_a(n, a, &pv1, &pv2) == 0)
+		exit_with_error(a, b, cmd);
 	init_cnt(&cnt);
-	i = 0;
-	curr = A->back; // top부터 n개 처리
-	while (i++ < n)
+	curr = a->back;
+	while (n--)
 	{
 		temp = curr->data;
 		curr = curr->prev;
 		if (pv1 <= temp)
-			ra(A, B, cmd, &cnt);
+			ra(a, b, cmd, &cnt);
 		else
 		{
-			pb(A, B, cmd, &cnt);
+			pb(a, b, cmd, &cnt);
 			if (pv2 <= temp)
-				rb(A, B, cmd, &cnt);
+				rb(a, b, cmd, &cnt);
 		}
 	}
 	return (cnt);
 }
 
-t_cnt	div_btoa(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+t_cnt	div_btoa(int n, t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
 	int		pv1;
 	int		pv2;
-	int		i;
 	int		temp;
 	t_cnt	cnt;
 	t_stack	*curr;
 
-	if (getpivotB(n, B, &pv1, &pv2) == 0)
-		exit_with_error(A, B, cmd);
+	if (getpivot_b(n, b, &pv1, &pv2) == 0)
+		exit_with_error(a, b, cmd);
 	init_cnt(&cnt);
-	i = 0;
-	curr = B->back;
-	while (i++ < n)
+	curr = b->back;
+	while (n--)
 	{
 		temp = curr->data;
 		curr = curr->prev;
 		if (temp < pv2)
-			rb(A, B, cmd, &cnt);
+			rb(a, b, cmd, &cnt);
 		else
 		{
-			pa(A, B, cmd, &cnt);
+			pa(a, b, cmd, &cnt);
 			if (temp < pv1)
-				ra(A, B, cmd, &cnt);
+				ra(a, b, cmd, &cnt);
 		}
 	}
 	return (cnt);

@@ -24,8 +24,7 @@ void	bubble_sort(int n, int *arr)
 	}
 }
 
-// 현 stack에서 top부터 n개의 수를 정렬할 때 적절한 pivot 설정
-int	getpivotA(int n, t_HEAD *head, int *pv1, int *pv2)
+int	getpivot_a(int n, t_HEAD *head, int *pv1, int *pv2)
 {
 	int		*temp;
 	t_stack	*curr;
@@ -42,13 +41,13 @@ int	getpivotA(int n, t_HEAD *head, int *pv1, int *pv2)
 		curr = curr->prev;
 	}
 	bubble_sort(n, temp);
-	*pv1 = temp[n/2];
-	*pv2 = temp[n/2/2];
+	*pv1 = temp[n / 2];
+	*pv2 = temp[n / 2 / 2];
 	free(temp);
 	return (1);
 }
 
-int	getpivotB(int n, t_HEAD *head, int *pv1, int *pv2)
+int	getpivot_b(int n, t_HEAD *head, int *pv1, int *pv2)
 {
 	int		*temp;
 	t_stack	*curr;
@@ -65,82 +64,13 @@ int	getpivotB(int n, t_HEAD *head, int *pv1, int *pv2)
 		curr = curr->prev;
 	}
 	bubble_sort(n, temp);
-	*pv1 = temp[n/2 + n/2/2];
-	*pv2 = temp[n/2];
+	*pv1 = temp[n / 2 + n / 2 / 2];
+	*pv2 = temp[n / 2];
 	free(temp);
 	return (1);
 }
 
-// 3개 이하인 case에 대해서 정렬해주는 알고리즘
-void	sort_pieceA(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
-{
-	if (n == 1)
-		return ;
-	if (n == 2 && A->back->prev->data < A->back->data)
-		sa(A, B, cmd, 0);
-	else if (n == 3)
-	{
-		if (A->back->prev->prev->data < A->back->prev->data && A->back->data < A->back->prev->data) // 두번째가 제일 큼
-		{
-			if (A->count != 3)
-			{
-				ra(A, B, cmd, 0);
-				sa(A, B, cmd, 0);
-			}
-			rra(A, B, cmd, 0);
-		}
-		else if (A->back->prev->prev->data < A->back->data && A->back->prev->data < A->back->data) // 3번째가 제일 큼
-		{
-			if (A->count == 3)
-				ra(A, B, cmd, 0);
-			else
-			{
-				sa(A, B, cmd, 0);
-				ra(A, B, cmd, 0);
-				sa(A, B, cmd, 0);
-				rra(A, B, cmd, 0);
-			}
-		}
-		if (A->back->prev->data < A->back->data)
-			sa(A, B, cmd, 0);
-	}
-}
-
-void	sort_pieceB(int n, t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
-{
-	if (n == 1)
-		return ;
-	if (n == 2 && B->back->prev->data > B->back->data)
-		sb(A, B, cmd, 0);
-	else if (n == 3)
-	{
-		if (B->back->prev->data < B->back->prev->prev->data && B->back->prev->data < B->back->data) // 두번째가 제일 작음
-		{
-			if (B->count != 3)
-			{
-				rb(A, B, cmd, 0);
-				sb(A, B, cmd, 0);
-			}
-			rrb(A, B, cmd, 0);
-		}
-		else if (B->back->data < B->back->prev->prev->data && B->back->data < B->back->prev->data) // 세번째가 제일 작음
-		{
-			if (B->count == 3)
-				rb(A, B, cmd, 0);
-			else
-			{
-				sb(A, B, cmd, 0);
-				rb(A, B, cmd, 0);
-				sb(A, B, cmd, 0);
-				rrb(A, B, cmd, 0);
-			}
-		}
-		if (B->back->prev->data > B->back->data)
-			sb(A, B, cmd, 0);
-	}
-}
-
-void init_cnt(t_cnt *cnt)
+void	init_cnt(t_cnt *cnt)
 {
 	cnt->sa = 0;
 	cnt->sb = 0;

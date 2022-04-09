@@ -2,25 +2,25 @@
 
 int	check_merge(char *s, t_CHEAD *cmd)
 {
-	char	*temp;
+	char	*x;
 
 	if (cmd->count == 0)
 		return (0);
-	temp = cmd->back->data;
-	if ((ft_strncmp(s, "ra", 3) == 0 && ft_strncmp(temp, "rb", 3) == 0) || \
-		(ft_strncmp(s, "rb", 3) == 0 && ft_strncmp(temp, "ra", 3) == 0))
+	x = cmd->back->data;
+	if ((ft_strncmp(s, "ra", 3) == 0 && ft_strncmp(x, "rb", 3) == 0) || \
+		(ft_strncmp(s, "rb", 3) == 0 && ft_strncmp(x, "ra", 3) == 0))
 	{
 		cmd->back->data = "rr";
 		return (1);
 	}
-	else if ((ft_strncmp(s, "sa", 3) == 0 && ft_strncmp(temp, "sb", 3) == 0) || \
-			(ft_strncmp(s, "sb", 3) == 0 && ft_strncmp(temp, "sa", 3) == 0))
+	else if ((ft_strncmp(s, "sa", 3) == 0 && ft_strncmp(x, "sb", 3) == 0) || \
+			(ft_strncmp(s, "sb", 3) == 0 && ft_strncmp(x, "sa", 3) == 0))
 	{
 		cmd->back->data = "ss";
 		return (1);
 	}
-	else if ((ft_strncmp(s, "rra", 4) == 0 && ft_strncmp(temp, "rrb", 4) == 0) || \
-			(ft_strncmp(s, "rrb", 4) == 0 && ft_strncmp(temp, "rra", 4) == 0))
+	else if ((ft_strncmp(s, "rra", 4) == 0 && ft_strncmp(x, "rrb", 4) == 0) || \
+			(ft_strncmp(s, "rrb", 4) == 0 && ft_strncmp(x, "rra", 4) == 0))
 	{
 		cmd->back->data = "rrr";
 		return (1);
@@ -52,23 +52,25 @@ void	pop_command(t_CHEAD *cmd)
 
 int	check_pop(char *s, t_CHEAD *cmd)
 {
-	char		*temp;
+	char		*x;
 
 	if (cmd->count == 0)
 		return (0);
-	temp = cmd->back->data;
-	if ((ft_strncmp(s, "ra", 3) == 0 && ft_strncmp(temp, "rra", 4) == 0) || \
-		(ft_strncmp(s, "rra", 4) == 0 && ft_strncmp(temp, "ra", 3) == 0))
+	x = cmd->back->data;
+	if ((ft_strncmp(s, "ra", 3) == 0 && ft_strncmp(x, "rra", 4) == 0) || \
+		(ft_strncmp(s, "rra", 4) == 0 && ft_strncmp(x, "ra", 3) == 0))
 	{
 		pop_command(cmd);
 		return (1);
-	} else if ((ft_strncmp(s, "rb", 3) == 0 && ft_strncmp(temp, "rrb", 4) == 0) || \
-			(ft_strncmp(s, "rrb", 4) == 0 && ft_strncmp(temp, "rb", 3) == 0))
+	}
+	else if ((ft_strncmp(s, "rb", 3) == 0 && ft_strncmp(x, "rrb", 4) == 0) || \
+			(ft_strncmp(s, "rrb", 4) == 0 && ft_strncmp(x, "rb", 3) == 0))
 	{
 		pop_command(cmd);
 		return (1);
-	} else if ((ft_strncmp(s, "pb", 3) == 0 && ft_strncmp(temp, "pa", 3) == 0) || \
-			(ft_strncmp(s, "pa", 3) == 0 && ft_strncmp(temp, "pb", 3) == 0))
+	}
+	else if ((ft_strncmp(s, "pb", 3) == 0 && ft_strncmp(x, "pa", 3) == 0) || \
+			(ft_strncmp(s, "pa", 3) == 0 && ft_strncmp(x, "pb", 3) == 0))
 	{
 		pop_command(cmd);
 		return (1);
@@ -115,19 +117,4 @@ void	free_cmd(t_CHEAD *cmd)
 		free(pcur);
 	}
 	return ;
-}
-
-void	print_cmd(t_CHEAD cmd)
-{
-	t_command	*curr;
-	int			i;
-
-	i = 0;
-	curr = cmd.front;
-	while (i < cmd.count)
-	{
-		ft_printf("%s\n", curr->data);
-		curr = curr->next;
-		i++;
-	}
 }

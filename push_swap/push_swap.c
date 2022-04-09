@@ -1,60 +1,61 @@
 #include "push_swap.h"
 
-void print_stack(t_HEAD head) {
-	int	i;
-	t_stack	*curr;
-
-	i = 0;
-	curr = head.front;
-	while (i < head.count) {
-		printf("%2d ", curr->data);
-		curr = curr->next;
-		i++;
-	}
-	printf("\n");
-}
-
-void exit_with_error(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+void	exit_with_error(t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
-	free_stack(A, B);
+	free_stack(a, b);
 	free_cmd(cmd);
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
-void init(t_HEAD *A, t_HEAD *B, t_CHEAD *cmd)
+void	init(t_HEAD *a, t_HEAD *b, t_CHEAD *cmd)
 {
-	A->front = NULL;
-	A->count = 0;
-	A->back = NULL;
-	B->front = NULL;
-	B->count = 0;
-	B->back = NULL;
+	a->front = NULL;
+	a->count = 0;
+	a->back = NULL;
+	b->front = NULL;
+	b->count = 0;
+	b->back = NULL;
 	cmd->front = NULL;
 	cmd->count = 0;
 	cmd->back = NULL;
 }
 
-int main(int argc, char *argv[])
+void	print_cmd(t_CHEAD cmd)
 {
-	t_HEAD		A;
-	t_HEAD		B;
+	t_command	*curr;
+	int			i;
+
+	i = 0;
+	curr = cmd.front;
+	while (i < cmd.count)
+	{
+		ft_printf("%s\n", curr->data);
+		curr = curr->next;
+		i++;
+	}
+}
+
+int	main(int argc, char *argv[])
+{
+	t_HEAD		a;
+	t_HEAD		b;
 	t_CHEAD		cmd;
 
-	init(&A, &B, &cmd);
+	init(&a, &b, &cmd);
 	if (argc < 2)
 		return (0);
-	parse_arg(&A, &B, argc, argv);
-	if (4 <= A.count && A.count <= 6)
+	parse_arg(&a, &b, argc, argv);
+	if (4 <= a.count && a.count <= 6)
 	{
-		div_atob(A.count, &A, &B, &cmd);
-		atob(A.count, &A, &B, &cmd);
-		btoa(B.count, &A, &B, &cmd);
+		div_atob(a.count, &a, &b, &cmd);
+		atob(a.count, &a, &b, &cmd);
+		btoa(b.count, &a, &b, &cmd);
 	}
 	else
-		atob(A.count, &A, &B, &cmd);
+		atob(a.count, &a, &b, &cmd);
 	print_cmd(cmd);
-	free_stack(&A, &B);
+	free_stack(&a, &b);
 	free_cmd(&cmd);
 	return (0);
 }

@@ -54,33 +54,33 @@ void	push_back(t_HEAD *head, int data, t_HEAD *another, t_CHEAD *cmd)
 
 void	pop_front(t_HEAD *head)
 {
-	t_stack	*pCur;
-	
+	t_stack	*pcur;
+
 	if (head->count == 0)
 		return ;
-	pCur = head->front;
-	head->front = pCur->next;
+	pcur = head->front;
+	head->front = pcur->next;
 	head->front->prev = head->back;
 	head->back->next = head->front;
-	free(pCur);
+	free(pcur);
 	(head->count)--;
 }
 
 void	pop_back(t_HEAD *head)
 {
-	t_stack	*pCur;
-	
+	t_stack	*pcur;
+
 	if (head->count == 0)
 		return ;
-	pCur = head->back;
-	head->back = pCur->prev;
+	pcur = head->back;
+	head->back = pcur->prev;
 	head->back->next = head->front;
 	head->front->prev = head->back;
-	free(pCur);
+	free(pcur);
 	(head->count)--;
 }
 
-void free_stack(t_HEAD *stack1, t_HEAD *stack2)
+void	free_stack(t_HEAD *stack1, t_HEAD *stack2)
 {
 	while (stack1->count)
 		pop_front(stack1);
