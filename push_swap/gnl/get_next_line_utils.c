@@ -6,12 +6,11 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 11:49:16 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/09 14:29:58 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/10 02:02:10 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 void	ft_strcpy(char *dst, char *src)
 {

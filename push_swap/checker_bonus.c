@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/10 02:03:00 by yejin             #+#    #+#             */
+/*   Updated: 2022/04/10 02:04:42 by yejin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker_bonus.h"
- 
+
 void	exit_with_error(t_HEAD *a, t_HEAD *b, char *cmd)
 {
 	free_stack(a, b);
@@ -64,19 +76,19 @@ void	get_commands(t_HEAD *a, t_HEAD *b)
 	char	*curr;
 	int		len;
 
-	while (1)	
+	while (1)
 	{
 		curr = get_next_line(0);
 		if (curr == 0)
 			break ;
 		len = ft_strlen(curr);
-		curr[len-1] = '\0';
+		curr[len - 1] = '\0';
 		execute_command(a, b, curr);
 		free(curr);
 	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_HEAD	a;
 	t_HEAD	b;
