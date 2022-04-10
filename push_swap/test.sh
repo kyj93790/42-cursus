@@ -1,7 +1,7 @@
 CNT=500
 LIMIT=5500
 INDEX=0
-ITER=10000
+ITER=1000
 NUM_OVER=0
 MAX=$LIMIT
 ARG=`jot -r $CNT -2147483648 2147483647 | tr "\n" " "`
@@ -9,7 +9,7 @@ NUM=`./push_swap $ARG | wc -l`
 ​
 while [ $INDEX -lt $ITER ]
 do
-echo "$INDEX    :   $NUM `./push_swap $ARG | ./checker_Mac $ARG`"
+echo "$INDEX    :   $NUM `./push_swap $ARG | ./checker $ARG`"
 # echo "$INDEX	:	$NUM"
 if [ $NUM -ge $LIMIT ]; then
 NUM_OVER=`expr $NUM_OVER + 1`

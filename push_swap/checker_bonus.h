@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:03:08 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/10 02:04:43 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/10 13:29:02 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	pop_front(t_HEAD *head);
 void	pop_back(t_HEAD *head);
 void	free_stack(t_HEAD *a, t_HEAD *b);
 
-int		arg_to_int(char *arg);
+t_ll	arg_to_int(t_HEAD *a, t_HEAD *b, char *arg);
 int		check_dup(t_HEAD *a, int data);
 void	parse_arg(t_HEAD *a, t_HEAD *b, int argc, char *argv[]);
 

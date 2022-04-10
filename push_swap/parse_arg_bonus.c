@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arg_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:03:23 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/10 02:04:48 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/10 13:32:35 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	arg_to_int(char *arg)
-{
-	size_t	len;
-	size_t	i;
-	t_ll	result;
-	int		neg;
-
-	len = ft_strlen(arg);
-	i = 0;
-	neg = 1;
-	if (arg[i] == '-' || arg[i] == '+')
-	{
-		if (arg[i] == '-')
-			neg = -1;
-		i++;
-	}
-	result = 0;
-	while (i < len)
-	{
-		if (arg[i] < '0' || '9' < arg[i])
-			return (0);
-		result = result * 10 + (arg[i++] - '0');
-	}
-	result *= neg;
-	if (result < -2147483648 || result > 2147483647)
-		return (0);
-	return ((int)result);
-}
+#include "checker_bonus.h"
 
 int	check_arg_error(char *arg)
 {
@@ -63,6 +34,31 @@ int	check_arg_error(char *arg)
 	return (0);
 }
 
+t_ll	arg_to_int(t_HEAD *a, t_HEAD *b, char *arg)
+{
+	size_t	len;
+	size_t	i;
+	t_ll	result;
+	int		neg;
+
+	if (check_arg_error(arg))
+		exit_with_error(a, b, 0);
+	len = ft_strlen(arg);
+	i = 0;
+	neg = 1;
+	if (arg[i] == '-' || arg[i] == '+')
+	{
+		if (arg[i] == '-')
+			neg = -1;
+		i++;
+	}
+	result = 0;
+	while (i < len)
+		result = result * 10 + (arg[i++] - '0');
+	result *= neg;
+	return (result);
+}
+
 int	check_dup(t_HEAD *a, int data)
 {
 	int		i;
@@ -84,7 +80,7 @@ void	parse_arg(t_HEAD *a, t_HEAD *b, int argc, char *argv[])
 {
 	int		i;
 	int		j;
-	int		data;
+	t_ll	data;
 	char	**result;
 
 	i = 0;
@@ -96,10 +92,10 @@ void	parse_arg(t_HEAD *a, t_HEAD *b, int argc, char *argv[])
 		j = -1;
 		while (result[++j])
 		{
-			data = arg_to_int(result[j]);
-			if (check_arg_error(result[j]) || check_dup(a, data))
+			data = arg_to_int(a, b, result[j]);
+			if (data < -2147483648 || data > 2147483647 || check_dup(a, data))
 				exit_with_error(a, b, 0);
-			push_front(a, data, b, 0);
+			push_front(a, (int)data, b);
 		}
 		j = 0;
 		while (result[j])
