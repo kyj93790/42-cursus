@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:03:27 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/10 13:28:01 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/04/11 21:22:13 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_ll	arg_to_int(t_HEAD *a, t_HEAD *b, char *arg)
 		i++;
 	}
 	result = 0;
-	while (i < len)
+	while (i < len && result < 10000000000)
 		result = result * 10 + (arg[i++] - '0');
 	result *= neg;
 	return (result);
