@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:03:29 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/10 02:04:50 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/11 21:28:55 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,26 @@ void	print_cmd(t_CHEAD cmd)
 	}
 }
 
+int	check_correction(t_HEAD a)
+{
+	t_stack	*curr;
+	int		temp;
+	int		i;
+
+	curr = a.back;
+	temp = curr->data;
+	i = 1;
+	while (i < a.count)
+	{
+		curr = curr->prev;
+		if (curr->data < temp)
+			return (0);
+		temp = curr->data;
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_HEAD		a;
@@ -58,6 +78,8 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	parse_arg(&a, &b, argc, argv);
+	if (check_correction(a))
+		return (0);
 	if (4 <= a.count && a.count <= 6)
 	{
 		div_atob(a.count, &a, &b, &cmd);
