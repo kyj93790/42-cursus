@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:03:23 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/11 21:22:35 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/11 21:24:09 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	parse_arg(t_HEAD *a, t_HEAD *b, int argc, char *argv[])
 	while (++i < argc)
 	{
 		result = ft_split(argv[i], ' ');
-		if (result == 0)
+		if (result == 0 || result[0] == 0)
 			exit_with_error(a, b, 0);
 		j = -1;
 		while (result[++j])
