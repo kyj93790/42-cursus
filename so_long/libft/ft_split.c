@@ -6,22 +6,22 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/04/15 16:33:41 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/15 18:01:05 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	in_word(char const *s, unsigned long long *i, char c)
+static void	in_word(char const *s, t_ull *i, char c)
 {
 	while (s[*i] && (s[*i] != c))
 		(*i)++;
 }
 
-static unsigned long long	count_word(char const *s, char c)
+static t_ull	count_word(char const *s, char c)
 {
-	unsigned long long	word_cnt;
-	unsigned long long	i;
+	t_ull	word_cnt;
+	t_ull	i;
 
 	word_cnt = 0;
 	i = 0;
@@ -40,7 +40,7 @@ static unsigned long long	count_word(char const *s, char c)
 
 static void	free_mem(char **result)
 {
-	unsigned long long	i;
+	t_ull	i;
 
 	i = 0;
 	while (result[i])
@@ -48,11 +48,11 @@ static void	free_mem(char **result)
 	free(result);
 }
 
-static char	*curr_word(char **result, char const *s, unsigned long long *i, char c)
+static char	*curr_word(char **result, char const *s, t_ull *i, char c)
 {
-	char				*pnew;
-	unsigned long long	j;
-	unsigned long long	k;
+	char	*pnew;
+	t_ull	j;
+	t_ull	k;
 
 	j = *i;
 	in_word(s, i, c);
@@ -74,9 +74,9 @@ static char	*curr_word(char **result, char const *s, unsigned long long *i, char
 
 char	**ft_split(char const *s, char c)
 {
-	char				**result;
-	unsigned long long	i;
-	unsigned long long	j;
+	char	**result;
+	t_ull	i;
+	t_ull	j;
 
 	if (s == 0)
 		return (0);
