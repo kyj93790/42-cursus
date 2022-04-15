@@ -55,10 +55,16 @@ char	*read_file(char *filename)
 		exit_with_error("ERROR in read_file");
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		free(buffer);
 		exit_with_error("ERROR in read_file");
+	}
 	i = read(fd, buffer, size + 1);
 	if (i < 0)
+	{
+		free(buffer);
 		exit_with_error("ERROR in read_file");
+	}
 	close(fd);
 	buffer[size] = '\0';
 	return (buffer);
