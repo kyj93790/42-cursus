@@ -97,7 +97,19 @@ void	check_map(t_map *map_info)
 	get_map_size(map_info);
 	check_outline(map_info);
 	check_contents(map_info);
-	// C, E, P 하나 있어야 함.
-	// P는 하나 아니면 에러로 처리
-
+	if (map_info->num_of_c < 1)
+	{
+		free_map(map_info);
+		exit_with_error("Failure by number of collectible");
+	}
+	if (map_info->num_of_e < 1)
+	{
+		free_map(map_info);
+		exit_with_error("Failure by number of exit");
+	}
+	if (map_info->num_of_p != 1)
+	{
+		free_map(map_info);
+		exit_with_error("Failure by number of starting position");
+	}
 }
