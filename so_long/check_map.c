@@ -36,16 +36,67 @@ void	get_map_size(t_map *map_info)
 	}
 }
 
-// void	check_outline(t_map *map_info)
-// {
-// 	t_ull	i;
-// }
+void	check_outline(t_map *map_info)
+{
+	t_ull	i;
+	t_ull	h;
+	t_ull	w;
+
+	h = map_info->height;
+	w = map_info->width;
+	i = -1;
+	while (++i < h)
+	{
+		if (map_info->map[i][0] != '1' || map_info->map[i][w - 1] != '1')
+		{
+			free_map(map_info);
+			exit_with_error("Failure by outline of map");
+		}
+	}
+	i = -1;
+	while (++i < w)
+	{
+		if (map_info->map[0][i] != '1' || map_info->map[h - 1][i] != '1')
+		{
+			free_map(map_info);
+			exit_with_error("Failure by outline of map");
+		}
+	}
+}
+
+void	check_contents(t_map *map_info)
+{
+	t_ull	i;
+	t_ull	j;
+
+	i = 0;
+	while (i < map_info->height)
+	{
+		j = 0;
+		while (j < map_info->width)
+		{
+			if (map_info->map[i][j] == 'C')
+				(map_info->num_of_c)++;
+			else if (map_info->map[i][j] == 'E')
+				(map_info->num_of_e)++;
+			else if (map_info->map[i][j] == 'P')
+				(map_info->num_of_p)++;
+			else if (map_info->map[i][j] != '0' || map_info->map[i][j] != '1')
+			{
+				free_map(map_info);
+				exit_with_error("Failure by contents of map");
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void	check_map(t_map *map_info)
 {
 	get_map_size(map_info);
-	// check_outline(map_info);
-	// 내부 부분 0, 1, C, E, P가 아니면 에러
+	check_outline(map_info);
+	check_contents(map_info);
 	// C, E, P 하나 있어야 함.
 	// P는 하나 아니면 에러로 처리
 
