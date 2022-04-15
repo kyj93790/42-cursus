@@ -6,19 +6,19 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/04/15 18:01:05 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/15 19:04:39 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	in_word(char const *s, t_ull *i, char c)
+static void	in_word(char *s, t_ull *i, char c)
 {
 	while (s[*i] && (s[*i] != c))
 		(*i)++;
 }
 
-static t_ull	count_word(char const *s, char c)
+static t_ull	count_word(char *s, char c)
 {
 	t_ull	word_cnt;
 	t_ull	i;
@@ -38,17 +38,18 @@ static t_ull	count_word(char const *s, char c)
 	return (word_cnt);
 }
 
-static void	free_mem(char **result)
+static void	free_mem(char **result, char *s)
 {
 	t_ull	i;
 
+	free(s);
 	i = 0;
 	while (result[i])
 		free(result[i++]);
 	free(result);
 }
 
-static char	*curr_word(char **result, char const *s, t_ull *i, char c)
+static char	*curr_word(char **result, char *s, t_ull *i, char c)
 {
 	char	*pnew;
 	t_ull	j;
@@ -59,7 +60,7 @@ static char	*curr_word(char **result, char const *s, t_ull *i, char c)
 	pnew = (char *)malloc(sizeof(char) * (*i - j + 1));
 	if (pnew == 0)
 	{
-		free_mem(result);
+		free_mem(result, s);
 		return (0);
 	}
 	k = 0;
@@ -72,7 +73,7 @@ static char	*curr_word(char **result, char const *s, t_ull *i, char c)
 	return (pnew);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**result;
 	t_ull	i;
