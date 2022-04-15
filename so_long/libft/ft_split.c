@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:30 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/29 14:00:51 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:33:41 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	in_word(char const *s, int *i, char c)
+static void	in_word(char const *s, unsigned long long *i, char c)
 {
 	while (s[*i] && (s[*i] != c))
 		(*i)++;
 }
 
-static int	count_word(char const *s, char c)
+static unsigned long long	count_word(char const *s, char c)
 {
-	int	word_cnt;
-	int	i;
+	unsigned long long	word_cnt;
+	unsigned long long	i;
 
 	word_cnt = 0;
 	i = 0;
@@ -40,7 +40,7 @@ static int	count_word(char const *s, char c)
 
 static void	free_mem(char **result)
 {
-	int	i;
+	unsigned long long	i;
 
 	i = 0;
 	while (result[i])
@@ -48,11 +48,11 @@ static void	free_mem(char **result)
 	free(result);
 }
 
-static char	*curr_word(char **result, char const *s, int *i, char c)
+static char	*curr_word(char **result, char const *s, unsigned long long *i, char c)
 {
-	char	*pnew;
-	int		j;
-	int		k;
+	char				*pnew;
+	unsigned long long	j;
+	unsigned long long	k;
 
 	j = *i;
 	in_word(s, i, c);
@@ -74,9 +74,9 @@ static char	*curr_word(char **result, char const *s, int *i, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		i;
-	int		j;
+	char				**result;
+	unsigned long long	i;
+	unsigned long long	j;
 
 	if (s == 0)
 		return (0);
