@@ -19,4 +19,11 @@ typedef struct s_map {
 	t_ull	num_of_p;
 }	t_map;
 
+void	exit_with_error(char *message);
+
+void	check_filename(int argc, char *argv[]);
+int		get_file_size(char *filename);
+char	*read_file(char *filename);
+
+
 #endif
