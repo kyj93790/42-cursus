@@ -10,7 +10,7 @@ void	free_map(t_map *map_info)
 	free(map_info->map);
 }
 
-void	get_map_size(t_map *map_info)
+static void	get_map_size(t_map *map_info)
 {
 	t_ull	i;
 
@@ -36,7 +36,7 @@ void	get_map_size(t_map *map_info)
 	}
 }
 
-void	check_outline(t_map *map_info)
+static void	check_outline(t_map *map_info)
 {
 	t_ull	i;
 	t_ull	h;
@@ -64,7 +64,7 @@ void	check_outline(t_map *map_info)
 	}
 }
 
-void	check_contents(t_map *map_info)
+static void	check_contents(t_map *map_info)
 {
 	t_ull	i;
 	t_ull	j;
@@ -81,7 +81,7 @@ void	check_contents(t_map *map_info)
 				(map_info->num_of_e)++;
 			else if (map_info->map[i][j] == 'P')
 				(map_info->num_of_p)++;
-			else if (map_info->map[i][j] != '0' || map_info->map[i][j] != '1')
+			else if (map_info->map[i][j] != '0' && map_info->map[i][j] != '1')
 			{
 				free_map(map_info);
 				exit_with_error("Failure by contents of map");

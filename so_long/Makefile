@@ -5,7 +5,8 @@ NAME = so_long
 
 SRC_FILE = so_long \
 			read_file \
-			check_map
+			check_map \
+			game
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
 MLX = minilibx_opengl_20191021
