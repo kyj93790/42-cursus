@@ -7,34 +7,34 @@ void	exit_with_error(char *message)
 	exit(EXIT_FAILURE);
 }
 
-static void init(t_map *map_info)
+static void init(t_game *game)
 {
-	map_info->height = 0;
-	map_info->width = 0;
-	map_info->map = 0;
-	map_info->num_of_c = 0;
-	map_info->num_of_e = 0;
-	map_info->num_of_p = 0;
+	game->height = 0;
+	game->width = 0;
+	game->map = 0;
+	game->num_of_c = 0;
+	game->num_of_e = 0;
+	game->num_of_p = 0;
 }
 
 int	main(int argc, char *argv[])
 {
 	char	*buffer;
-	t_map	map_info;
+	t_game	game;
 	int		i;
 
 	check_filename(argc, argv);
-	init(&map_info);
+	init(&game);
 	buffer = read_file(argv[1]);
-	map_info.map = ft_split(buffer, '\n');
+	game.map = ft_split(buffer, '\n');
 	i = 0;
-	while(map_info.map[i])
+	while(game.map[i])
 	{
-		printf("%s\n", map_info.map[i++]);
+		printf("%s\n", game.map[i++]);
 	}
 	free(buffer);
-	if (map_info.map == 0)
+	if (game.map == 0)
 		exit_with_error("Failure in splitting buffer to map");
-	check_map(&map_info);
-	start_game(&map_info);
+	check_map(&game);
+	init_game(&game);
 }
