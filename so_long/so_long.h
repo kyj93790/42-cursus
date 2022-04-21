@@ -41,7 +41,7 @@ typedef struct s_game
 	t_img	tile;
 	t_img	wall;
 	t_img	collect;
-	t_img	character[16];
+	t_img	character[4][4];
 	t_img	exit;
 	t_loc	loc;
 }	t_game;
@@ -56,5 +56,10 @@ void	free_map(t_game *game);
 void	check_map(t_game *game);
 
 void	init_game(t_game *game);
+
+void	load_character_up_img(void *mlx_ptr, void *win_ptr, t_game *game);
+void	load_character_left_img(void *mlx_ptr, void *win_ptr, t_game *game);
+void	load_character_down_img(void *mlx_ptr, void *win_ptr, t_game *game);
+void	load_character_right_img(void *mlx_ptr, void *win_ptr, t_game *game);
 
 #endif

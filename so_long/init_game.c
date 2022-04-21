@@ -76,15 +76,10 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 
 void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	t_img character;
-
-	printf("before load right3\n");
-	character.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/character/up3.xpm", &(character.width), &(character.height));
-	printf("%lld, %lld\n", game->loc.y, game->loc.x);
-	if (character.img_ptr == 0)
-		printf("null\n");
-	mlx_put_image_to_window(mlx_ptr, win_ptr, character.img_ptr, 64*(game->loc.y), 64*(game->loc.x));
-	printf("after print character\n");
+	// load_up_img
+	// load_left_img
+	// load_down_img
+	// load_right_img
 }
 
 void	init_game(t_game *game)
@@ -105,6 +100,6 @@ void	init_game(t_game *game)
 	put_wall(mlx_ptr, win_ptr, game);
 	put_collectible(mlx_ptr, win_ptr, game);
 	load_character_img(mlx_ptr, win_ptr, game);
-	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &loc);
+	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &game);
 	mlx_loop(mlx_ptr);
 }
