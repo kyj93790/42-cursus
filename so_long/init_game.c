@@ -77,17 +77,28 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 	}
 }
 
+void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game)
+{
+	t_img character;
+
+	printf("before load right3\n");
+	character.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/character/up3.xpm", &(character.width), &(character.height));
+	printf("%lld, %lld\n", game->loc.y, game->loc.x);
+	if (character.img_ptr == 0)
+		printf("null\n");
+	mlx_put_image_to_window(mlx_ptr, win_ptr, character.img_ptr, 64*(game->loc.y), 64*(game->loc.x));
+	printf("after print character\n");
+}
+
 void	init_game(t_game *game)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_loc	loc;
 
 	mlx_ptr = mlx_init();
-	loc.x = 0;
-	loc.y = 0;
 	// window의 size를 map의 크기로 정할 것
 	win_ptr = mlx_new_window(mlx_ptr, 64*(game->width), 64*(game->height), "so_long");
+	
 	if (win_ptr == 0)
 	{
 		free_map(game);
@@ -96,6 +107,7 @@ void	init_game(t_game *game)
 	put_background_tiles(mlx_ptr, win_ptr, game);
 	put_wall(mlx_ptr, win_ptr, game);
 	put_collectible(mlx_ptr, win_ptr, game);
+	load_character_img(mlx_ptr, win_ptr, game);
 	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &loc);
 	mlx_loop(mlx_ptr);
 }

@@ -36,7 +36,7 @@ static void	get_game_size(t_game *game)
 	}
 }
 
-static void	check_outline(t_game *game)
+static int	check_outline(t_game *game)
 {
 	t_ull	i;
 	t_ull	h;
@@ -48,23 +48,18 @@ static void	check_outline(t_game *game)
 	while (++i < h)
 	{
 		if (game->map[i][0] != '1' || game->map[i][w - 1] != '1')
-		{
-			free_map(game);
-			exit_with_error("Failure by outline of map");
-		}
+			return (1);
 	}
 	i = -1;
 	while (++i < w)
 	{
 		if (game->map[0][i] != '1' || game->map[h - 1][i] != '1')
-		{
-			free_map(game);
-			exit_with_error("Failure by outline of map");
-		}
+			return (1);
 	}
+	return (0);
 }
 
-static void	check_contents(t_game *game)
+static int	check_contents(t_game *game)
 {
 	t_ull	i;
 	t_ull	j;
@@ -80,23 +75,28 @@ static void	check_contents(t_game *game)
 			else if (game->map[i][j] == 'E')
 				(game->num_of_e)++;
 			else if (game->map[i][j] == 'P')
-				(game->num_of_p)++;
-			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
 			{
-				free_map(game);
-				exit_with_error("Failure by contents of map");
+				(game->num_of_p)++;
+				game->loc.x = j;
+				game->loc.y = i;
 			}
+			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
+				return (1);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 void	check_map(t_game *game)
 {
 	get_game_size(game);
-	check_outline(game);
-	check_contents(game);
+	if (check_outline(game) || check_contents(game))
+	{
+		free_map(game);
+		exit_with_error("Failure by format of map");
+	}
 	if (game->num_of_c < 1)
 	{
 		free_map(game);
