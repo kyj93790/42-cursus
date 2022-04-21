@@ -1,10 +1,29 @@
 #include "so_long.h"
 
+void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_map *map_info)
+{
+	t_img	tile;
+	t_ull	i;
+	t_ull	j;
+
+	tile.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "tile.xpm", &(tile.width), &(tile.height));
+	i = 0;
+	while (i < map_info->height)
+	{
+		j = 0;
+		while (j < map_info->width)
+		{
+			mlx_put_image_to_window(mlx_ptr, win_ptr, tile.img_ptr, 64*j, 64*i);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	start_game(t_map *map_info)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*tile_ptr;
 	void	*bush_ptr;
 	int		width;
 	int		height;
@@ -20,8 +39,8 @@ void	start_game(t_map *map_info)
 		free_map(map_info);
 		exit_with_error("Failure in opening window");
 	}
-	tile_ptr = mlx_xpm_file_to_image(mlx_ptr, "tile.xpm", &width, &height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, tile_ptr, 0, 0);
+	// 전체 배경 tile 까는 함수 생성
+	put_background_tiles(mlx_ptr, win_ptr, map_info);
 	bush_ptr = mlx_xpm_file_to_image(mlx_ptr, "bush.xpm", &width, &height);
 	mlx_put_image_to_window(mlx_ptr, win_ptr, bush_ptr, 0, 0);
 	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &loc);

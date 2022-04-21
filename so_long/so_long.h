@@ -17,7 +17,8 @@
 
 typedef unsigned long long	t_ull;
 
-typedef struct s_map {
+typedef struct s_map
+{
 	t_ull 	height;
 	t_ull 	width;
 	char	**map;
@@ -26,7 +27,16 @@ typedef struct s_map {
 	t_ull	num_of_p;
 }	t_map;
 
-typedef struct s_loc {
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		height;
+	int		width;
+}	t_img;
+
+
+typedef struct s_loc
+{
 	t_ull	x;
 	t_ull	y;
 }	t_loc;
