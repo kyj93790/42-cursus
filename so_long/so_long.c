@@ -19,7 +19,6 @@ static void init(t_map *map_info)
 
 int	main(int argc, char *argv[])
 {
-	int		fd;
 	char	*buffer;
 	t_map	map_info;
 	int		i;
