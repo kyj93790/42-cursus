@@ -2,12 +2,11 @@
 
 void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	t_img	tile;
 	t_ull	i;
 	t_ull	j;
 
-	tile.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/tile.xpm", &(tile.width), &(tile.height));
-	if (tile.img_ptr == 0)
+	game->tile.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/tile.xpm", &(game->tile.width), &(game->tile.height));
+	if (game->tile.img_ptr == 0)
 	{
 		free_map(game);
 		exit_with_error("Failure in getting tile image");
@@ -18,7 +17,7 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game)
 		j = 0;
 		while (j < game->width)
 		{
-			mlx_put_image_to_window(mlx_ptr, win_ptr, tile.img_ptr, 64*j, 64*i);
+			mlx_put_image_to_window(mlx_ptr, win_ptr, game->tile.img_ptr, 64*j, 64*i);
 			j++;
 		}
 		i++;
@@ -27,12 +26,11 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game)
 
 void put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	t_img	bush;
 	t_ull	i;
 	t_ull	j;
 
-	bush.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/bush.xpm", &(bush.width), &(bush.height));
-	if (bush.img_ptr == 0)
+	game->wall.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/bush.xpm", &(game->wall.width), &(game->wall.height));
+	if (game->wall.img_ptr == 0)
 	{
 		free_map(game);
 		exit_with_error("Failure in getting wall image");
@@ -44,7 +42,7 @@ void put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
 		while (j < game->width)
 		{
 			if (game->map[i][j] == '1')
-				mlx_put_image_to_window(mlx_ptr, win_ptr, bush.img_ptr, 64*j, 64*i);
+				mlx_put_image_to_window(mlx_ptr, win_ptr, game->wall.img_ptr, 64*j, 64*i);
 			j++;
 		}
 		i++;
@@ -53,12 +51,11 @@ void put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
 
 void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	t_img pokeball;
 	t_ull i;
 	t_ull j;
 
-	pokeball.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/pokeball.xpm", &(pokeball.width), &(pokeball.height));
-	if (pokeball.img_ptr == 0)
+	game->collect.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/pokeball.xpm", &(game->collect.width), &(game->collect.height));
+	if (game->collect.img_ptr == 0)
 	{
 		free_map(game);
 		exit_with_error("Failure in getting collectible image");
@@ -70,7 +67,7 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 		while (j < game->width)
 		{
 			if (game->map[i][j] == 'C')
-				mlx_put_image_to_window(mlx_ptr, win_ptr, pokeball.img_ptr, 64*j, 64*i);
+				mlx_put_image_to_window(mlx_ptr, win_ptr, game->collect.img_ptr, 64*j, 64*i);
 			j++;
 		}
 		i++;

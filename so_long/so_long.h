@@ -23,6 +23,13 @@ typedef struct s_loc
 	t_ull	y;
 }	t_loc;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		height;
+	int		width;
+}	t_img;
+
 typedef struct s_game
 {
 	t_ull 	height;
@@ -31,15 +38,13 @@ typedef struct s_game
 	t_ull	num_of_c;
 	t_ull	num_of_e;
 	t_ull	num_of_p;
+	t_img	tile;
+	t_img	wall;
+	t_img	collect;
+	t_img	character[16];
+	t_img	exit;
 	t_loc	loc;
 }	t_game;
-
-typedef struct s_img
-{
-	void	*img_ptr;
-	int		height;
-	int		width;
-}	t_img;
 
 void	exit_with_error(char *message);
 
