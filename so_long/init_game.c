@@ -76,10 +76,10 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 
 void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	// load_up_img
-	// load_left_img
-	// load_down_img
-	// load_right_img
+	load_character_up_img(mlx_ptr, win_ptr, game);
+	load_character_left_img(mlx_ptr, win_ptr, game);
+	load_character_down_img(mlx_ptr, win_ptr, game);
+	load_character_right_img(mlx_ptr, win_ptr, game);
 }
 
 void	init_game(t_game *game)
