@@ -17,7 +17,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	make -C $(LIBFT)
 	make -C $(MLX)
-	$(CC) -I $(MLX) $(SRC) -L $(LIBFT) -lft -L $(MLX) -lmlx -framework OpenGL -framework AppKit -o $@
+	$(CC) $(FLAGS) -I $(MLX) $(SRC) -L $(LIBFT) -lft -L $(MLX) -lmlx -framework OpenGL -framework AppKit -o $@
 
 clean :
 	rm -f $(OBJ)

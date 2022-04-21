@@ -7,6 +7,7 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_map *map_info)
 	t_ull	j;
 
 	tile.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "tile.xpm", &(tile.width), &(tile.height));
+	// img 제대로 열리지 않는 경우 종료
 	i = 0;
 	while (i < map_info->height)
 	{
@@ -20,13 +21,36 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_map *map_info)
 	}
 }
 
+void put_wall(void *mlx_ptr, void *win_ptr, t_map *map_info)
+{
+	t_img	bush;
+	t_ull	i;
+	t_ull	j;
+
+	bush.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "bush.xpm", &(bush.width), &(bush.height));
+	if (bush.img_ptr == 0)
+	{
+		free_map(map_info);
+		exit_with_error("Failure in getting wall image");
+	}
+	i = 0;
+	while (i < map_info->height)
+	{
+		j = 0;
+		while (j < map_info->width)
+		{
+			if (map_info->map[i][j] == '1')
+				mlx_put_image_to_window(mlx_ptr, win_ptr, bush.img_ptr, 64*j, 64*i);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	start_game(t_map *map_info)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*bush_ptr;
-	int		width;
-	int		height;
 	t_loc	loc;
 
 	mlx_ptr = mlx_init();
@@ -39,10 +63,8 @@ void	start_game(t_map *map_info)
 		free_map(map_info);
 		exit_with_error("Failure in opening window");
 	}
-	// 전체 배경 tile 까는 함수 생성
 	put_background_tiles(mlx_ptr, win_ptr, map_info);
-	bush_ptr = mlx_xpm_file_to_image(mlx_ptr, "bush.xpm", &width, &height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, bush_ptr, 0, 0);
+	put_wall(mlx_ptr, win_ptr, map_info);
 	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &loc);
 	mlx_loop(mlx_ptr);
 }
