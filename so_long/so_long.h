@@ -8,6 +8,13 @@
 # include "libft/libft.h"
 # include "minilibx_opengl_20191021/mlx.h"
 
+# define X_EVENT_PRESS_KEY 2
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
+
 typedef unsigned long long	t_ull;
 
 typedef struct s_map {
