@@ -23,6 +23,7 @@ static void init(t_game *game)
 	game->tile.img_ptr = NULL;
 	game->wall.img_ptr = NULL;
 	game->collect.img_ptr = NULL;
+	game->exit.img_ptr = NULL;
 	i = -1;
 	while (++i < 4)
 	{
@@ -31,8 +32,6 @@ static void init(t_game *game)
 			game->character[i][j].img_ptr = NULL;
 	}
 	game->loc.dir = 0;
-	game->loc.x = 0;
-	game->loc.y = 0;
 	game->cnt = 0;
 }
 

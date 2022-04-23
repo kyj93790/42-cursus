@@ -60,9 +60,15 @@ void	free_game(t_game *game);
 void	check_map(t_game *game);
 
 void	init_game(t_game *game);
-void	put_background_tiles(t_game *game);
-void	put_wall(t_game *game);
-void	put_collectible(t_game *game);
+void	put_tiles(t_game *game);
+void	put_walls(t_game *game);
+void	put_collectibles(t_game *game);
+void	put_exits(t_game *game);
+
+void	put_tile(t_game *game, t_ull i, t_ull j);
+void	put_wall(t_game *game, t_ull i, t_ull j);
+void	put_collectible(t_game *game, t_ull i, t_ull j);
+void	put_exit(t_game *game, t_ull i, t_ull j);
 
 void	load_character_up_img(t_game *game);
 void	load_character_left_img(t_game *game);
