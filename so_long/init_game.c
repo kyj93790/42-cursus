@@ -68,7 +68,7 @@ void	put_exits(t_game *game)
 		while (j < game->width)
 		{
 			if (game->map[i][j] == 'E')
-				put_exit(game, i, j);
+				put_exit(game, i, j, 0);
 			j++;
 		}
 		i++;
@@ -91,7 +91,8 @@ void	init_game(t_game *game)
 	put_exits(game);
 	printf("after exits\n");
 	load_character_img(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.i, 64*game->loc.j);
+	game->map[game->loc.i][game->loc.j] = '0';
 	mlx_hook(game->win_ptr, X_EVENT_PRESS_KEY, 0, press_key, game);
 	mlx_loop(game->mlx_ptr);
 }

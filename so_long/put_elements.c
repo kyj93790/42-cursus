@@ -42,11 +42,14 @@ void	put_collectible(t_game *game, t_ull i, t_ull j)
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->collect.img_ptr, 64*j, 64*i);
 }
 
-void	put_exit(t_game *game, t_ull i, t_ull j)
+void	put_exit(t_game *game, t_ull i, t_ull j, int flag)
 {
 	if (game->exit.img_ptr == NULL)
 	{
-		game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit.xpm", &(game->exit.width), &(game->exit.height));
+		if (flag == 0)
+			game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit.xpm", &(game->exit.width), &(game->exit.height));
+		else
+			game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit1.xpm", &(game->exit.width), &(game->exit.height));
 		if (game->exit.img_ptr == NULL)
 		{
 			free_game(game);
