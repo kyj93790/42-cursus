@@ -89,7 +89,6 @@ void	init_game(t_game *game)
 	put_walls(game);
 	put_collectibles(game);
 	put_exits(game, 0);
-	printf("after exits\n");
 	load_character_img(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
 	game->map[game->loc.y][game->loc.x] = '0';

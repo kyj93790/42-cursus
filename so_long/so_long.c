@@ -45,11 +45,6 @@ int	main(int argc, char *argv[])
 	init(&game);
 	buffer = read_file(argv[1]);
 	game.map = ft_split(buffer, '\n');
-	i = 0;
-	while(game.map[i])
-	{
-		printf("%s\n", game.map[i++]);
-	}
 	free(buffer);
 	if (game.map == 0)
 		exit_with_error("Failure in splitting buffer to map");

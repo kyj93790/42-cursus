@@ -44,7 +44,7 @@ void	put_collectible(t_game *game, t_ull i, t_ull j)
 
 void	put_exit(t_game *game, t_ull i, t_ull j, int flag)
 {
-	// void	*temp_ptr;
+	void	*temp_ptr;
 
 	if (flag == 0)
 	{
@@ -60,10 +60,10 @@ void	put_exit(t_game *game, t_ull i, t_ull j, int flag)
 	}
 	else
 	{
-		// temp_ptr = game->exit.img_ptr;
+		temp_ptr = game->exit.img_ptr;
 		game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit1.xpm", &(game->exit.width), &(game->exit.height));
-		// if (temp_ptr)
-		// 	free(temp_ptr);
+		if (temp_ptr)
+		mlx_destroy_image(game->mlx_ptr, temp_ptr);
 		if (game->exit.img_ptr == NULL)
 		{
 			free_game(game);
