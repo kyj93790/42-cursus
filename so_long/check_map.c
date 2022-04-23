@@ -3,8 +3,8 @@
 static void	free_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free(game->mlx_ptr);
-	free(game->win_ptr);
+	// free(game->mlx_ptr);
+	// free(game->win_ptr);
 }
 
 void	free_game(t_game *game)
@@ -16,22 +16,22 @@ void	free_game(t_game *game)
 	while (game->map[i])
 		free(game->map[i++]);
 	free(game->map);
-	if (game->tile.img_ptr)
-		free(game->tile.img_ptr);
-	if (game->wall.img_ptr)
-		free(game->wall.img_ptr);
-	if (game->collect.img_ptr)
-		free(game->collect.img_ptr);
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < 4)
-		{
-			if (game->character[i][j].img_ptr)
-				free(game->character[i][j].img_ptr);
-		}
-	}
+	// if (game->tile.img_ptr)
+	// 	free(game->tile.img_ptr);
+	// if (game->wall.img_ptr)
+	// 	free(game->wall.img_ptr);
+	// if (game->collect.img_ptr)
+	// 	free(game->collect.img_ptr);
+	// i = -1;
+	// while (++i < 4)
+	// {
+	// 	j = -1;
+	// 	while (++j < 4)
+	// 	{
+	// 		if (game->character[i][j].img_ptr)
+	// 			free(game->character[i][j].img_ptr);
+	// 	}
+	// }
 	free_window(game);
 }
 

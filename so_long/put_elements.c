@@ -44,12 +44,26 @@ void	put_collectible(t_game *game, t_ull i, t_ull j)
 
 void	put_exit(t_game *game, t_ull i, t_ull j, int flag)
 {
-	if (game->exit.img_ptr == NULL)
+	// void	*temp_ptr;
+
+	if (flag == 0)
 	{
-		if (flag == 0)
+		if (game->exit.img_ptr == NULL)
+		{
 			game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit.xpm", &(game->exit.width), &(game->exit.height));
-		else
-			game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit1.xpm", &(game->exit.width), &(game->exit.height));
+			if (game->exit.img_ptr == NULL)
+			{
+				free_game(game);
+				exit_with_error("Failure in getting exit image");
+			}
+		}
+	}
+	else
+	{
+		// temp_ptr = game->exit.img_ptr;
+		game->exit.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, "imgs/exit1.xpm", &(game->exit.width), &(game->exit.height));
+		// if (temp_ptr)
+		// 	free(temp_ptr);
 		if (game->exit.img_ptr == NULL)
 		{
 			free_game(game);

@@ -51,13 +51,11 @@ void	check_new_pos(t_game *game)
 	else if (game->map[game->loc.y][game->loc.x] == 'C')
 	{
 		(game->cnt)++;
+		game->map[game->loc.y][game->loc.x] = '0';
 		put_tile(game, game->loc.y, game->loc.x);
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[game->loc.dir][game->cnt % 4].img_ptr, 64 * game->loc.x, 64 * game->loc.y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[game->loc.dir][game->move % 4].img_ptr, 64 * game->loc.x, 64 * game->loc.y);
 		if (game->cnt == game->num_of_c)
-		{
-			free(game->exit.img_ptr);
 			put_exits(game, 1);
-		}
 	}
 }
 
@@ -82,13 +80,7 @@ int	press_key(int key_in, t_game *game)
 			move_to_new_pos(game, 3, game->loc.x + 1, game->loc.y);
 		check_new_pos(game);
 	}
-	printf("dir : %llu\n", game->loc.dir);
+	printf("game->cnt : %llu\n", game->cnt);
 	printf("(x, y): (%llu, %llu)\n", game->loc.x, game->loc.y);
-
-	// 최종으로 이동된 위치로 이동시킴.
-	// 최종으로 이동된 위치가 exit이면서 수집품을 모두 모았다면 게임 finish !!
 	return (0);
 }
-
-// 이동 가능 여부 판단 후
-// 이동이 가능하면 
