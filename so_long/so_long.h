@@ -20,8 +20,8 @@ typedef unsigned long long	t_ull;
 typedef struct s_loc
 {
 	t_ull	dir;
-	t_ull	i;
-	t_ull	j;
+	t_ull	x;
+	t_ull	y;
 }	t_loc;
 
 typedef struct s_img
@@ -48,6 +48,7 @@ typedef struct s_game
 	t_img	exit;
 	t_loc	loc;
 	t_ull	cnt;
+	t_ull	move;
 }	t_game;
 
 void	exit_with_error(char *message);
@@ -63,7 +64,7 @@ void	init_game(t_game *game);
 void	put_tiles(t_game *game);
 void	put_walls(t_game *game);
 void	put_collectibles(t_game *game);
-void	put_exits(t_game *game);
+void	put_exits(t_game *game, int flag);
 
 void	put_tile(t_game *game, t_ull i, t_ull j);
 void	put_wall(t_game *game, t_ull i, t_ull j);

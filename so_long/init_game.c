@@ -56,7 +56,7 @@ void	put_collectibles(t_game *game)
 	}
 }
 
-void	put_exits(t_game *game)
+void	put_exits(t_game *game, int flag)
 {
 	t_ull	i;
 	t_ull	j;
@@ -68,7 +68,7 @@ void	put_exits(t_game *game)
 		while (j < game->width)
 		{
 			if (game->map[i][j] == 'E')
-				put_exit(game, i, j, 0);
+				put_exit(game, i, j, flag);
 			j++;
 		}
 		i++;
@@ -88,11 +88,11 @@ void	init_game(t_game *game)
 	put_tiles(game);
 	put_walls(game);
 	put_collectibles(game);
-	put_exits(game);
+	put_exits(game, 0);
 	printf("after exits\n");
 	load_character_img(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.i, 64*game->loc.j);
-	game->map[game->loc.i][game->loc.j] = '0';
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
+	game->map[game->loc.y][game->loc.x] = '0';
 	mlx_hook(game->win_ptr, X_EVENT_PRESS_KEY, 0, press_key, game);
 	mlx_loop(game->mlx_ptr);
 }
