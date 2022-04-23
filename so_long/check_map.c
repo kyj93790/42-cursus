@@ -1,13 +1,32 @@
 #include "so_long.h"
 
-void	free_map(t_game *game)
+void	free_game(t_game *game)
 {
 	t_ull	i;
+	t_ull	j;
 
 	i = 0;
 	while (game->map[i])
 		free(game->map[i++]);
 	free(game->map);
+	if (game->tile.img_ptr)
+		free(game->tile.img_ptr);
+	if (game->wall.img_ptr)
+		free(game->wall.img_ptr);
+	if (game->collect.img_ptr)
+		free(game->collect.img_ptr);
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (game->character[i][j].img_ptr)
+				free(game->character[i][j].img_ptr);
+			j++;
+		}
+		i++;
+	}
 }
 
 static void	get_game_size(t_game *game)
@@ -21,7 +40,7 @@ static void	get_game_size(t_game *game)
 	game->width = ft_strlen(game->map[0]);
 	if (game->height < 3 || game->width < 3)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure by map size");
 	}
 	i = 0;
@@ -29,7 +48,7 @@ static void	get_game_size(t_game *game)
 	{
 		if (ft_strlen(game->map[i]) != game->width)
 		{
-			free_map(game);
+			free_game(game);
 			exit_with_error("Failure by feature of map");
 		}
 		i++;
@@ -94,22 +113,22 @@ void	check_map(t_game *game)
 	get_game_size(game);
 	if (check_outline(game) || check_contents(game))
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure by format of map");
 	}
 	if (game->num_of_c < 1)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure by number of collectible");
 	}
 	if (game->num_of_e < 1)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure by number of exit");
 	}
 	if (game->num_of_p != 1)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure by number of starting position");
 	}
 }

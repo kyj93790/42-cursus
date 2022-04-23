@@ -9,12 +9,25 @@ void	exit_with_error(char *message)
 
 static void init(t_game *game)
 {
+	int	i;
+	int	j;
+
 	game->height = 0;
 	game->width = 0;
 	game->map = 0;
 	game->num_of_c = 0;
 	game->num_of_e = 0;
 	game->num_of_p = 0;
+	game->tile.img_ptr = NULL;
+	game->wall.img_ptr = NULL;
+	game->collect.img_ptr = NULL;
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+			game->character[i][j].img_ptr = NULL;
+	}
 	game->loc.dir = 0;
 	game->loc.x = 0;
 	game->loc.y = 0;

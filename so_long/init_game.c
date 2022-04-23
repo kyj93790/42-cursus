@@ -8,7 +8,7 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game)
 	game->tile.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/tile.xpm", &(game->tile.width), &(game->tile.height));
 	if (game->tile.img_ptr == 0)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure in getting tile image");
 	}
 	i = 0;
@@ -32,7 +32,7 @@ void	put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
 	game->wall.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/bush.xpm", &(game->wall.width), &(game->wall.height));
 	if (game->wall.img_ptr == 0)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure in getting wall image");
 	}
 	i = 0;
@@ -57,7 +57,7 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 	game->collect.img_ptr = mlx_xpm_file_to_image(mlx_ptr, "imgs/pokeball.xpm", &(game->collect.width), &(game->collect.height));
 	if (game->collect.img_ptr == 0)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure in getting collectible image");
 	}
 	i = 0;
@@ -74,12 +74,21 @@ void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game)
 	}
 }
 
-void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game)
+void	put_exits(void *mlx_ptr, void *win_ptr, t_game *game)
 {
-	load_character_up_img(mlx_ptr, win_ptr, game);
-	load_character_left_img(mlx_ptr, win_ptr, game);
-	load_character_down_img(mlx_ptr, win_ptr, game);
-	load_character_right_img(mlx_ptr, win_ptr, game);
+	t_ull	i;
+	t_ull	j;
+
+	i = 0;
+	while (i < game->height)
+	{
+		j = 0;
+		while (j < game->width)
+		{
+			if (game->map[i][j] == 'E')
+				put_exit(mlx_ptr, win_ptr, game, i, j);
+		}
+	}
 }
 
 void	init_game(t_game *game)
@@ -93,7 +102,7 @@ void	init_game(t_game *game)
 	
 	if (win_ptr == 0)
 	{
-		free_map(game);
+		free_game(game);
 		exit_with_error("Failure in opening window");
 	}
 	put_background_tiles(mlx_ptr, win_ptr, game);

@@ -33,6 +33,8 @@ typedef struct s_img
 
 typedef struct s_game
 {
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_ull 	height;
 	t_ull 	width;
 	char	**map;
@@ -54,7 +56,7 @@ void	check_filename(int argc, char *argv[]);
 int		get_file_size(char *filename);
 char	*read_file(char *filename);
 
-void	free_map(t_game *game);
+void	free_game(t_game *game);
 void	check_map(t_game *game);
 
 void	init_game(t_game *game);
@@ -66,6 +68,7 @@ void	load_character_up_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_left_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_down_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_right_img(void *mlx_ptr, void *win_ptr, t_game *game);
+void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game);
 
 int		press_key(int key_in, t_game *game);
 
