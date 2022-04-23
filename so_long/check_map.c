@@ -1,5 +1,12 @@
 #include "so_long.h"
 
+static void	free_window(t_game *game)
+{
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	free(game->mlx_ptr);
+	free(game->win_ptr);
+}
+
 void	free_game(t_game *game)
 {
 	t_ull	i;
@@ -15,18 +22,17 @@ void	free_game(t_game *game)
 		free(game->wall.img_ptr);
 	if (game->collect.img_ptr)
 		free(game->collect.img_ptr);
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (++i < 4)
 	{
-		j = 0;
-		while (j < 4)
+		j = -1;
+		while (++j < 4)
 		{
 			if (game->character[i][j].img_ptr)
 				free(game->character[i][j].img_ptr);
-			j++;
 		}
-		i++;
 	}
+	free_window(game);
 }
 
 static void	get_game_size(t_game *game)

@@ -12,6 +12,8 @@ static void init(t_game *game)
 	int	i;
 	int	j;
 
+	game->mlx_ptr = NULL;
+	game->win_ptr = NULL;
 	game->height = 0;
 	game->width = 0;
 	game->map = 0;

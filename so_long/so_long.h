@@ -60,15 +60,15 @@ void	free_game(t_game *game);
 void	check_map(t_game *game);
 
 void	init_game(t_game *game);
-void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game);
-void	put_wall(void *mlx_ptr, void *win_ptr, t_game *game);
-void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game);
+void	put_background_tiles(t_game *game);
+void	put_wall(t_game *game);
+void	put_collectible(t_game *game);
 
-void	load_character_up_img(void *mlx_ptr, void *win_ptr, t_game *game);
-void	load_character_left_img(void *mlx_ptr, void *win_ptr, t_game *game);
-void	load_character_down_img(void *mlx_ptr, void *win_ptr, t_game *game);
-void	load_character_right_img(void *mlx_ptr, void *win_ptr, t_game *game);
-void	load_character_img(void *mlx_ptr, void *win_ptr, t_game *game);
+void	load_character_up_img(t_game *game);
+void	load_character_left_img(t_game *game);
+void	load_character_down_img(t_game *game);
+void	load_character_right_img(t_game *game);
+void	load_character_img(t_game *game);
 
 int		press_key(int key_in, t_game *game);
 
