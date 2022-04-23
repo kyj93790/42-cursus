@@ -24,7 +24,7 @@ void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game)
 	}
 }
 
-void put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
+void	put_wall(void *mlx_ptr, void *win_ptr, t_game *game)
 {
 	t_ull	i;
 	t_ull	j;
@@ -100,6 +100,7 @@ void	init_game(t_game *game)
 	put_wall(mlx_ptr, win_ptr, game);
 	put_collectible(mlx_ptr, win_ptr, game);
 	load_character_img(mlx_ptr, win_ptr, game);
-	//mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, &game);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
+	mlx_hook(win_ptr, X_EVENT_PRESS_KEY, 0, press_key, game);
 	mlx_loop(mlx_ptr);
 }

@@ -19,6 +19,7 @@ typedef unsigned long long	t_ull;
 
 typedef struct s_loc
 {
+	t_ull	dir;
 	t_ull	x;
 	t_ull	y;
 }	t_loc;
@@ -44,6 +45,7 @@ typedef struct s_game
 	t_img	character[4][4];
 	t_img	exit;
 	t_loc	loc;
+	t_ull	cnt;
 }	t_game;
 
 void	exit_with_error(char *message);
@@ -56,10 +58,15 @@ void	free_map(t_game *game);
 void	check_map(t_game *game);
 
 void	init_game(t_game *game);
+void	put_background_tiles(void *mlx_ptr, void *win_ptr, t_game *game);
+void	put_wall(void *mlx_ptr, void *win_ptr, t_game *game);
+void	put_collectible(void *mlx_ptr, void *win_ptr, t_game *game);
 
 void	load_character_up_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_left_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_down_img(void *mlx_ptr, void *win_ptr, t_game *game);
 void	load_character_right_img(void *mlx_ptr, void *win_ptr, t_game *game);
+
+int		press_key(int key_in, t_game *game);
 
 #endif

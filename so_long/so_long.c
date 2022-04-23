@@ -15,6 +15,10 @@ static void init(t_game *game)
 	game->num_of_c = 0;
 	game->num_of_e = 0;
 	game->num_of_p = 0;
+	game->loc.dir = 0;
+	game->loc.x = 0;
+	game->loc.y = 0;
+	game->cnt = 0;
 }
 
 int	main(int argc, char *argv[])
