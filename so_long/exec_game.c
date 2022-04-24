@@ -69,3 +69,10 @@ int	press_key(int key_in, t_game *game)
 	printf("current number of move : %llu\n", game->move);
 	return (0);
 }
+
+int press_red_cross(t_game *game)
+{
+	free_game(game);
+	exit(EXIT_SUCCESS);
+	return (0);
+}

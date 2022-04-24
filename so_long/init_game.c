@@ -93,5 +93,6 @@ void	init_game(t_game *game)
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
 	game->map[game->loc.y][game->loc.x] = '0';
 	mlx_hook(game->win_ptr, X_EVENT_PRESS_KEY, 0, press_key, game);
+	mlx_hook(game->win_ptr, X_EVENT_RED_CROSS, 0, press_red_cross, game);
 	mlx_loop(game->mlx_ptr);
 }

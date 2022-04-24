@@ -9,6 +9,7 @@
 # include "minilibx_opengl_20191021/mlx.h"
 
 # define X_EVENT_PRESS_KEY 2
+# define X_EVENT_RED_CROSS 17
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -78,5 +79,6 @@ void	load_character_right_img(t_game *game);
 void	load_character_img(t_game *game);
 
 int		press_key(int key_in, t_game *game);
+int		press_red_cross(t_game *game);
 
 #endif
