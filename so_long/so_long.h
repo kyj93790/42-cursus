@@ -36,8 +36,8 @@ typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_ull 	height;
-	t_ull 	width;
+	t_ull	height;
+	t_ull	width;
 	char	**map;
 	t_ull	num_of_c;
 	t_ull	num_of_e;

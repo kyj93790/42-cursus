@@ -7,7 +7,7 @@ void	exit_with_error(char *message)
 	exit(EXIT_FAILURE);
 }
 
-static void init(t_game *game)
+static void	init(t_game *game)
 {
 	int	i;
 	int	j;
@@ -39,7 +39,6 @@ int	main(int argc, char *argv[])
 {
 	char	*buffer;
 	t_game	game;
-	int		i;
 
 	check_filename(argc, argv);
 	init(&game);

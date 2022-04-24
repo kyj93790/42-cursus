@@ -39,8 +39,8 @@ void	put_walls(t_game *game)
 
 void	put_collectibles(t_game *game)
 {
-	t_ull i;
-	t_ull j;
+	t_ull	i;
+	t_ull	j;
 
 	i = 0;
 	while (i < game->height)
@@ -78,8 +78,8 @@ void	put_exits(t_game *game, int flag)
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 64*(game->width), 64*(game->height), "so_long");
-	
+	game->win_ptr = mlx_new_window(game->mlx_ptr, \
+							64 * (game->width), 64 * (game->height), "so_long");
 	if (game->win_ptr == 0)
 	{
 		free_game(game);
@@ -90,7 +90,8 @@ void	init_game(t_game *game)
 	put_collectibles(game);
 	put_exits(game, 0);
 	load_character_img(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[2][0].img_ptr, 64*game->loc.x, 64*game->loc.y);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+			game->character[2][0].img_ptr, 64 * game->loc.x, 64 * game->loc.y);
 	game->map[game->loc.y][game->loc.x] = '0';
 	mlx_hook(game->win_ptr, X_EVENT_PRESS_KEY, 0, press_key, game);
 	mlx_hook(game->win_ptr, X_EVENT_RED_CROSS, 0, press_red_cross, game);

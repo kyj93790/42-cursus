@@ -21,7 +21,9 @@ void	move_to_new_pos(t_game *game, t_ull new_dir, t_ull new_x, t_ull new_y)
 		game->loc.y = new_y;
 		(game->move)++;
 	}
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[game->loc.dir][game->move % 4].img_ptr, 64 * game->loc.x, 64 * game->loc.y);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+					game->character[game->loc.dir][game->move % 4].img_ptr, \
+					64 * game->loc.x, 64 * game->loc.y);
 }
 
 void	check_new_pos(t_game *game)
@@ -40,7 +42,9 @@ void	check_new_pos(t_game *game)
 		(game->cnt)++;
 		game->map[game->loc.y][game->loc.x] = '0';
 		put_tile(game, game->loc.y, game->loc.x);
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->character[game->loc.dir][game->move % 4].img_ptr, 64 * game->loc.x, 64 * game->loc.y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+						game->character[game->loc.dir][game->move % 4].img_ptr, \
+						64 * game->loc.x, 64 * game->loc.y);
 		if (game->cnt == game->num_of_c)
 			put_exits(game, 1);
 	}
@@ -53,7 +57,8 @@ int	press_key(int key_in, t_game *game)
 		free_game(game);
 		exit(EXIT_SUCCESS);
 	}
-	if (key_in == KEY_W || key_in == KEY_A || key_in == KEY_S || key_in == KEY_D)
+	if (key_in == KEY_W || key_in == KEY_A || \
+		key_in == KEY_S || key_in == KEY_D)
 	{
 		refresh_curr_pos(game, game->loc.x, game->loc.y);
 		if (key_in == KEY_W)
@@ -70,7 +75,7 @@ int	press_key(int key_in, t_game *game)
 	return (0);
 }
 
-int press_red_cross(t_game *game)
+int	press_red_cross(t_game *game)
 {
 	free_game(game);
 	exit(EXIT_SUCCESS);

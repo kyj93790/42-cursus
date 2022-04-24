@@ -1,5 +1,5 @@
 CC = gcc
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 NAME = so_long
 
@@ -9,7 +9,8 @@ SRC_FILE = so_long \
 			init_game \
 			put_elements \
 			load_character_img \
-			exec_game
+			exec_game \
+			free_game
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
 MLX = minilibx_opengl_20191021

@@ -1,43 +1,5 @@
 #include "so_long.h"
 
-void	free_imgs(t_game *game)
-{
-	t_ull	i;
-	t_ull	j;
-
-	if (game->tile.img_ptr)
-		mlx_destroy_image(game->mlx_ptr, game->tile.img_ptr);
-	if (game->wall.img_ptr)
-		mlx_destroy_image(game->mlx_ptr, game->wall.img_ptr);
-	if (game->collect.img_ptr)
-		mlx_destroy_image(game->mlx_ptr, game->collect.img_ptr);
-	if (game->exit.img_ptr)
-		mlx_destroy_image(game->mlx_ptr, game->exit.img_ptr);
-	i = -1;
-	while (++i < 4)
-	{
-		j = -1;
-		while (++j < 4)
-		{
-			if (game->character[i][j].img_ptr)
-				mlx_destroy_image(game->mlx_ptr, game->character[i][j].img_ptr);
-		}
-	}
-}
-
-void	free_game(t_game *game)
-{
-	t_ull	i;
-
-	i = 0;
-	while (game->map[i])
-		free(game->map[i++]);
-	free(game->map);
-	free_imgs(game);
-	if (game->mlx_ptr && game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-}
-
 static void	get_game_size(t_game *game)
 {
 	t_ull	i;
@@ -87,6 +49,20 @@ static int	check_outline(t_game *game)
 	return (0);
 }
 
+static void	count_contents(char content, t_ull i, t_ull j, t_game *game)
+{
+	if (content == 'P')
+	{
+		(game->num_of_p)++;
+		game->loc.x = j;
+		game->loc.y = i;
+	}
+	else if (content == 'C')
+		(game->num_of_c)++;
+	else if (content == 'E')
+		(game->num_of_e)++;
+}
+
 static int	check_contents(t_game *game)
 {
 	t_ull	i;
@@ -98,16 +74,9 @@ static int	check_contents(t_game *game)
 		j = 0;
 		while (j < game->width)
 		{
-			if (game->map[i][j] == 'C')
-				(game->num_of_c)++;
-			else if (game->map[i][j] == 'E')
-				(game->num_of_e)++;
-			else if (game->map[i][j] == 'P')
-			{
-				(game->num_of_p)++;
-				game->loc.x = j;
-				game->loc.y = i;
-			}
+			if (game->map[i][j] == 'P' || game->map[i][j] == 'C' \
+					|| game->map[i][j] == 'E')
+				count_contents(game->map[i][j], i, j, game);
 			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
 				return (1);
 			j++;
