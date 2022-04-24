@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/24 14:02:09 by yejin             #+#    #+#              #
-#    Updated: 2022/04/24 15:27:35 by yejin            ###   ########.fr        #
+#    Updated: 2022/04/24 15:42:22 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ all : $(NAME)
 $(NAME) : $(OBJ_FILES)
 	make -C $(LIBFT)
 	make -C $(MLX)
-	$(CC) $(FLAGS) -I $(MLX) $(SRC) -L $(LIBFT) -lft -L $(MLX) -lmlx -framework OpenGL -framework AppKit -o $@
+	$(CC) $(FLAGS) -I $(MLX) -L $(LIBFT) -lft -L $(MLX) -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 bonus : $(B_OBJ)
 	make WITH_BONUS=1 all

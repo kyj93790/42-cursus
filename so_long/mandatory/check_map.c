@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:01:49 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 14:03:57 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 15:34:05 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,19 @@ static int	check_outline(t_game *game)
 
 	h = game->height;
 	w = game->width;
-	i = -1;
-	while (++i < h)
+	i = 0;
+	while (i < h)
 	{
 		if (game->map[i][0] != '1' || game->map[i][w - 1] != '1')
 			return (1);
+		i++;
 	}
-	i = -1;
-	while (++i < w)
+	i = 0;
+	while (i < w)
 	{
 		if (game->map[0][i] != '1' || game->map[h - 1][i] != '1')
 			return (1);
+		i++;
 	}
 	return (0);
 }
