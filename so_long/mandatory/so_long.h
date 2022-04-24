@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:03:03 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 14:03:03 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 15:19:53 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "libft/libft.h"
-# include "minilibx_opengl_20191021/mlx.h"
+# include "../libft/libft.h"
+# include "../minilibx_opengl_20191021/mlx.h"
 
 # define X_EVENT_PRESS_KEY 2
 # define X_EVENT_RED_CROSS 17
