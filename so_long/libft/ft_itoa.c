@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:20:04 by yejikim           #+#    #+#             */
-/*   Updated: 2021/11/19 14:18:14 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/04/24 16:28:55 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	get_digit(int n, int *digit, int *cnt)
+static void	get_digit(t_ull n, t_ull *digit, t_ull *cnt)
 {
 	*digit = 1;
 	*cnt = 1;
@@ -21,29 +21,20 @@ static void	get_digit(int n, int *digit, int *cnt)
 		*digit *= 10;
 		(*cnt)++;
 	}
-	if (n < 0)
-		(*cnt)++;
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(t_ull n)
 {
 	char	*pnew;
-	int		digit;
-	int		cnt;
-	int		i;
+	t_ull	digit;
+	t_ull	cnt;
+	t_ull	i;
 
 	get_digit(n, &digit, &cnt);
 	pnew = (char *)malloc(sizeof(char) * (cnt + 1));
 	if (pnew == 0)
 		return (0);
 	i = 0;
-	if (n < 0)
-	{
-		pnew[i++] = '-';
-		pnew[i++] = -1 * (n / digit) + '0';
-		n = n % digit * -1;
-		digit /= 10;
-	}
 	while (digit > 0)
 	{
 		pnew[i++] = (n / digit) + '0';

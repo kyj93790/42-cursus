@@ -6,12 +6,12 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:03:03 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 15:19:44 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 16:25:39 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -95,5 +95,7 @@ void	load_character_img(t_game *game);
 
 int		press_key(int key_in, t_game *game);
 int		press_red_cross(t_game *game);
+
+void	print_movements(t_game *game);
 
 #endif

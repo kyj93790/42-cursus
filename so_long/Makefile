@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/24 14:02:09 by yejin             #+#    #+#              #
-#    Updated: 2022/04/24 15:42:22 by yejin            ###   ########.fr        #
+#    Updated: 2022/04/24 16:36:44 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,20 @@ SRC_FILE = so_long \
 			load_character_img \
 			exec_game \
 			free_game
+B_SRC_FILE = so_long \
+			read_file \
+			check_map \
+			init_game \
+			put_elements \
+			load_character_img \
+			exec_game \
+			free_game \
+			put_enemy \
+			print_movements
 SRC = $(addprefix mandatory/, $(addsuffix .c, $(SRC_FILE)))
 OBJ = $(addprefix mandatory/, $(addsuffix .o, $(SRC_FILE)))
-B_SRC = $(addprefix bonus/, $(addsuffix _bonus.c, $(SRC_FILE)))
-B_OBJ = $(addprefix bonus/, $(addsuffix _bonus.o, $(SRC_FILE)))
+B_SRC = $(addprefix bonus/, $(addsuffix _bonus.c, $(B_SRC_FILE)))
+B_OBJ = $(addprefix bonus/, $(addsuffix _bonus.o, $(B_SRC_FILE)))
 MLX = minilibx_opengl_20191021
 LIBFT = libft
 

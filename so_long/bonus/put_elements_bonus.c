@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:02:40 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 15:48:15 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 16:05:46 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,4 @@ void	put_exit(t_game *game, t_ull i, t_ull j, int flag)
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 							game->exit.img_ptr, 64 * j, 64 * i);
-}
-
-void	put_enemy(t_game *game, t_ull i, t_ull j)
-{
-	if (game->enemy.img_ptr == NULL)
-	{
-		game->enemy.img_ptr = mlx_xpm_file_to_image(\
-				game->mlx_ptr, "imgs/enemy.xpm", \
-				&(game->enemy.width), &(game->enemy.height));
-		if (game->enemy.img_ptr == NULL)
-		{
-			free_game(game);
-			exit_with_error("Failure in getting enemy image");
-		}
-	}
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
-							game->enemy.img_ptr, 64 * j, 64 * i);
 }

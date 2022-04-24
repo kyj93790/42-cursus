@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:01:49 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 15:38:49 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 16:06:11 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ static int	check_contents(t_game *game)
 			if (game->map[i][j] == 'P' || game->map[i][j] == 'C' \
 					|| game->map[i][j] == 'E')
 				count_contents(game->map[i][j], i, j, game);
-			else if (game->map[i][j] != '0' && game->map[i][j] != '1' && game->map[i][j] != 'X')
+			else if (game->map[i][j] != '0' && game->map[i][j] != '1' \
+					&& game->map[i][j] != 'X')
 				return (1);
 			j++;
 		}

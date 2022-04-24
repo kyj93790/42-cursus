@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:01:54 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 15:19:10 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 16:40:21 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,15 @@ void	check_new_pos(t_game *game)
 		game->map[game->loc.y][game->loc.x] = '0';
 		put_tile(game, game->loc.y, game->loc.x);
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
-						game->character[game->loc.dir][game->move % 4].img_ptr, \
-						64 * game->loc.x, 64 * game->loc.y);
+				game->character[game->loc.dir][game->move % 4].img_ptr, \
+				64 * game->loc.x, 64 * game->loc.y);
 		if (game->cnt == game->num_of_c)
 			put_exits(game, 1);
+	}
+	else if (game->map[game->loc.y][game->loc.x] == 'X')
+	{
+		printf("FAILURE !\n");
+		press_red_cross(game);
 	}
 }
 
@@ -82,7 +87,7 @@ int	press_key(int key_in, t_game *game)
 		else if (key_in == KEY_D)
 			move_to_new_pos(game, 3, game->loc.x + 1, game->loc.y);
 		check_new_pos(game);
-		printf("current number of move : %llu\n", game->move);
+		print_movements(game);
 	}
 	return (0);
 }
