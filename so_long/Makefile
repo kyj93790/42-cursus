@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/24 14:02:09 by yejin             #+#    #+#              #
-#    Updated: 2022/04/24 15:22:59 by yejin            ###   ########.fr        #
+#    Updated: 2022/04/24 15:27:35 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ bonus : $(B_OBJ)
 
 clean :
 	rm -f $(OBJ)
+	rm -f $(B_OBJ)
 	make fclean -C $(LIBFT)
 	make clean -C $(MLX)
 	rm -f $(MLX)/libmlx
