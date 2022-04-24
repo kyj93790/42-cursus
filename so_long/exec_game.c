@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:01:54 by yejin             #+#    #+#             */
-/*   Updated: 2022/04/24 14:02:46 by yejin            ###   ########.fr       */
+/*   Updated: 2022/04/24 14:15:56 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	move_to_new_pos(t_game *game, t_ull new_dir, t_ull new_x, t_ull new_y)
 	{
 		game->loc.x = new_x;
 		game->loc.y = new_y;
-		(game->move)++;
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 					game->character[game->loc.dir][game->move % 4].img_ptr, \
@@ -72,6 +71,7 @@ int	press_key(int key_in, t_game *game)
 	if (key_in == KEY_W || key_in == KEY_A || \
 		key_in == KEY_S || key_in == KEY_D)
 	{
+		(game->move)++;
 		refresh_curr_pos(game, game->loc.x, game->loc.y);
 		if (key_in == KEY_W)
 			move_to_new_pos(game, 0, game->loc.x, game->loc.y - 1);
@@ -82,8 +82,8 @@ int	press_key(int key_in, t_game *game)
 		else if (key_in == KEY_D)
 			move_to_new_pos(game, 3, game->loc.x + 1, game->loc.y);
 		check_new_pos(game);
+		printf("current number of move : %llu\n", game->move);
 	}
-	printf("current number of move : %llu\n", game->move);
 	return (0);
 }
 
