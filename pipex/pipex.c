@@ -9,13 +9,11 @@ void	exit_with_error(char *message)
 int	main(int argc, char *argv[], char *envp[])
 {
 	int		**p;
-	char	**path;
 	t_arg	arg;
-	int		i;
 
 	arg = init_args(argc, argv);
 	p = init_pipe(argc);
-	path = init_path(envp);
-	
-	return 0;
+	arg.path = init_path(envp);
+	execute_cmds(arg, path, p, arg.cmd_cnt);
+	return (0);
 }

@@ -25,11 +25,11 @@ int	**init_pipe(int argc)
 	int	**p;
 	int	i;
 	
-	p = (int **)malloc(sizeof(int *) * (argc - 1));
+	p = (int **)malloc(sizeof(int *) * (argc - 2));
 	if (p == NULL)
 		exit_with_error("Failure in allocating pipes");
 	i = 0;
-	while (i < argc - 1)
+	while (i < argc - 2)
 	{
 		p[i] = (int *)malloc(sizeof(int) * 2);
 		if (p[i] == NULL)

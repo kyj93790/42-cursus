@@ -14,6 +14,7 @@ typedef struct	s_arg
 	int		cmd_cnt;
 	char	**cmd;
 	char	*outfile;
+	char	**path;
 }	t_arg;
 
 void	exit_with_error(char *message);

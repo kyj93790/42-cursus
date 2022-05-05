@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 LIBFT = libft
 SRC_FILE = pipex \
-		initialize
+		initialize \
+		excute_cmds
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
