@@ -4,7 +4,8 @@ NAME = pipex
 LIBFT = libft
 SRC_FILE = pipex \
 		initialize \
-		excute_cmds
+		execute_cmds \
+		redirection
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-t_arg	init_args(int argc, char *argv[])
+t_arg	init_argv(int argc, char *argv[])
 {
 	t_arg	arg;
 	int		i;

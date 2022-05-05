@@ -14,6 +14,7 @@ int	main(int argc, char *argv[], char *envp[])
 	arg = init_args(argc, argv);
 	p = init_pipe(argc);
 	arg.path = init_path(envp);
-	execute_cmds(arg, path, p, arg.cmd_cnt);
+	arg.envp = envp;
+	execute_pipex(arg, p, arg.cmd_cnt);
 	return (0);
 }
