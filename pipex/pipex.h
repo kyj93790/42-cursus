@@ -16,6 +16,8 @@ typedef struct	s_arg
 	char	*outfile;
 }	t_arg;
 
+void	exit_with_error(char *message);
+
 t_arg	init_args(int argc, char *argv[]);
 int		**init_pipe(int argc);
 char	**init_path(char *envp[]);

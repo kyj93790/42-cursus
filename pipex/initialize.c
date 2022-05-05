@@ -24,7 +24,6 @@ int	**init_pipe(int argc)
 {
 	int	**p;
 	int	i;
-	int	j;
 	
 	p = (int **)malloc(sizeof(int *) * (argc - 1));
 	if (p == NULL)
