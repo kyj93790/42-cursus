@@ -1,11 +1,5 @@
 #include "pipex.h"
 
-void	exit_with_error(char *message)
-{
-	perror(message);
-	exit(EXIT_FAILURE);
-}
-
 t_arg	init_args(int argc, char *argv[])
 {
 	t_arg	arg;
@@ -56,25 +50,14 @@ char	**init_path(char *envp[])
 	i = 0;
 	while (envp[i])
 	{
-		
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			break;
 		i++;
 	}
 	if (envp[i] == NULL)
-	{
-		perror("")
-	}
-	
-}
-
-int	main(int argc, char *argv[], char *envp[])
-{
-	int		i;
-	int		**p;
-	char	**path;
-	t_arg	arg;
-	
-	arg = init_args(argc, argv);
-	p = init_pipe(argc);
-	path = init_path(envp);
-	return 0;
+		exit_with_error("Failure by given envp : path doesn't exist");
+	path = ft_split(&envp[i][5], ':');
+	if (path == NULL)
+		exit_with_error("Failure in ft_split");
+	return (path);
 }
