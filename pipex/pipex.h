@@ -12,7 +12,7 @@ typedef struct	s_arg
 {
 	char	*infile;
 	int		cmd_cnt;
-	char	**cmd;
+	char	***cmd;
 	char	*outfile;
 	char	**envp;
 	char	**path;
@@ -20,7 +20,7 @@ typedef struct	s_arg
 
 void	exit_with_error(char *message);
 
-t_arg	init_args(int argc, char *argv[]);
+void	init_args(t_arg *arg, int argc, char *argv[], char *envp[]);
 int		**init_pipe(int argc);
 char	**init_path(char *envp[]);
 

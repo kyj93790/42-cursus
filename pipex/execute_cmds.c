@@ -2,15 +2,15 @@
 
 void	execute_cmd(pid_t pid, t_arg arg, int **p, int i)
 {	
-	int	status;
+	int		status;
 
 	waitpid(pid, &status, 0);
 	dup2(p[i-1][0], STDIN_FILENO);
 	if (i == arg.cmd_cnt)
 		redirect_to_outfile(arg, p);
 	dup2(p[i][1], STDOUT_FILENO);
-	// execve를 위한 argument 처리
 	// execve진행
+	// execve의 반환값에 대한 예외처리도 필요
 	// ft_putstr_fd("execute cmd ", STDERR_FILENO);
 	// ft_putnbr_fd(i, STDERR_FILENO);
 	// ft_putstr_fd("\n", STDERR_FILENO);

@@ -1,25 +1,5 @@
 #include "pipex.h"
 
-t_arg	init_argv(int argc, char *argv[])
-{
-	t_arg	arg;
-	int		i;
-
-	if (argc != 5)
-		exit_with_error("Failure by number of arguments");
-	arg.infile = argv[1];
-	arg.cmd_cnt = argc - 3;
-	arg.cmd = (char **)malloc(sizeof(char *) * (arg.cmd_cnt + 1));
-	if (arg.cmd == NULL)
-		exit_with_error("Failure in allocating cmd");
-	arg.cmd[0] = NULL;
-	i = 0;
-	while (++i <= arg.cmd_cnt)
-		arg.cmd[i] = argv[i + 1];
-	arg.outfile = argv[++i];
-	return (arg);
-}
-
 int	**init_pipe(int argc)
 {
 	int	**p;
@@ -59,4 +39,59 @@ char	**init_path(char *envp[])
 	if (path == NULL)
 		exit_with_error("Failure in ft_split");
 	return (path);
+}
+
+void	add_path(t_arg *arg, int curr_i)
+{
+	char	*temp_cmd;
+	int		i;
+
+	i = 0;
+	while (arg->path[i])
+	{
+		temp_cmd = ft_strjoin(arg->path[i], arg->cmd[curr_i][0]);
+		if (temp_cmd == NULL)
+			exit_with_error("Failure in adding directory path to cmd");
+		if (access(temp_cmd, X_OK) < 0)
+			free(temp_cmd);
+		else
+		{
+			free(arg->cmd[i][0]);
+			arg->cmd[i][0] = temp_cmd;
+			return ;
+		}
+		temp_cmd = NULL;
+		i++;
+	}
+}
+
+void	init_cmd(t_arg *arg, char *argv[])
+{
+	int	i;
+
+	i = 1;
+	while (i <= arg->cmd_cnt)
+	{
+		arg->cmd[i] = ft_split(argv[i + 1], ' ');
+		if (arg->cmd[i] == NULL)
+			exit_with_error("Failure in spliting command");
+		add_path(arg, i);
+		i++;
+	}
+}
+
+void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
+{
+	if (argc != 5)
+		exit_with_error("Failure by number of arguments");
+	arg->infile = argv[1];
+	arg->cmd_cnt = argc - 3;
+	arg->cmd = (char ***)malloc(sizeof(char **) * (arg->cmd_cnt + 1));
+	if (arg->cmd == NULL)
+		exit_with_error("Failure in allocating cmd");
+	arg->cmd[0] = NULL;
+	init_cmd(arg, argv);
+	arg->outfile = argv[argc - 1];
+	arg->path = init_path(envp);
+	arg->envp = envp;
 }
