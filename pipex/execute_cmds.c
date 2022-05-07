@@ -1,13 +1,46 @@
 #include "pipex.h"
 
+void	redirect_from_infile(t_arg arg, int **p)
+{
+	int	fd;
+
+	fd = open(arg.infile, O_RDONLY);
+	if (fd < 0)
+		exit_with_error("Failure in opening infile");
+	dup2(fd, p[0][1]);
+	// dup2 에러 처리
+	close(fd);
+}
+
+void	redirect_to_outfile(t_arg arg, int **p)
+{
+	int fd;
+
+	fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT);
+	if (fd < 0)
+		exit_with_error("Failure in opening outfile");
+	dup2(fd, STDOUT_FILENO);
+	// dup2 에러 처리
+	close(fd);
+	//return (fd);
+}
+
 void	execute_cmd(pid_t pid, t_arg arg, int **p, int i)
 {	
+	//int outfile_fd;
 
 	printf("parent %d\n", i);
 	dup2(p[i-1][0], STDIN_FILENO);
 	if (i == arg.cmd_cnt)
+	{
+		//outfile_fd = redirect_to_outfile(arg, p);
 		redirect_to_outfile(arg, p);
-	dup2(p[i][1], STDOUT_FILENO);
+		//dup2(outfile_fd, STDOUT_FILENO);)
+	}
+	else
+		dup2(p[i][1], STDOUT_FILENO);
+	// if (i == arg.cmd_cnt)
+	// 	close(outfile_fd);
 	execve(arg.cmd[i][0], arg.cmd[i], arg.envp);
 	perror("excute error");
 	// ft_putstr_fd("execute cmd ", STDERR_FILENO);
@@ -38,9 +71,9 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		//close(p[i - 1][1]);
 		return ;
 	}
-	close(p[i - 1][1]);
 	//wait(&status);
 	waitpid(pid, &status, 0);
+	close(p[i - 1][1]);
 	execute_cmd(pid, arg, p, i);
 	printf("finish cmd %d\n", i);
 	//close(p[i - 1][0]);
@@ -52,7 +85,6 @@ void	execute_pipex(t_arg arg, int **p, int i)
 	pid_t	exit_pid;
 	int		status;
 
-	printf("%d\n", i);
 	pid = fork();
 	if (pid < 0)
 		exit_with_error("Failure in fork");

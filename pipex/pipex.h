@@ -26,7 +26,4 @@ char	**init_path(char *envp[]);
 
 void	execute_pipex(t_arg arg, int **p, int i);
 
-void	redirect_from_infile(t_arg arg, int **p);
-void	redirect_to_outfile(t_arg arg, int **p);
-
 #endif
