@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 LIBFT = libft
 SRC_FILE = pipex \
