@@ -57,12 +57,14 @@ void	add_path(t_arg *arg, int curr_i)
 		free(temp_path);
 		if (temp_cmd == NULL)
 			exit_with_error("Failure in adding directory path to cmd");
+		printf("current check path : %s\n", arg->path[i]);
 		if (access(temp_cmd, X_OK) < 0)
 			free(temp_cmd);
 		else
 		{
 			free(arg->cmd[curr_i][0]);
 			arg->cmd[curr_i][0] = temp_cmd;
+			printf("correct path : %s\n", temp_cmd);
 			return ;
 		}
 		i++;
@@ -86,8 +88,8 @@ void	init_cmd(t_arg *arg, char *argv[])
 
 void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
 {
-	// if (argc != 5)
-	// 	exit_with_error("Failure by number of arguments");
+	if (argc != 5)
+		exit_with_error("Failure by number of arguments");
 	arg->path = init_path(envp);
 	arg->envp = envp;
 	arg->infile = argv[1];
@@ -97,13 +99,5 @@ void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
 		exit_with_error("Failure in allocating cmd");
 	arg->cmd[0] = NULL;
 	init_cmd(arg, argv);
-	int i = 1;
-	while (i <= arg->cmd_cnt) {
-		int j = 0;
-		while (arg->cmd[i][j])
-			printf("%s ", arg->cmd[i][j++]);
-		printf("\n");
-		i++;
-	}
 	arg->outfile = argv[argc - 1];
 }
