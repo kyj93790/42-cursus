@@ -81,6 +81,7 @@ void	init_cmd(t_arg *arg, char *argv[])
 		arg->cmd[i] = ft_split(argv[i + 1], ' ');
 		if (arg->cmd[i] == NULL)
 			exit_with_error("Failure in spliting command");
+		printf("num %d\n", i);
 		add_path(arg, i);
 		i++;
 	}

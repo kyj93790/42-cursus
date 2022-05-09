@@ -60,7 +60,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		close(p[i - 1][1]);
 		return ;
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, WNOHANG);
 	close(p[i - 1][1]);
 	execute_cmd(pid, arg, p, i);
 }
@@ -79,5 +79,5 @@ void	execute_pipex(t_arg arg, int **p, int i)
 		execute_cmds(arg, p, i);
 		return ;
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, WNOHANG);
 }
