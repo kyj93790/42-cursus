@@ -16,7 +16,7 @@ void	redirect_to_outfile(t_arg arg, int **p)
 {
 	int fd;
 
-	fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 		exit_with_error("Failure in opening outfile");
 	dup2(fd, STDOUT_FILENO);

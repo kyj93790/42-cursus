@@ -57,14 +57,12 @@ void	add_path(t_arg *arg, int curr_i)
 		free(temp_path);
 		if (temp_cmd == NULL)
 			exit_with_error("Failure in adding directory path to cmd");
-		printf("current check path : %s\n", arg->path[i]);
 		if (access(temp_cmd, X_OK) < 0)
 			free(temp_cmd);
 		else
 		{
 			free(arg->cmd[curr_i][0]);
 			arg->cmd[curr_i][0] = temp_cmd;
-			printf("correct path : %s\n", temp_cmd);
 			return ;
 		}
 		i++;
@@ -81,7 +79,6 @@ void	init_cmd(t_arg *arg, char *argv[])
 		arg->cmd[i] = ft_split(argv[i + 1], ' ');
 		if (arg->cmd[i] == NULL)
 			exit_with_error("Failure in spliting command");
-		printf("num %d\n", i);
 		add_path(arg, i);
 		i++;
 	}
