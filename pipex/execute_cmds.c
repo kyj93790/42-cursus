@@ -75,7 +75,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		exit_with_error(EXIT_FAILURE, "failure in fork", NULL);
 	if (pid == 0)
 	{
-		close(p[i - 1][0]); // close read fd
+		close(p[i - 1][0]);
 		execute_cmds(arg, p, i - 1);
 		close(p[i - 1][1]);
 		return ;
