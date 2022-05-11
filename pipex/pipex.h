@@ -5,8 +5,13 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <sys/wait.h>
 # include "libft/libft.h"
+
+# define EACCESS 2
+# define EXIT_FOPEN 1
+# define EXIT_CNF 127
 
 typedef struct	s_arg
 {
@@ -18,7 +23,8 @@ typedef struct	s_arg
 	char	**path;
 }	t_arg;
 
-void	exit_with_error(char *message);
+
+void	exit_with_error(int exit_num, char *message, char *filename);
 
 void	init_args(t_arg *arg, int argc, char *argv[], char *envp[]);
 int		**init_pipe(int argc);
