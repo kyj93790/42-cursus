@@ -12,6 +12,8 @@
 # define EACCESS 2
 # define EXIT_FOPEN 1
 # define EXIT_CNF 127
+# define P_READ 0
+# define P_WRITE 1
 
 typedef struct	s_arg
 {

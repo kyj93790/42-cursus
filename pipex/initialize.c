@@ -34,7 +34,7 @@ char	**init_path(char *envp[])
 		i++;
 	}
 	if (envp[i] == NULL)
-		exit_with_error(EXIT_FAILURE, "failure by given envp", "path doesn't exist");
+		exit_with_error(EXIT_FAILURE, "failure by envp", "path doesn't exist");
 	path = ft_split(&envp[i][5], ':');
 	if (path == NULL)
 		exit_with_error(EXIT_FAILURE, "failure in ft_split", NULL);
@@ -52,11 +52,11 @@ void	add_path(t_arg *arg, int curr_i)
 	{
 		temp_path = ft_strjoin(arg->path[i], "/");
 		if (temp_path == NULL)
-			exit_with_error(EXIT_FAILURE, "failure in adding directory path to cmd", NULL);
+			exit_with_error(EXIT_FAILURE, "failure in adding path", NULL);
 		temp_cmd = ft_strjoin(temp_path, arg->cmd[curr_i][0]);
 		free(temp_path);
 		if (temp_cmd == NULL)
-			exit_with_error(EXIT_FAILURE, "Failure in adding directory path to cmd", NULL);
+			exit_with_error(EXIT_FAILURE, "Failure in adding path", NULL);
 		if (access(temp_cmd, X_OK) < 0)
 			free(temp_cmd);
 		else
