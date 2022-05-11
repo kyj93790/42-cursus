@@ -65,6 +65,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 {
 	pid_t	pid;
 	int		status;
+	int		ret;
 
 	if (i == 0)
 		return ;
@@ -79,18 +80,21 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		close(p[i - 1][1]);
 		return ;
 	}
-	waitpid(pid, &status, 0);
-	if (!WIFEXITED(status))
-		exit(EXIT_FAILURE);
-	close(p[i - 1][1]);
-	execute_cmd(pid, arg, p, i);
+	while (1)
+	{
+		ret = waitpid(pid, &status, WNOHANG);
+		if (ret && WIFEXITED(status) != 0)
+			exit(EXIT_FAILURE);
+		close(p[i - 1][1]);
+		execute_cmd(pid, arg, p, i);
+	}
 }
 
 void	execute_pipex(t_arg arg, int **p, int i)
 {
 	pid_t	pid;
-	pid_t	exit_pid;
 	int		status;
+	int		ret;
 
 	pid = fork();
 	if (pid < 0)
@@ -100,9 +104,15 @@ void	execute_pipex(t_arg arg, int **p, int i)
 		execute_cmds(arg, p, i);
 		return ;
 	}
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		exit(WEXITSTATUS(status));
-	else
-		exit(EXIT_FAILURE);
+	while (1)
+	{
+		ret = waitpid(pid, &status, WNOHANG);
+		if (ret)
+		{
+			if (WIFEXITED(status))
+				exit(WEXITSTATUS(status));
+			else
+				exit(EXIT_FAILURE);
+		}
+	}
 }
