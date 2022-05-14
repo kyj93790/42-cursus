@@ -9,10 +9,18 @@ SRC_FILE = pipex \
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
+B_SRC = $(addsuffix _bonus.c, $(SRC_FILE))
+B_OBJ = $(addsuffix _bonus.o, $(SRC_FILE))
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(B_OBJ)
+else
+	OBJ_FILES = $(OBJ)
+endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ_FILES)
 	make -C $(LIBFT)
 	$(CC) $(CFLAGS) -L $(LIBFT) -lft $^ -o $@
 
@@ -25,5 +33,8 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+bonus : $(B_OBJ)
+	make WITH_BONUS=1 all
 	
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus

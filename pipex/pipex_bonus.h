@@ -1,5 +1,5 @@
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -15,7 +15,7 @@
 # define P_READ 0
 # define P_WRITE 1
 
-typedef struct s_arg
+typedef struct	s_arg
 {
 	char	*infile;
 	int		cmd_cnt;
@@ -24,6 +24,7 @@ typedef struct s_arg
 	char	**envp;
 	char	**path;
 }	t_arg;
+
 
 void	exit_with_error(int exit_num, char *message, char *filename);
 
