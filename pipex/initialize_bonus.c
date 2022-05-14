@@ -86,7 +86,7 @@ void	init_cmd(t_arg *arg, char *argv[])
 
 void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
 {
-	if (argc != 5)
+	if (argc < 5)
 		exit_with_error(EXIT_FAILURE, "failure by number of arguments", NULL);
 	arg->path = init_path(envp);
 	arg->envp = envp;
