@@ -6,14 +6,16 @@ LIBFT = libft
 SRC_FILE = pipex \
 		initialize \
 		execute_cmds \
-		calc_status
+		calc_status \
+		redirect
 B_SRC_FILE = pipex \
 			initialize \
 			execute_cmds \
 			calc_status \
 			get_next_line \
 			get_next_line_utils \
-			heredoc
+			heredoc \
+			redirect
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

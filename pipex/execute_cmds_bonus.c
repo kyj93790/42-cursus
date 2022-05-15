@@ -1,38 +1,5 @@
 #include "pipex_bonus.h"
 
-void	redirect_from_infile(t_arg arg)
-{
-	extern int	errno;
-	int			fd;
-	int			ret;
-
-	fd = open(arg.infile, O_RDONLY);
-	if (fd < 0)
-		exit_with_error(EXIT_FOPEN, "no such file or directory", arg.infile);
-	ret = dup2(fd, STDIN_FILENO);
-	if (ret < 0)
-		exit_with_error(EXIT_FAILURE, strerror(errno), NULL);
-	close(fd);
-}
-
-void	redirect_to_outfile(t_arg arg)
-{
-	extern int	errno;
-	int			fd;
-	int			ret;
-
-	if (arg.here_doc == 0)
-		fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	else
-		fd = open(arg.outfile, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	if (fd < 0)
-		exit_with_error(EXIT_FOPEN, "no such file or directory", arg.outfile);
-	ret = dup2(fd, STDOUT_FILENO);
-	if (ret < 0)
-		exit_with_error(EXIT_FAILURE, strerror(errno), NULL);
-	close(fd);
-}
-
 void	execute_cmd(t_arg arg, int **p, int i)
 {	
 	extern int	errno;
@@ -59,12 +26,30 @@ void	execute_cmd(t_arg arg, int **p, int i)
 		exit_with_error(EXIT_FAILURE, "failure by execve", NULL);
 }
 
+void	wait_child_and_execute_cmd(pid_t pid, t_arg arg, int **p, int i)
+{
+	int	flag;
+	int	status;
+	int	ret;
+
+	flag = 0;
+	while (1)
+	{
+		ret = waitpid(pid, &status, WNOHANG);
+		if (ret && !wifexited(status))
+			exit(EXIT_FAILURE);
+		if (!flag)
+		{
+			flag = 1;
+			close(p[i - 1][P_WRITE]);
+			execute_cmd(arg, p, i);
+		}
+	}
+}
+
 void	execute_cmds(t_arg arg, int **p, int i)
 {
 	pid_t	pid;
-	int		status;
-	int		ret;
-	int		flag;
 
 	if (i == 0)
 		return ;
@@ -80,19 +65,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		close(p[i - 1][P_WRITE]);
 		return ;
 	}
-	flag = 0;
-	while (1)
-	{
-		ret = waitpid(pid, &status, WNOHANG);
-		if (ret && !wifexited(status))
-			exit(EXIT_FAILURE);
-		if (!flag)
-		{
-			close(p[i - 1][P_WRITE]);
-			execute_cmd(arg, p, i);
-			flag = 1;
-		}
-	}
+	wait_child_and_execute_cmd(pid, arg, p, i);
 }
 
 void	execute_pipex(t_arg arg, int **p, int i)
