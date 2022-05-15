@@ -61,6 +61,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 	pid_t	pid;
 	int		status;
 	int		ret;
+	int		flag;
 
 	if (i == 0)
 		return ;
@@ -76,13 +77,18 @@ void	execute_cmds(t_arg arg, int **p, int i)
 		close(p[i - 1][P_WRITE]);
 		return ;
 	}
+	flag = 0;
 	while (1)
 	{
 		ret = waitpid(pid, &status, WNOHANG);
 		if (ret && !WIFEXITED(status))
 			exit(EXIT_FAILURE);
-		close(p[i - 1][P_WRITE]);
-		execute_cmd(arg, p, i);
+		if (!flag)
+		{
+			close(p[i - 1][P_WRITE]);
+			execute_cmd(arg, p, i);
+			flag = 1;
+		}
 	}
 }
 
