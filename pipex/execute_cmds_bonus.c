@@ -81,7 +81,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 	while (1)
 	{
 		ret = waitpid(pid, &status, WNOHANG);
-		if (ret && !WIFEXITED(status))
+		if (ret && !wifexited(status))
 			exit(EXIT_FAILURE);
 		if (!flag)
 		{
@@ -111,8 +111,8 @@ void	execute_pipex(t_arg arg, int **p, int i)
 		ret = waitpid(pid, &status, WNOHANG);
 		if (ret)
 		{
-			if (WIFEXITED(status))
-				exit(WEXITSTATUS(status));
+			if (wifexited(status))
+				exit(wexitstatus(status));
 			else
 				exit(EXIT_FAILURE);
 		}
