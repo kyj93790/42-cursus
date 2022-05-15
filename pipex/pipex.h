@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 23:41:40 by yejin             #+#    #+#             */
-/*   Updated: 2022/05/15 23:41:41 by yejin            ###   ########.fr       */
+/*   Updated: 2022/05/16 00:02:05 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	execute_pipex(t_arg arg, int **p, int i);
 
 /* calc_status_bonus.c */
 int		wifexited(int status);
-int 	wexitstatus(int status);
+int		wexitstatus(int status);
 
 /* redirect_bonus.c */
 void	redirect_from_infile(t_arg arg);
