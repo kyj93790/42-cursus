@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 23:41:10 by yejin             #+#    #+#             */
-/*   Updated: 2022/05/15 23:41:11 by yejin            ###   ########.fr       */
+/*   Updated: 2022/05/15 23:58:40 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
 	if (strncmp("here_doc", argv[1], 9) == 0)
 	{
 		get_infile(argv[2]);
-		arg->here_doc = 2;
+		arg->here_doc = 1;
 		arg->infile = "temp_file";
 	}
 	else
