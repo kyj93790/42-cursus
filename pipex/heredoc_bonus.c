@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/15 23:41:07 by yejin             #+#    #+#             */
+/*   Updated: 2022/05/15 23:53:30 by yejin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	get_infile(char *limiter)
@@ -12,6 +24,7 @@ void	get_infile(char *limiter)
 	len = ft_strlen(limiter);
 	while (1)
 	{
+		ft_putstr_fd("> ", 1);
 		temp = get_next_line(0);
 		if (temp == 0)
 			exit_with_error(EXIT_FAILURE, "failure in gnl", NULL);
