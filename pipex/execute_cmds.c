@@ -64,7 +64,7 @@ void	execute_cmds(t_arg arg, int **p, int i)
 
 	if (i == 0)
 		return ;
-	if (pipe(p[i - 1]))
+	if (pipe(p[i - 1]) < 0)
 		exit_with_error(EXIT_FAILURE, "failure in generating pipe", NULL);
 	pid = fork();
 	if (pid < 0)
