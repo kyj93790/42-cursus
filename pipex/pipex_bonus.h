@@ -8,6 +8,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include "libft/libft.h"
+# include "get_next_line_bonus.h"
 
 # define EACCESS 2
 # define EXIT_FOPEN 1
@@ -19,6 +20,7 @@ typedef struct	s_arg
 {
 	char	*infile;
 	int		cmd_cnt;
+	int		here_doc;
 	char	***cmd;
 	char	*outfile;
 	char	**envp;
@@ -33,5 +35,10 @@ int		**init_pipe(int argc);
 char	**init_path(char *envp[]);
 
 void	execute_pipex(t_arg arg, int **p, int i);
+
+int		wifexited(int status);
+int 	wexitstatus(int status);
+
+void	get_infile(char *limiter);
 
 #endif

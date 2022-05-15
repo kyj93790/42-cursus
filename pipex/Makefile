@@ -5,12 +5,20 @@ LIBFT = libft
 
 SRC_FILE = pipex \
 		initialize \
-		execute_cmds
+		execute_cmds \
+		calc_status
+B_SRC_FILE = pipex \
+			initialize \
+			execute_cmds \
+			calc_status \
+			get_next_line \
+			get_next_line_utils \
+			heredoc
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
-B_SRC = $(addsuffix _bonus.c, $(SRC_FILE))
-B_OBJ = $(addsuffix _bonus.o, $(SRC_FILE))
+B_SRC = $(addsuffix _bonus.c, $(B_SRC_FILE))
+B_OBJ = $(addsuffix _bonus.o, $(B_SRC_FILE))
 
 ifdef WITH_BONUS
 	OBJ_FILES = $(B_OBJ)
@@ -28,6 +36,7 @@ clean :
 	make fclean -C $(LIBFT)
 	rm -f $(OBJ)
 	rm -f $(B_OBJ)
+	rm -f temp_file
 
 fclean : clean
 	rm -f $(NAME)

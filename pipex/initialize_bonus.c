@@ -76,7 +76,7 @@ void	init_cmd(t_arg *arg, char *argv[])
 	i = 1;
 	while (i <= arg->cmd_cnt)
 	{
-		arg->cmd[i] = ft_split(argv[i + 1], ' ');
+		arg->cmd[i] = ft_split(argv[i + arg->here_doc + 1], ' ');
 		if (arg->cmd[i] == NULL)
 			exit_with_error(EXIT_FAILURE, "failure in spliting command", NULL);
 		add_path(arg, i);
@@ -90,8 +90,18 @@ void	init_args(t_arg *arg, int argc, char *argv[], char *envp[])
 		exit_with_error(EXIT_FAILURE, "failure by number of arguments", NULL);
 	arg->path = init_path(envp);
 	arg->envp = envp;
-	arg->infile = argv[1];
-	arg->cmd_cnt = argc - 3;
+	if (strncmp("here_doc", argv[1], 9) == 0)
+	{
+		get_infile(argv[2]);
+		arg->here_doc = 2;
+		arg->infile = "temp_file";
+	}
+	else
+	{
+		arg->here_doc = 0;
+		arg->infile = argv[1 + arg->here_doc];
+	}
+	arg->cmd_cnt = argc - arg->here_doc - 3;
 	arg->cmd = (char ***)malloc(sizeof(char **) * (arg->cmd_cnt + 1));
 	if (arg->cmd == NULL)
 		exit_with_error(EXIT_FAILURE, "failure in allocating cmd", NULL);

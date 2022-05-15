@@ -1,25 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 18:20:47 by yejikim           #+#    #+#             */
-/*   Updated: 2022/05/15 22:45:03 by yejin            ###   ########.fr       */
+/*   Created: 2021/11/21 11:49:16 by yejin             #+#    #+#             */
+/*   Updated: 2022/05/15 22:46:07 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_strcpy(char *dst, char *src)
 {
-	size_t	i;
+	int	i;
 
-	if (s == NULL)
-		return (0);
+	if (src == NULL)
+	{
+		*dst = '\0';
+		return ;
+	}
 	i = 0;
-	while (*(s + i))
+	while (*(src + i))
+	{
+		*(dst + i) = *(src + i);
 		i++;
-	return (i);
+	}
+	*(dst + i) = '\0';
+}
+
+void	free_mem(t_lst **lst, char **pnew)
+{
+	if (*lst)
+	{
+		if ((*lst)->buffer)
+		{
+			free((*lst)->buffer);
+			(*lst)->buffer = NULL;
+		}
+		free(*lst);
+		*lst = NULL;
+	}
+	if (*pnew)
+	{
+		free(*pnew);
+		*pnew = NULL;
+	}
 }

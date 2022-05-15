@@ -21,7 +21,10 @@ void	redirect_to_outfile(t_arg arg)
 	int			fd;
 	int			ret;
 
-	fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (arg.here_doc == 0)
+		fd = open(arg.outfile, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	else
+		fd = open(arg.outfile, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (fd < 0)
 		exit_with_error(EXIT_FOPEN, "no such file or directory", arg.outfile);
 	ret = dup2(fd, STDOUT_FILENO);
