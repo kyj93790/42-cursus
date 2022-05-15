@@ -33,4 +33,7 @@ char	**init_path(char *envp[]);
 
 void	execute_pipex(t_arg arg, int **p, int i);
 
+int		wifexited(int status);
+int 	wexitstatus(int status);
+
 #endif
