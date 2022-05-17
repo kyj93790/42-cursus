@@ -14,7 +14,7 @@ int main(int argc, char *argv)
 	t_monitor	monitor;
 	pthread_t	*thread;
 
-	if (initialize_monitor(&monitor, argc, argv) < 0)
+	if (init_monitor(&monitor, argc, argv) < 0)
 	{
 		printf("fail in initialize_monitor");
 		free_monitor(monitor);
