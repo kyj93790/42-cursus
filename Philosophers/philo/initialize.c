@@ -50,7 +50,54 @@ int	init_philo(t_monitor *monitor)
 	return (0);
 }
 
+int	init_fork(t_monitor *monitor)
+{
+	int	i;
+	int	j;
 
+	monitor->fork = malloc(sizeof(int) * monitor->num_of_philo);
+	if (monitor->fork == NULL)
+	{
+		free(monitor->philo);
+		return (-1);
+	}
+	i = 0;
+	while (i < monitor->num_of_philo)
+	{
+		monitor->fork[i] = 1;
+		if (pthread_mutex_init(&(monitor->m_fork[i]), NULL) != 0)
+		{
+			j = 0;
+			while (j < i)
+				pthread_mutex_destroy(&(monitor->m_fork[j++]));
+			free(monitor->philo);
+			free(monitor->fork);
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	init_print(t_monitor *monitor)
+{
+	int	i;
+	int	j;
+
+	if (pthread_mutex_init(&(monitor->m_print), NULL) != 0)
+	{
+		free(monitor->philo);
+		free(monitor->fork);
+		i = 0;
+		while (i < monitor->num_of_philo)
+		{
+			pthread_mutex_destroy(&(monitor->m_fork[j++]));
+			i++;
+		}
+		return (-1);
+	}
+	return (0);
+}
 
 int	init_monitor(t_monitor *monitor, int argc, char *argv[])
 {
@@ -72,6 +119,9 @@ int	init_monitor(t_monitor *monitor, int argc, char *argv[])
 	monitor->error_flag = 0;
 	if (init_philo(monitor) < 0)
 		return (-1);
-	// fork 생성 및 mutex 생성
-	// print mutex 생성
+	if (init_fork(monitor) < 0)
+		return (-1);
+	if (init_print(monitor) < 0)
+		return (-1);
+	return (0);
 }

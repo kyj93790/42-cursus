@@ -1,13 +1,5 @@
 #include "philo.h"
 
-void	free_monitor(t_monitor monitor)
-{
-	// philo 해제
-	// m_fork destroy
-	// fork 해제
-	// m_print destroy
-}
-
 int main(int argc, char *argv)
 {
 	int			i;
@@ -17,7 +9,6 @@ int main(int argc, char *argv)
 	if (init_monitor(&monitor, argc, argv) < 0)
 	{
 		printf("fail in initialize_monitor");
-		free_monitor(monitor);
 		return (0);
 	}
 	// parse 해서 구조체 채워넣음
