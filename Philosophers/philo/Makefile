@@ -1,2 +1,22 @@
 cc = gcc
 CFLAGS = -Wall -Wextra -Werror
+NAME = philo
+SRC_FILE = main
+
+SRC = $(addsuffix .c, $(SRC_FILE))
+OBJ = $(addsuffix .o, $(SRC_FILE))
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	$(cc) $(CFLAGS) $^ -o $@
+
+clean :
+	rm -f $(OBJ)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
+
+PHONY : all clean fclean re
