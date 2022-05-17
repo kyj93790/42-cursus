@@ -29,8 +29,7 @@ typedef struct s_monitor
 	int	time_to_sleep;
 	int	must_eat_flag;
 	int	must_eat;
-	int	finish_flag;	// monitor가 각 philosopher의 상태를 체크하고 die라면 finish flag를 세팅한다
-	int	error_flag;	// 예기치 못한 에러 발생 시에도 종료될 수 있도록 하는 flag
+	int	finish_flag;
 	t_philo			*philo;
 	pthread_mutex_t	*m_fork; // fork라는 공유자원을 보호하기 위한 mutex
 	int	*fork;
@@ -39,5 +38,9 @@ typedef struct s_monitor
 
 /* initialize.c */
 int	init_monitor(t_monitor *monitor, int argc, char *argv[]);
+
+
+/* philo_utils.c */
+int convert_arg_to_int(char *str);
 
 # endif

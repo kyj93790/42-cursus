@@ -1,20 +1,16 @@
 #include "philo.h"
 
-int main(int argc, char *argv)
+int main(int argc, char *argv[])
 {
-	int			i;
+	// int			i;
 	t_monitor	monitor;
-	pthread_t	*thread;
+	// pthread_t	*thread;
 
 	if (init_monitor(&monitor, argc, argv) < 0)
 	{
-		printf("fail in initialize_monitor");
+		printf("fail in initialize_monitor\n");
 		return (0);
 	}
-	// parse 해서 구조체 채워넣음
-	// 일단 monitor를 하나 생성하고 initialize : 내부에서 argument를 parsing 함수 호출한다
-	// philo, fork, mutex 등을 개수에 맞게 생성, initialize 할 것
-
 	// 생성 전 시간 초기화 !
 	// main thread에서 반복문을 통해 philo thread를 생성한다.
 	// 이 때 thread에 argument로는 t_philo의 주소값 변수를 넘겨줄 것.

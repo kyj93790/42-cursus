@@ -1,7 +1,9 @@
 cc = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philo
-SRC_FILE = main
+SRC_FILE = main \
+			initialize \
+			philo_utils
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
