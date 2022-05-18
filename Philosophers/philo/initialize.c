@@ -84,6 +84,7 @@ int	init_m_print(t_monitor *monitor)
 			pthread_mutex_destroy(&(monitor->m_fork[i++]));
 			i++;
 		}
+		free(monitor->m_fork);
 		return (-1);
 	}
 	return (0);

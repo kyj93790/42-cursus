@@ -11,7 +11,12 @@ int main(int argc, char *argv[])
 		printf("fail in initialize_monitor\n");
 		return (0);
 	}
-	// 생성 전 시간 초기화 !
+	if (gettimeofday(&(monitor.start_time), NULL) != 0)
+	{
+		printf("fail in setting start time\n");
+		free_monitor(&monitor);
+		return (0);
+	}
 	// main thread에서 반복문을 통해 philo thread를 생성한다.
 	// 이 때 thread에 argument로는 t_philo의 주소값 변수를 넘겨줄 것.
 
