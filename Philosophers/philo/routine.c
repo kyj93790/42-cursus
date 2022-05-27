@@ -1,34 +1,54 @@
 #include "philo.h"
 
-void	sleep_unit(long time, long unit)
+static void	routine_take_fork(t_philo *philo)
 {
-	long	curr;
-
-	curr = 0;
-	while (curr < time)
-	{
-		usleep(unit);
-		curr += unit;
-	}
+	pthread_mutex_lock(&(philo->monitor->m_fork[philo->first_fork]));
+	philo->monitor->fork[philo->first_fork] = 0;
+	print_curr_state(philo, TAKE_FORK);
+	pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
+	philo->monitor->fork[philo->second_fork] = 0;
+	print_curr_state(philo, TAKE_FORK);
 }
 
-void	print_curr_state(t_philo *philo, int status)
+static void *routine_takeoff_fork(t_philo *philo)
 {
-	long	time_stamp;
+	philo->monitor->fork[philo->first_fork] = 1;
+	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
+	philo->monitor->fork[philo->second_fork] = 1;
+	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
+	return (0);
+}
 
-	time_stamp = calc_timeval(&(philo->monitor->start_time), &(philo->last_eat));
-	pthread_mutex_lock(&(philo->monitor->m_print));
-	if (status == TAKE_FORK)
-		printf("%ld\t%d\thas taken a fork\n", time_stamp, philo->id);
-	else if (status == EAT)
-		printf("%ld\t%d\tis eating\n", time_stamp, philo->id);
-	else if (status == SLEEP)
-		printf("%ld\t%d\tis sleeping\n", time_stamp, philo->id);
-	else if (status == THINK)
-		printf("%ld\t%d\tis thinking\n", time_stamp, philo->id);
-	else if (status == DIE)
-		printf("%ld\t%d\tis died\n", time_stamp, philo->id);
-	pthread_mutex_unlock(&(philo->monitor->m_print));
+static void	routine_eat(t_philo *philo)
+{
+	print_curr_state(philo, EAT);
+	if (gettimeofday(&(philo->last_eat), NULL) != 0)
+	{
+		philo->monitor->finish_flag = 2;
+		return ;
+	}
+	//
+	// pthread_mutex_lock(&(philo->monitor->m_start));
+	// printf("sec : %ld, usec : %d\n", philo->last_eat.tv_sec, philo->last_eat.tv_usec);
+	// pthread_mutex_unlock(&(philo->monitor->m_start));
+	//
+	// usleep(philo->monitor->time_to_eat * 1e3);
+	sleep_unit(philo->monitor, philo->monitor->time_to_eat, philo->last_eat, 100);
+	(philo->cnt_eat)++;
+}
+
+static void	routine_sleep(t_philo *philo)
+{
+	struct timeval start_time;
+
+	if (gettimeofday(&(start_time), NULL) != 0)
+	{
+		philo->monitor->finish_flag = 2;
+		return ;
+	}
+	print_curr_state(philo, SLEEP);
+	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 100);
+	// usleep(philo->monitor->time_to_sleep * 1e3);
 }
 
 void	*routine(void *arg)
@@ -38,29 +58,26 @@ void	*routine(void *arg)
 	philo = arg;
 	pthread_mutex_lock(&(philo->monitor->m_start));
 	pthread_mutex_unlock(&(philo->monitor->m_start));
-	printf("start routine : %d\n", philo->id);
+	if (philo->id % 2 == 0)
+		usleep(philo->monitor->time_to_eat / 2 * 1e3);
 	while (1)
 	{
-		// take fork
-		pthread_mutex_lock(&(philo->monitor->m_fork[philo->first_fork]));
-		philo->monitor->fork[philo->first_fork] = 1;
-		print_curr_state(philo, TAKE_FORK);
-		pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
-		philo->monitor->fork[philo->second_fork] = 1;
-		print_curr_state(philo, TAKE_FORK);
-		// start eat
-		if (gettimeofday(&(philo->last_eat), NULL) != 0)
-			philo->error_flag = 1;
-		print_curr_state(philo, EAT);
-		sleep_unit(philo->monitor->time_to_eat, 10);
-		(philo->cnt_eat)++;
-		// take off fork
-		philo->monitor->fork[philo->first_fork] = 0;
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
-		philo->monitor->fork[philo->second_fork] = 0;
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
-		print_curr_state(philo, SLEEP);
-		sleep_unit(philo->monitor->time_to_sleep, 10);
+		// if (philo->monitor->finish_flag != 0)
+		// 	break ;
+		routine_take_fork(philo);
+		if (philo->monitor->finish_flag != 0)
+			return (routine_takeoff_fork(philo));
+		routine_eat(philo);
+		if (philo->monitor->finish_flag != 0)
+			return (routine_takeoff_fork(philo));
+		routine_takeoff_fork(philo);
+		// if (philo->monitor->finish_flag != 0)
+		// 	break ;
+		routine_sleep(philo);
+		// if (philo->monitor->finish_flag != 0)
+		// 	break ;
 		print_curr_state(philo, THINK);
+		usleep(1000);
 	}
+	return (0);
 }

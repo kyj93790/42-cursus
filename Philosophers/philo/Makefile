@@ -1,10 +1,11 @@
 cc = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 NAME = philo
 SRC_FILE = main \
 			initialize \
 			philo_utils \
-			routine
+			routine \
+			monitor
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
