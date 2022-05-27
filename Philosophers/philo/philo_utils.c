@@ -20,10 +20,10 @@ void	free_monitor(t_monitor *monitor)
 
 long calc_timeval(struct timeval *start, struct timeval *end)
 {
-	int	diff_sec;
+	long	diff_sec;
 
-	diff_sec = (end->tv_sec - start->tv_sec) * 1e6;
-	diff_sec += end->tv_usec - start->tv_usec;
+	diff_sec = (end->tv_sec - start->tv_sec) * 1e3;
+	diff_sec += (end->tv_usec - start->tv_usec) / 1e3;
 	return (diff_sec);
 }
 
