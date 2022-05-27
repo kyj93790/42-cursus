@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 23:41:07 by yejin             #+#    #+#             */
-/*   Updated: 2022/05/15 23:53:30 by yejin            ###   ########.fr       */
+/*   Updated: 2022/05/20 23:33:40 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	get_infile(char *limiter)
 			break ;
 		}
 		ft_putstr_fd(temp, fd);
+		free(temp);
 	}
 	close(fd);
 }
