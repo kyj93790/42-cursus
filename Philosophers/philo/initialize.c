@@ -1,5 +1,18 @@
 #include "philo.h"
 
+void	check_fork(int *first_fork, int *second_fork)
+{
+	int	temp;
+
+	if (*first_fork < *second_fork)
+		return ;
+	temp = *first_fork;
+	*first_fork = *second_fork;
+	*second_fork = temp;
+}
+
+// philo가 1명인 케이스도 별도로 처리해야함?
+// 한 스레드에서 한 자원에 대해 lock을 두번 요청하면 어떻게 되는지 확인 필요
 int	init_philo(t_monitor *monitor)
 {
 	int	i;
@@ -11,11 +24,18 @@ int	init_philo(t_monitor *monitor)
 	while (i < monitor->num_of_philo)
 	{
 		monitor->philo[i].id = i;
-		monitor->philo[i].last_eat = 0;
+		if (gettimeofday(&(monitor->philo[i].last_eat), NULL) != 0)
+		{
+			free(monitor->philo);
+			return (-1);
+		}
 		monitor->philo[i].cnt_eat = 0;
-		monitor->philo[i].die_flag = 0;
 		monitor->philo[i].first_fork = i;
 		monitor->philo[i].second_fork = (i + 1) % monitor->num_of_philo;
+		check_fork(&(monitor->philo[i].first_fork), &(monitor->philo[i].second_fork));
+		// printf("%d\n", monitor->philo[i].id);
+		// printf("%d\n", monitor->philo[i].first_fork);
+		// printf("%d\n\n", monitor->philo[i].second_fork);
 		monitor->philo[i].monitor = monitor;
 		i++;
 	}
@@ -107,7 +127,6 @@ int	init_monitor(t_monitor *monitor, int argc, char *argv[])
 	if (monitor->num_of_philo <= 0 || monitor->time_to_die <= 0 || \
 		monitor->time_to_eat < 0 || monitor->time_to_sleep < 0)
 		return (-1);
-	monitor->finish_flag = 0;
 	if (init_philo(monitor) < 0)
 		return (-1);
 	if (init_fork(monitor) < 0)

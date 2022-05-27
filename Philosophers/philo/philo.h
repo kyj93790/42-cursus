@@ -9,13 +9,18 @@
 # include <pthread.h>
 
 # define INT_MAX 2147483647
+# define TAKE_FORK 0
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
+# define DIE 4
 
 typedef struct s_philo
 {
 	int					id;
-	int					last_eat;
+	struct timeval		last_eat;
 	int					cnt_eat;
-	int					die_flag; // 철학자가 죽으면 monitor에 flag 1 -> 다른 철학자도 자원을 반납시켜 종료할 수 있도록 함.
+	int					error_flag;
 	int					first_fork; // lowest number
 	int					second_fork;
 	struct s_monitor	*monitor;
@@ -23,13 +28,13 @@ typedef struct s_philo
 
 typedef struct s_monitor
 {
+	pthread_mutex_t	m_start;
 	int				num_of_philo;
 	long 			time_to_die;
 	long 			time_to_eat;
 	long			time_to_sleep;
 	int				must_eat_flag;
 	int				must_eat;
-	int				finish_flag;
 	struct timeval start_time;
 	t_philo			*philo;
 	pthread_mutex_t	*m_fork; // fork라는 공유자원을 보호하기 위한 mutex
@@ -44,5 +49,8 @@ int		init_monitor(t_monitor *monitor, int argc, char *argv[]);
 void	free_monitor(t_monitor *monitor);
 long	calc_timeval(struct timeval *start, struct timeval *end);
 int 	convert_arg_to_int(char *str);
+
+/* routine */
+void	*routine(void *arg);
 
 # endif

@@ -23,7 +23,7 @@ long calc_timeval(struct timeval *start, struct timeval *end)
 	int	diff_sec;
 
 	diff_sec = (end->tv_sec - start->tv_sec) * 1e6;
-	diff_sec += end->tv_usec - start->tv_sec;
+	diff_sec += end->tv_usec - start->tv_usec;
 	return (diff_sec);
 }
 

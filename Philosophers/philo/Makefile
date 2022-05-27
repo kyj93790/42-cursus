@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = philo
 SRC_FILE = main \
 			initialize \
-			philo_utils
+			philo_utils \
+			routine
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
