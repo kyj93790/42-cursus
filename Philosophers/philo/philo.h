@@ -9,17 +9,13 @@
 # include <pthread.h>
 
 # define INT_MAX 2147483647
-# define TAKE_FORK 0
-# define EAT 1
-# define SLEEP 2
-# define THINK 3
-# define DIE 4
-# define FULL 5
+# define DIE 0
+# define FULL 1
 
 typedef struct s_philo
 {
 	int					id;
-	struct timeval		last_eat; // 나중에 init
+	long				last_eat;
 	int					cnt_eat;
 	int					first_fork; // lowest number
 	int					second_fork;
@@ -47,8 +43,14 @@ typedef struct s_monitor
 /* initialize.c */
 int		init_monitor(t_monitor *monitor, int argc, char *argv[]);
 
+/* print_state.c */
+void	print_take_fork_state(t_philo *philo);
+void	print_eat_state(t_philo *philo);
+void	print_sleep_state(t_philo *philo);
+void	print_think_state(t_philo *philo);
+void	print_finish_state(t_philo *philo, int status);
+
 /* philo_utils.c */
-void	print_curr_state(t_philo *philo, int status);
 void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, long unit);
 void	free_monitor(t_monitor *monitor);
 long	calc_timeval(struct timeval *start, struct timeval *end);

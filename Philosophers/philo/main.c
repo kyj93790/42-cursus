@@ -13,7 +13,6 @@ static int	generate_philos(t_monitor *monitor)
 	pthread_mutex_lock(&(monitor->m_start));
 	while (i < monitor->num_of_philo)
 	{
-		monitor->philo[i].last_eat = monitor->start_time;
 		if (pthread_create(&(monitor->thread[i]), NULL, routine, &(monitor->philo[i])) < 0)
 		{
 			monitor->num_of_philo = i;

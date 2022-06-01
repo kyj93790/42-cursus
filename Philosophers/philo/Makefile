@@ -5,7 +5,8 @@ SRC_FILE = main \
 			initialize \
 			philo_utils \
 			routine \
-			monitor
+			monitor \
+			print_state
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))

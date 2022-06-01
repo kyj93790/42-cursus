@@ -1,11 +1,9 @@
 #include "philo.h"
 
-static void	check_fork(int *first_fork, int *second_fork)
+static void	swap_fork(int *first_fork, int *second_fork)
 {
 	int	temp;
 
-	if (*first_fork < *second_fork)
-		return ;
 	temp = *first_fork;
 	*first_fork = *second_fork;
 	*second_fork = temp;
@@ -24,10 +22,12 @@ static int	init_philo(t_monitor *monitor)
 	while (i < monitor->num_of_philo)
 	{
 		monitor->philo[i].id = i;
+		monitor->philo[i].last_eat = 0;
 		monitor->philo[i].cnt_eat = 0;
 		monitor->philo[i].first_fork = i;
 		monitor->philo[i].second_fork = (i + 1) % monitor->num_of_philo;
-		check_fork(&(monitor->philo[i].first_fork), &(monitor->philo[i].second_fork));
+		if (i % 2 == 1)
+			swap_fork(&(monitor->philo[i].first_fork), &(monitor->philo[i].second_fork));
 		monitor->philo[i].monitor = monitor;
 		i++;
 	}
