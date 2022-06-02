@@ -4,8 +4,6 @@ static int	generate_philos(t_monitor *monitor)
 {
 	int			i;
 
-	if (gettimeofday(&(monitor->start_time), NULL) != 0)
-		return (-1);
 	monitor->thread = malloc(sizeof(pthread_t) * monitor->num_of_philo);
 	if (monitor->thread < 0)
 		return (-1);
@@ -22,6 +20,8 @@ static int	generate_philos(t_monitor *monitor)
 		i++;
 	}
 	i = 0;
+	if (gettimeofday(&(monitor->start_time), NULL) != 0)
+		return (-1);
 	pthread_mutex_unlock(&(monitor->m_start));
 	return (0);
 }

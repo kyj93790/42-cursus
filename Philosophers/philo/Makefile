@@ -1,5 +1,5 @@
 cc = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread
 NAME = philo
 SRC_FILE = main \
 			initialize \

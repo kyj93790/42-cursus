@@ -30,7 +30,8 @@ static void	routine_eat(t_philo *philo)
 		return ;
 	}
 	philo->last_eat = calc_timeval(&(philo->monitor->start_time), &curr_time);
-	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 10);
+	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 100);
+	// usleep(philo->monitor->time_to_eat * 1000);
 	(philo->cnt_eat)++;
 }
 
@@ -44,7 +45,8 @@ static void	routine_sleep(t_philo *philo)
 		return ;
 	}
 	print_sleep_state(philo);
-	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 10);
+	// usleep(philo->monitor->time_to_sleep * 1000);
+	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 100);
 }
 
 void	*routine(void *arg)
@@ -55,18 +57,13 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&(philo->monitor->m_start));
 	pthread_mutex_unlock(&(philo->monitor->m_start));
 	if (philo->id % 2 == 1)
-		// usleep(philo->monitor->time_to_eat * 1e3);
 		usleep(philo->monitor->time_to_eat / 2 * 1e3);
 	while (1)
 	{
 		if (philo->monitor->finish_flag != 0)
 			break ;
 		routine_take_fork(philo);
-		if (philo->monitor->finish_flag != 0)
-			return (routine_takeoff_fork(philo));
 		routine_eat(philo);
-		if (philo->monitor->finish_flag != 0)
-			return (routine_takeoff_fork(philo));
 		routine_takeoff_fork(philo);
 		routine_sleep(philo);
 		print_think_state(philo);

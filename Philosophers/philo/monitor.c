@@ -7,6 +7,11 @@ static int	check_die(t_monitor *monitor)
 	long			curr_time_stamp;
 
 	i = 0;
+	// if (gettimeofday(&curr_time, NULL) != 0)
+	// {
+	// 	monitor->finish_flag = 2;
+	// 	return (1);
+	// }
 	while (i < monitor->num_of_philo)
 	{
 		if (gettimeofday(&curr_time, NULL) != 0)
@@ -17,13 +22,11 @@ static int	check_die(t_monitor *monitor)
 		curr_time_stamp = calc_timeval(&(monitor->start_time), &curr_time);
 		if (curr_time_stamp - monitor->philo[i].last_eat > monitor->time_to_die)
 		{
-			pthread_mutex_lock(&(monitor->m_start));
-			pthread_mutex_unlock(&(monitor->m_start));
 			monitor->finish_flag = 1;
 			print_finish_state(&(monitor->philo[i]), DIE);
 			return (1);
 		}
-		usleep(50);
+		// usleep(50);
 		i++;
 	}
 	return (0);
@@ -41,7 +44,7 @@ static int	check_must_eat(t_monitor *monitor)
 		if (monitor->philo[i].cnt_eat >= monitor->must_eat)
 			full_cnt++;
 		i++;
-		usleep(50);
+		// usleep(50);
 	}
 	if (full_cnt == monitor->num_of_philo)
 	{
@@ -65,6 +68,7 @@ int	monitor_philo(t_monitor *monitor)
 			if (check_must_eat(monitor))
 				break ;
 		}
+		// usleep(50);
 	}
 	return (0);
 }
