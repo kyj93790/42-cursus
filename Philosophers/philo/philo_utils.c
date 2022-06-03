@@ -19,8 +19,8 @@ void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, lo
 			pthread_mutex_unlock(&(monitor->m_finish));
 			return ;
 		}
-		usleep(unit);
 		pthread_mutex_unlock(&(monitor->m_finish));
+		usleep(unit);
 	}
 }
 
