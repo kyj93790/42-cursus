@@ -10,7 +10,24 @@ static void	routine_take_fork(t_philo *philo)
 		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
 		return ;
 	}
-	pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
+	while (1)
+	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
+		if (philo->monitor->finish_flag != 0)
+		{
+			pthread_mutex_unlock(&(philo->monitor->m_finish));
+			philo->monitor->fork[philo->first_fork] = 0;
+			pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
+			return ;
+		}
+		if (philo->monitor->fork[philo->second_fork] == 0)
+		{
+			pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
+			pthread_mutex_unlock(&(philo->monitor->m_finish));
+			break ;
+		}
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+	}
 	philo->monitor->fork[philo->second_fork] = 1;
 	if (print_take_fork_state(philo) < 0)
 	{
@@ -24,7 +41,6 @@ static void	routine_take_fork(t_philo *philo)
 
 static void routine_takeoff_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	philo->monitor->fork[philo->first_fork] = 0;
 	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
 	philo->monitor->fork[philo->second_fork] = 0;
@@ -48,8 +64,7 @@ static void	routine_eat(t_philo *philo)
 	pthread_mutex_unlock(&(philo->m_last_eat));
 	if (print_eat_state(philo) < 0)
 	{
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
+		routine_takeoff_fork(philo);
 		return ;
 	}
 	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 100);
