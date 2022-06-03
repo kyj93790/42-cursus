@@ -36,12 +36,6 @@ static void	routine_eat(t_philo *philo)
 {
 	struct timeval	curr_time;
 
-	if (print_eat_state(philo) < 0)
-	{
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
-		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
-		return ;
-	}
 	if (gettimeofday(&curr_time, NULL) != 0)
 	{
 		pthread_mutex_lock(&(philo->monitor->m_finish));
@@ -52,6 +46,12 @@ static void	routine_eat(t_philo *philo)
 	pthread_mutex_lock(&(philo->m_last_eat));
 	philo->last_eat = calc_timeval(&(philo->monitor->start_time), &curr_time);
 	pthread_mutex_unlock(&(philo->m_last_eat));
+	if (print_eat_state(philo) < 0)
+	{
+		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
+		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
+		return ;
+	}
 	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 100);
 	pthread_mutex_lock(&(philo->m_cnt_eat));
 	(philo->cnt_eat)++;
