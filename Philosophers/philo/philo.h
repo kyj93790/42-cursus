@@ -15,7 +15,9 @@
 typedef struct s_philo
 {
 	int					id;
+	pthread_mutex_t		m_last_eat;
 	long				last_eat;
+	pthread_mutex_t		m_cnt_eat;
 	int					cnt_eat;
 	int					first_fork; // lowest number
 	int					second_fork;
@@ -31,6 +33,7 @@ typedef struct s_monitor
 	long			time_to_sleep;
 	int				must_eat_flag;
 	int				must_eat;
+	pthread_mutex_t	m_finish;
 	int				finish_flag;
 	struct timeval	start_time;
 	pthread_t		*thread; // 나중에 init
@@ -44,11 +47,11 @@ typedef struct s_monitor
 int		init_monitor(t_monitor *monitor, int argc, char *argv[]);
 
 /* print_state.c */
-void	print_take_fork_state(t_philo *philo);
-void	print_eat_state(t_philo *philo);
-void	print_sleep_state(t_philo *philo);
-void	print_think_state(t_philo *philo);
-void	print_finish_state(t_philo *philo, int status);
+int	print_take_fork_state(t_philo *philo);
+int	print_eat_state(t_philo *philo);
+int	print_sleep_state(t_philo *philo);
+int	print_think_state(t_philo *philo);
+int	print_finish_state(t_philo *philo, int status);
 
 /* philo_utils.c */
 void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, long unit);
@@ -61,5 +64,11 @@ void	*routine(void *arg);
 
 /* monitor */
 int	monitor_philo(t_monitor *monitor);
+
+
+int free_philo(t_monitor *monitor, int philo_num);
+void free_fork(t_monitor *monitor, int philo_num);
+
+int	print_error(char *message);
 
 # endif

@@ -1,91 +1,119 @@
 #include "philo.h"
 
-void	print_take_fork_state(t_philo *philo)
+int	print_take_fork_state(t_philo *philo)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
 
 	pthread_mutex_lock(&(philo->monitor->m_print));
+	pthread_mutex_lock(&(philo->monitor->m_finish));
 	if (philo->monitor->finish_flag != 0)
 	{
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
 		pthread_mutex_unlock(&(philo->monitor->m_print));
-		return ;
+		return (-1);
 	}
+	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
-		return ;
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+		pthread_mutex_unlock(&(philo->monitor->m_print));
+		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	printf("%ldms\t%d\thas taken a fork\n", time_stamp, philo->id);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
+	return (0);
 }
 
-void	print_eat_state(t_philo *philo)
+int	print_eat_state(t_philo *philo)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
 
 	pthread_mutex_lock(&(philo->monitor->m_print));
+	pthread_mutex_lock(&(philo->monitor->m_finish));
 	if (philo->monitor->finish_flag != 0)
 	{
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
 		pthread_mutex_unlock(&(philo->monitor->m_print));
-		return ;
+		return (-1);
 	}
+	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
-		return ;
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+		pthread_mutex_unlock(&(philo->monitor->m_print));
+		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	printf("%ldms\t%d\tis eating\n", time_stamp, philo->id);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
+	return (0);
 }
 
-void	print_sleep_state(t_philo *philo)
+int	print_sleep_state(t_philo *philo)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
 
 	pthread_mutex_lock(&(philo->monitor->m_print));
+	pthread_mutex_lock(&(philo->monitor->m_finish));
 	if (philo->monitor->finish_flag != 0)
 	{
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
 		pthread_mutex_unlock(&(philo->monitor->m_print));
-		return ;
+		return (-1);
 	}
+	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
-		return ;
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+		pthread_mutex_unlock(&(philo->monitor->m_print));
+		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	printf("%ldms\t%d\tis sleeping\n", time_stamp, philo->id);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
+	return (0);
 }
 
-void	print_think_state(t_philo *philo)
+int	print_think_state(t_philo *philo)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
 
 	pthread_mutex_lock(&(philo->monitor->m_print));
+	pthread_mutex_lock(&(philo->monitor->m_finish));
 	if (philo->monitor->finish_flag != 0)
 	{
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
 		pthread_mutex_unlock(&(philo->monitor->m_print));
-		return ;
+		return (-1);
 	}
+	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
-		return ;
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+		pthread_mutex_unlock(&(philo->monitor->m_print));
+		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	printf("%ldms\t%d\tis thinking\n", time_stamp, philo->id);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
+	return (0);
 }
 
 
-void	print_finish_state(t_philo *philo, int status)
+int	print_finish_state(t_philo *philo, int status)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
@@ -93,8 +121,11 @@ void	print_finish_state(t_philo *philo, int status)
 	pthread_mutex_lock(&(philo->monitor->m_print));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
-		return ;
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+		pthread_mutex_unlock(&(philo->monitor->m_print));
+		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	if (status == DIE)
@@ -102,4 +133,5 @@ void	print_finish_state(t_philo *philo, int status)
 	else if (status == FULL)
 		printf("%ldms\tall philosophers are full\n", time_stamp);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
+	return (0);
 }

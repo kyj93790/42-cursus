@@ -6,7 +6,6 @@ void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, lo
 
 	while (1)
 	{
-		usleep(unit);
 		if (gettimeofday(&(curr_time), NULL) != 0)
 		{
 			monitor->finish_flag = 2;
@@ -14,32 +13,15 @@ void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, lo
 		}
 		if (calc_timeval(&(start_time), &(curr_time)) >= aim_time)
 			break ;
+		pthread_mutex_lock(&(monitor->m_finish));
+		if (monitor->finish_flag != 0)
+		{
+			pthread_mutex_unlock(&(monitor->m_finish));
+			return ;
+		}
+		usleep(unit);
+		pthread_mutex_unlock(&(monitor->m_finish));
 	}
-}
-
-void	free_monitor(t_monitor *monitor)
-{
-	int i;
-	int	status;
-
-	i = 0;
-	while (i < monitor->num_of_philo)
-	{
-		pthread_join(monitor->thread[i], (void *)&status);
-		i++;
-	}
-	if (monitor->philo)
-		free(monitor->philo);
-	i = 0;
-	while (i < monitor->num_of_philo)
-	{
-		pthread_mutex_destroy(&(monitor->m_fork[i]));
-		i++;
-	}
-	if (monitor->fork)
-		free(monitor->fork);
-	pthread_mutex_destroy(&(monitor->m_print));
-	return ;
 }
 
 long calc_timeval(struct timeval *start, struct timeval *end)
@@ -61,7 +43,7 @@ int convert_arg_to_int(char *str)
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (-1);
+			return (print_error("error : numeric argument required"));
 		i++;
 	}
 	i = 0;
@@ -74,6 +56,6 @@ int convert_arg_to_int(char *str)
 		i++;
 	}
 	if (result > INT_MAX)
-		return (-1);
+		return (print_error("error : argument range"));
 	return (result);
 }

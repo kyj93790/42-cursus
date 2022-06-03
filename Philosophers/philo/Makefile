@@ -1,12 +1,15 @@
 cc = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror
+#-fsanitize=thread -g
 NAME = philo
 SRC_FILE = main \
 			initialize \
 			philo_utils \
 			routine \
 			monitor \
-			print_state
+			print_state \
+			handle_error \
+			free_mem
 
 SRC = $(addsuffix .c, $(SRC_FILE))
 OBJ = $(addsuffix .o, $(SRC_FILE))
