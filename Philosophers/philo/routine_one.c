@@ -94,7 +94,6 @@ void	*routine_one(void *arg)
 	t_philo	*philo;
 
 	philo = arg;
-	printf("herer\n");
 	pthread_mutex_lock(&(philo->monitor->m_start));
 	pthread_mutex_unlock(&(philo->monitor->m_start));
 	while (1)

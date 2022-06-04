@@ -1,6 +1,5 @@
 cc = gcc
 CFLAGS = -Wall -Wextra -Werror
-#-fsanitize=thread -g
 NAME = philo
 SRC_FILE = main \
 			initialize \

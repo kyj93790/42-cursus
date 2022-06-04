@@ -9,8 +9,6 @@ static void	swap_fork(int *first_fork, int *second_fork)
 	*second_fork = temp;
 }
 
-// philo가 1명인 케이스도 별도로 처리해야함?
-// 한 스레드에서 한 자원에 대해 lock을 두번 요청하면 어떻게 되는지 확인 필요
 static int	init_philo(t_monitor *monitor)
 {
 	int	i;

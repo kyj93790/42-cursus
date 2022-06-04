@@ -72,6 +72,5 @@ int	monitor_philo(t_monitor *monitor)
 				break ; 
 		}
 	}
-	// printf("finish monitor\n");
 	return (0);
 }

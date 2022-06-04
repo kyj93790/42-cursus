@@ -26,29 +26,25 @@ void free_fork(t_monitor *monitor, int philo_num)
 	free(monitor->fork);
 }
 
-void	free_monitor(t_monitor *monitor)
+void	collect_thread(t_monitor *monitor)
 {
-	int i;
+	int	i;
 	int	status;
-	// 추가 해제 필요
-	// m_start 등
+
 	i = 0;
 	while (i < monitor->num_of_philo)
 	{
-		pthread_join(monitor->thread[i], (void *)&status);
+		if (monitor->thread[i] != NULL)
+			pthread_join(monitor->thread[i], (void *)&status);
 		i++;
 	}
-	printf("join all \n");
-	if (monitor->philo)
-		free(monitor->philo);
-	i = 0;
-	while (i < monitor->num_of_philo)
-	{
-		pthread_mutex_destroy(&(monitor->m_fork[i]));
-		i++;
-	}
-	if (monitor->fork)
-		free(monitor->fork);
+	free(monitor->thread);
+}
+
+int	free_monitor(t_monitor *monitor)
+{
+	free_philo(monitor, monitor->num_of_philo);
+	free_fork(monitor, monitor->num_of_philo);
 	pthread_mutex_destroy(&(monitor->m_print));
-	return ;
+	return (0);
 }
