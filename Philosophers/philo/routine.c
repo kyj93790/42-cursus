@@ -22,15 +22,6 @@ static void	routine_take_fork(t_philo *philo)
 	}
 }
 
-static void routine_takeoff_fork(t_philo *philo)
-{
-	philo->monitor->fork[philo->first_fork] = 0;
-	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
-	philo->monitor->fork[philo->second_fork] = 0;
-	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
-	return ;
-}
-
 static void	routine_eat(t_philo *philo)
 {
 	struct timeval	curr_time;
@@ -50,7 +41,7 @@ static void	routine_eat(t_philo *philo)
 		routine_takeoff_fork(philo);
 		return ;
 	}
-	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 100);
+	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 200);
 	pthread_mutex_lock(&(philo->m_cnt_eat));
 	(philo->cnt_eat)++;
 	pthread_mutex_unlock(&(philo->m_cnt_eat));
@@ -69,7 +60,7 @@ static void	routine_sleep(t_philo *philo)
 		pthread_mutex_unlock(&(philo->monitor->m_finish));
 		return ;
 	}
-	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 100);
+	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 200);
 }
 
 void	*routine(void *arg)

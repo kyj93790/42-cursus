@@ -1,5 +1,14 @@
 #include "philo.h"
 
+void routine_takeoff_fork(t_philo *philo)
+{
+	philo->monitor->fork[philo->first_fork] = 0;
+	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
+	philo->monitor->fork[philo->second_fork] = 0;
+	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->second_fork]));
+	return ;
+}
+
 void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, long unit)
 {
 	struct timeval	curr_time;

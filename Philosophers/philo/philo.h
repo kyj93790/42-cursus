@@ -54,6 +54,7 @@ int	print_think_state(t_philo *philo);
 int	print_finish_state(t_philo *philo, int status);
 
 /* philo_utils.c */
+void routine_takeoff_fork(t_philo *philo);
 void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, long unit);
 long	calc_timeval(struct timeval *start, struct timeval *end);
 int 	convert_arg_to_int(char *str);
