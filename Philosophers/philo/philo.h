@@ -62,6 +62,9 @@ int 	convert_arg_to_int(char *str);
 /* routine */
 void	*routine(void *arg);
 
+/* routine_one */
+void	*routine_one(void *arg);
+
 /* monitor */
 int	monitor_philo(t_monitor *monitor);
 

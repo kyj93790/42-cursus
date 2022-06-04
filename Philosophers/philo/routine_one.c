@@ -10,7 +10,24 @@ static void	routine_take_fork(t_philo *philo)
 		pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
 		return ;
 	}
-	pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
+	while (1)
+	{
+		pthread_mutex_lock(&(philo->monitor->m_finish));
+		if (philo->monitor->finish_flag != 0)
+		{
+			pthread_mutex_unlock(&(philo->monitor->m_finish));
+			philo->monitor->fork[philo->first_fork] = 0;
+			pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
+			return ;
+		}
+		if (philo->monitor->fork[philo->second_fork] == 0)
+		{
+			pthread_mutex_lock(&(philo->monitor->m_fork[philo->second_fork]));
+			pthread_mutex_unlock(&(philo->monitor->m_finish));
+			break ;
+		}
+		pthread_mutex_unlock(&(philo->monitor->m_finish));
+	}
 	philo->monitor->fork[philo->second_fork] = 1;
 	if (print_take_fork_state(philo) < 0)
 	{
@@ -72,15 +89,14 @@ static void	routine_sleep(t_philo *philo)
 	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 100);
 }
 
-void	*routine(void *arg)
+void	*routine_one(void *arg)
 {
 	t_philo	*philo;
 
 	philo = arg;
+	printf("herer\n");
 	pthread_mutex_lock(&(philo->monitor->m_start));
 	pthread_mutex_unlock(&(philo->monitor->m_start));
-	if (philo->id % 2 == 1)
-		usleep(philo->monitor->time_to_eat / 2 * 1e3);
 	while (1)
 	{
 		routine_take_fork(philo);

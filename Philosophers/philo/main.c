@@ -12,15 +12,19 @@ int	setting_flow_mutex(t_monitor *monitor)
 static int	generate_philos(t_monitor *monitor)
 {
 	int			i;
+	void		*target_routine;
 
 	monitor->thread = malloc(sizeof(pthread_t) * monitor->num_of_philo);
 	if (monitor->thread < 0)
 		return (-1);
 	i = 0;
+	if (monitor->num_of_philo == 1)
+		target_routine = routine_one;
+	
 	pthread_mutex_lock(&(monitor->m_start));
 	while (i < monitor->num_of_philo)
 	{
-		if (pthread_create(&(monitor->thread[i]), NULL, routine, &(monitor->philo[i])) < 0)
+		if (pthread_create(&(monitor->thread[i]), NULL, target_routine, &(monitor->philo[i])) < 0)
 		{
 			monitor->num_of_philo = i;
 			free(monitor->thread);

@@ -6,6 +6,7 @@ SRC_FILE = main \
 			initialize \
 			philo_utils \
 			routine \
+			routine_one \
 			monitor \
 			print_state \
 			handle_error \
