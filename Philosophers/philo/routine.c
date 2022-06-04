@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:38 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:53 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static void	routine_take_fork(t_philo *philo)
@@ -49,7 +61,7 @@ static void	routine_eat(t_philo *philo)
 
 static void	routine_sleep(t_philo *philo)
 {
-	struct timeval start_time;
+	struct timeval	start_time;
 
 	if (print_sleep_state(philo) < 0)
 		return ;

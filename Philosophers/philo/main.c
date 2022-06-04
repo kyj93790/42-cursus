@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:19 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:46 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	setting_flow_mutex(t_monitor *monitor)
@@ -27,7 +39,8 @@ static int	generate_philos(t_monitor *monitor)
 	i = 0;
 	while (i < monitor->num_of_philo)
 	{
-		if (pthread_create(&(monitor->thread[i]), NULL, target_routine, &(monitor->philo[i])) < 0)
+		if (pthread_create(&(monitor->thread[i]), NULL, target_routine, \
+													&(monitor->philo[i])) < 0)
 			monitor->thread[i] = NULL;
 		i++;
 	}
@@ -38,7 +51,7 @@ static int	generate_philos(t_monitor *monitor)
 	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_monitor	monitor;
 

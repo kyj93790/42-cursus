@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_state.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:32 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:51 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	print_take_fork_state(t_philo *philo)
@@ -96,18 +108,20 @@ int	print_think_state(t_philo *philo)
 	return (0);
 }
 
-
 int	print_finish_state(t_philo *philo, int status)
 {
 	long			time_stamp;
 	struct timeval	curr_time;
 
+	pthread_mutex_lock(&(philo->monitor->m_finish));
+	philo->monitor->finish_flag = 1;
+	pthread_mutex_unlock(&(philo->monitor->m_finish));
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
 		pthread_mutex_lock(&(philo->monitor->m_finish));
 		philo->monitor->finish_flag = 2;
 		pthread_mutex_unlock(&(philo->monitor->m_finish));
-		return (-1);
+		return (1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	pthread_mutex_lock(&(philo->monitor->m_print));
@@ -116,5 +130,5 @@ int	print_finish_state(t_philo *philo, int status)
 	else if (status == FULL)
 		printf("%ldms\tall philosophers are full\n", time_stamp);
 	pthread_mutex_unlock(&(philo->monitor->m_print));
-	return (0);
+	return (1);
 }

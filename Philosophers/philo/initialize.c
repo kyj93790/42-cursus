@@ -1,13 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:17 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:45 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-
-static void	swap_fork(int *first_fork, int *second_fork)
-{
-	int	temp;
-
-	temp = *first_fork;
-	*first_fork = *second_fork;
-	*second_fork = temp;
-}
 
 static int	init_philo(t_monitor *monitor)
 {
@@ -32,7 +35,7 @@ static int	init_philo(t_monitor *monitor)
 		monitor->philo[i].first_fork = i;
 		monitor->philo[i].second_fork = (i + 1) % monitor->num_of_philo;
 		if (i % 2 == 1)
-			swap_fork(&(monitor->philo[i].first_fork), &(monitor->philo[i].second_fork));
+			swap_fork(&(monitor->philo[i]));
 		monitor->philo[i].monitor = monitor;
 	}
 	return (0);
@@ -87,7 +90,7 @@ static int	init_m_print(t_monitor *monitor)
 	if (pthread_mutex_init(&(monitor->m_print), NULL) != 0)
 	{
 		free_philo(monitor, monitor->num_of_philo);
-		free_fork(monitor, monitor->num_of_philo);\
+		free_fork(monitor, monitor->num_of_philo);
 		return (-1);
 	}
 	return (0);

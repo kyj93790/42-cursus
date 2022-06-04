@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_mem.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:11 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:40 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int free_philo(t_monitor *monitor, int philo_num)
+int	free_philo(t_monitor *monitor, int philo_num)
 {
 	int	i;
 
@@ -15,7 +27,7 @@ int free_philo(t_monitor *monitor, int philo_num)
 	return (-1);
 }
 
-void free_fork(t_monitor *monitor, int philo_num)
+void	free_fork(t_monitor *monitor, int philo_num)
 {
 	int	i;
 

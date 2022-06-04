@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 16:57:27 by yejikim           #+#    #+#             */
+/*   Updated: 2022/06/04 16:57:50 by yejikim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void routine_takeoff_fork(t_philo *philo)
+void	routine_takeoff_fork(t_philo *philo)
 {
 	philo->monitor->fork[philo->first_fork] = 0;
 	pthread_mutex_unlock(&(philo->monitor->m_fork[philo->first_fork]));
@@ -9,7 +21,17 @@ void routine_takeoff_fork(t_philo *philo)
 	return ;
 }
 
-void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, long unit)
+void	swap_fork(t_philo *philo)
+{
+	int	temp;
+
+	temp = philo->first_fork;
+	philo->first_fork = philo->second_fork;
+	philo->second_fork = temp;
+}
+
+void	sleep_unit(t_monitor *monitor, long aim_time, \
+						struct timeval start_time, long unit)
 {
 	struct timeval	curr_time;
 
@@ -33,15 +55,16 @@ void	sleep_unit(t_monitor *monitor, long aim_time, struct timeval start_time, lo
 	}
 }
 
-long calc_timeval(struct timeval *start, struct timeval *end)
+long	calc_timeval(struct timeval *start, struct timeval *end)
 {
 	long	diff_time;
 
-	diff_time = (end->tv_sec - start->tv_sec) * 1e3 + (end->tv_usec - start->tv_usec) / 1e3;
+	diff_time = (end->tv_sec - start->tv_sec) * 1e3 + \
+				(end->tv_usec - start->tv_usec) / 1e3;
 	return (diff_time);
 }
 
-int convert_arg_to_int(char *str)
+int	convert_arg_to_int(char *str)
 {
 	int		i;
 	long	result;
