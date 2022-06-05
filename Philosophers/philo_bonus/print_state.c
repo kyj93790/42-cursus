@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:32 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 21:50:57 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 01:02:10 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	print_take_fork_state(t_philo *philo)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
@@ -35,8 +36,7 @@ int	print_eat_state(t_philo *philo)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
-		// 에러 함수 하나 만들고 post
-		// 함수 내에서도 print sem wait -> 만약 다른 애가 끝났으면 이 출력도 진행되지 않고 kill됨
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
@@ -53,6 +53,7 @@ int	print_sleep_state(t_philo *philo)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
@@ -69,6 +70,7 @@ int	print_think_state(t_philo *philo)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (-1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
@@ -85,7 +87,7 @@ int	print_finish_state(t_philo *philo, int status)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
-		
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));

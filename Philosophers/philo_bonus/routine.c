@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:38 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 19:56:49 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 00:11:43 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	routine_eat(t_philo *philo)
 
 	if (gettimeofday(&curr_time, NULL) != 0)
 	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return ;
 	}
 	sem_wait(philo->sem_last_eat);
@@ -33,7 +34,6 @@ static void	routine_eat(t_philo *philo)
 	sem_post(philo->sem_last_eat);
 	print_eat_state(philo);
 	sleep_unit(philo->monitor, philo->monitor->time_to_eat, curr_time, 200);
-	// finish flag check...? 해주어야 할듯 (맨데토리도) -> finish가 있으면 full check안하게 하면 됨
 	sem_wait(philo->sem_cnt_eat);
 	(philo->cnt_eat)++;
 	sem_post(philo->sem_cnt_eat);
@@ -46,6 +46,7 @@ static void	routine_sleep(t_philo *philo)
 	print_sleep_state(philo);
 	if (gettimeofday(&(start_time), NULL) != 0)
 	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return ;
 	}
 	sleep_unit(philo->monitor, philo->monitor->time_to_sleep, start_time, 200);
@@ -65,7 +66,6 @@ void	routine(t_monitor *monitor, int i)
 	monitor->philo[i].sem_last_eat = sem_open("sem_last_eat", O_CREAT | O_EXCL, 0644, 1);
 	sem_unlink("sem_cnt_eat");
 	monitor->philo[i].sem_cnt_eat = sem_open("sem_cnt_eat", O_CREAT | O_EXCL, 0644, 1);
-	
 	
 	// 내부 sem도 바로 Unlink진행
 	pthread_create(&sub_monitor, NULL, monitor_philo, &(monitor->philo[i]));

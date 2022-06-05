@@ -6,18 +6,11 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:27 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 20:45:17 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 00:56:24 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	finish_with_error(char *message, t_monitor *monitor)
-{
-	sem_wait(monitor->sem_print);
-	printf("%s\n", message);
-	sem_post(monitor->sem_finish);
-}
 
 void	routine_takeoff_fork(t_philo *philo)
 {
@@ -35,7 +28,7 @@ void	sleep_unit(t_monitor *monitor, long aim_time, \
 	{
 		if (gettimeofday(&(curr_time), NULL) != 0)
 		{
-			monitor->must_eat = 0; // temp
+			finish_with_error("fail in gettimeofday", monitor);
 			return ;
 		}
 		if (calc_timeval(&(start_time), &(curr_time)) >= aim_time)

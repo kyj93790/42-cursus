@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 22:42:13 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 00:44:23 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <signal.h>
 
 # define INT_MAX 2147483647
-# define DIE 0
-# define FULL 1
+# define DIE 1
+# define FULL 2
 
 typedef struct s_philo
 {
@@ -47,7 +47,9 @@ typedef struct s_monitor
 	int				must_eat;
 	struct timeval	start_time;
 	sem_t			*sem_start;
+	int				finish_type;
 	sem_t			*sem_finish;
+	int				full_cnt;
 	sem_t			*sem_full;
 	sem_t			*sem_print;
 	sem_t			*fork;

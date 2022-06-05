@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 22:41:40 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 01:06:42 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static int	check_die(t_philo *philo)
 	long			time_gap;
 
 	if (gettimeofday(&curr_time, NULL) != 0)
+	{
+		finish_with_error("fail in gettimeofday", philo->monitor);
 		return (1);
+	}
 	sem_wait(philo->sem_last_eat);
 	time_gap = calc_timeval(&(philo->monitor->start_time), &curr_time) - philo->last_eat;
 	sem_post(philo->sem_last_eat);
@@ -40,47 +43,67 @@ void	*monitor_philo(void *arg)
 		{
 			sem_wait(philo->monitor->sem_print);
 			print_finish_state(philo, DIE);
+			philo->monitor->finish_type = DIE;
 			sem_post(philo->monitor->sem_finish);
 		}
-		if (!dup_flag && philo->monitor->sem_finish == 0 && philo->monitor->must_eat)
+		if (!dup_flag && philo->monitor->must_eat_flag)
 		{
 			sem_wait(philo->sem_cnt_eat);
 			if (philo->cnt_eat >= philo->monitor->must_eat)
+			{
 				sem_post(philo->monitor->sem_full);
+				dup_flag = 1;
+			}
 			sem_post(philo->sem_cnt_eat);
-			dup_flag = 1;
 		}
+	}
+	return (0);
+}
+
+void	*monitor_full(void *arg)
+{
+	t_monitor		*monitor;
+	int				i;
+	long			time_stamp;
+	struct timeval	curr_time;
+
+	monitor = arg;
+	i = 0;
+	while (i < monitor->num_of_philo)
+	{
+		sem_wait(monitor->sem_full);
+		i++;
+	}
+	if (monitor->finish_type != DIE)
+	{
+		sem_wait(monitor->sem_print);
+		if (gettimeofday(&(curr_time), NULL) != 0)
+		{
+			finish_with_error("fail in gettimeofday", monitor);
+			return (0);
+		}
+		time_stamp = calc_timeval(&(monitor->start_time), &(curr_time));
+		printf("%ldms\tall philosophers are full\n", time_stamp);
+		sem_post(monitor->sem_finish);
 	}
 	return (0);
 }
 
 int monitor_main(t_monitor *monitor)
 {
-	int	finish_cnt;
-	int	full_cnt;
+	pthread_t	sub_monitor;
+	int			i;
 
-	finish_cnt = 0;
-	full_cnt = 0;
-	while (1)
+	pthread_create(&sub_monitor, NULL, monitor_full, monitor);
+	sem_wait(monitor->sem_finish);
+	kill_process(monitor);
+	monitor->finish_type = DIE;
+	i = 0;
+	while (i < monitor->num_of_philo)
 	{
-		if (monitor->sem_finish > 0)
-		{
-			sem_wait(monitor->sem_finish);
-			kill_process(monitor);
-			break ;
-		}
-		if (monitor->sem_full > 0)
-		{
-			sem_wait(monitor->sem_full);
-			full_cnt++;
-		}
-		if (full_cnt == monitor->num_of_philo)
-		{
-			sem_wait(monitor->sem_print);
-			print_finish_state(&(monitor->philo[0]), FULL);
-			kill_process(monitor);
-			break ;
-		}
+		sem_post(monitor->sem_full);
+		i++;
 	}
+	pthread_join(sub_monitor, NULL);
 	return (0);
 }
