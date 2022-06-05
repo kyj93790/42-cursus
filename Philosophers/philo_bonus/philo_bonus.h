@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 19:42:20 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/05 22:42:13 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int		print_think_state(t_philo *philo);
 int		print_finish_state(t_philo *philo, int status);
 
 /* philo_utils.c */
+void	finish_with_error(char *message, t_monitor *monitor);
 void	routine_takeoff_fork(t_philo *philo);
-void	swap_fork(t_philo *philo);
 void	sleep_unit(t_monitor *monitor, long aim_time, \
 					struct timeval start_time, long unit);
 long	calc_timeval(struct timeval *start, struct timeval *end);
@@ -74,9 +74,6 @@ int		convert_arg_to_int(char *str);
 
 /* routine */
 void	routine(t_monitor *monitor, int id);
-
-// /* routine_one */
-// void	*routine_one(void *arg);
 
 /* monitor */
 int		monitor_main(t_monitor *monitor);

@@ -6,11 +6,18 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:27 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 19:41:09 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/05 20:45:17 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void	finish_with_error(char *message, t_monitor *monitor)
+{
+	sem_wait(monitor->sem_print);
+	printf("%s\n", message);
+	sem_post(monitor->sem_finish);
+}
 
 void	routine_takeoff_fork(t_philo *philo)
 {

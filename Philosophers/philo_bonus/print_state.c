@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:32 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/05 19:43:41 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/05 21:50:57 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	print_take_fork_state(t_philo *philo)
 	struct timeval	curr_time;
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
+	{
 		return (-1);
+	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
 	sem_wait(philo->monitor->sem_print);
 	printf("%ldms\t%d\thas taken a fork\n", time_stamp, philo->id);
@@ -83,6 +85,7 @@ int	print_finish_state(t_philo *philo, int status)
 
 	if (gettimeofday(&(curr_time), NULL) != 0)
 	{
+		
 		return (1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
