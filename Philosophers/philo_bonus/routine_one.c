@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:36 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/04 16:57:52 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/05 15:16:48 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static void	routine_take_fork_one(t_philo *philo)
 {

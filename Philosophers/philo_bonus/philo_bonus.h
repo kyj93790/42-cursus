@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/04 19:05:51 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:42:20 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 
 # define INT_MAX 2147483647
 # define DIE 0
@@ -27,12 +28,13 @@
 
 typedef struct s_philo
 {
+	pid_t				pid;
 	int					id;
 	sem_t				*sem_last_eat;
 	long				last_eat;
 	sem_t				*sem_cnt_eat;
 	int					cnt_eat;
-	t_monitor			*monitor;
+	struct s_monitor	*monitor;
 }	t_philo;
 
 typedef struct s_monitor
@@ -46,10 +48,10 @@ typedef struct s_monitor
 	struct timeval	start_time;
 	sem_t			*sem_start;
 	sem_t			*sem_finish;
-	int				finish_flag;
+	sem_t			*sem_full;
 	sem_t			*sem_print;
 	sem_t			*fork;
-	pid_t			*philo;
+	t_philo			*philo;
 }	t_monitor;
 
 /* initialize.c */
@@ -78,11 +80,9 @@ void	routine(t_monitor *monitor, int id);
 
 /* monitor */
 int		monitor_main(t_monitor *monitor);
-int		monitor_philo(t_philo *philo);
+void	*monitor_philo(void *arg);
 
-int		free_philo(t_monitor *monitor, int philo_num);
-void	free_fork(t_monitor *monitor, int philo_num);
-int		free_monitor(t_monitor *monitor);
+void	kill_process(t_monitor *monitor);
 
 int		print_error(char *message);
 

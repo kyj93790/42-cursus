@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:27 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/04 19:01:50 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:41:09 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,11 @@ void	sleep_unit(t_monitor *monitor, long aim_time, \
 	{
 		if (gettimeofday(&(curr_time), NULL) != 0)
 		{
-			monitor->finish_flag = 2;
+			monitor->must_eat = 0; // temp
 			return ;
 		}
 		if (calc_timeval(&(start_time), &(curr_time)) >= aim_time)
 			break ;
-		sem_wait(monitor->sem_finish);
-		if (monitor->finish_flag != 0)
-		{
-			sem_post(monitor->sem_finish);
-			return ;
-		}
-		sem_post(monitor->sem_finish);
 		usleep(unit);
 	}
 }

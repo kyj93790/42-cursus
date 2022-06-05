@@ -3,113 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/04 19:12:05 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:54:19 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-static int	check_die(t_monitor *monitor)
+static int	check_die(t_philo *philo)
 {
-	int				i;
 	struct timeval	curr_time;
 	long			time_gap;
 
-	i = -1;
-	while (++i < monitor->num_of_philo)
-	{
-		if (gettimeofday(&curr_time, NULL) != 0)
-		{
-			pthread_mutex_lock(&(monitor->m_finish));
-			monitor->finish_flag = 2;
-			pthread_mutex_unlock(&(monitor->m_finish));
-			return (1);
-		}
-		pthread_mutex_lock(&(monitor->philo[i].m_last_eat));
-		time_gap = calc_timeval(&(monitor->start_time), &curr_time) \
-							- monitor->philo[i].last_eat;
-		pthread_mutex_unlock(&(monitor->philo[i].m_last_eat));
-		if (time_gap > monitor->time_to_die)
-			return (print_finish_state(&(monitor->philo[i]), DIE));
-	}
+	if (gettimeofday(&curr_time, NULL) != 0)
+		return (1);
+	sem_wait(philo->sem_last_eat);
+	time_gap = calc_timeval(&(philo->monitor->start_time), &curr_time) - philo->last_eat;
+	sem_post(philo->sem_last_eat);
+	if (time_gap > philo->monitor->time_to_die)
+		return (1);
 	return (0);
 }
 
-static int	check_must_eat(t_monitor *monitor)
+void	*monitor_philo(void *arg)
 {
-	int	i;
-	int	curr_eat;
-	int	full_cnt;
+	t_philo *philo;
 
-	i = 0;
-	full_cnt = 0;
-	while (i < monitor->num_of_philo)
-	{
-		pthread_mutex_lock(&(monitor->philo[i].m_cnt_eat));
-		curr_eat = monitor->philo[i].cnt_eat;
-		pthread_mutex_unlock(&(monitor->philo[i].m_cnt_eat));
-		if (curr_eat >= monitor->must_eat)
-			full_cnt++;
-		i++;
-	}
-	if (full_cnt == monitor->num_of_philo)
-		return (print_finish_state(&(monitor->philo[0]), FULL));
-	return (0);
-}
-
-int	monitor_philo(t_monitor *monitor)
-{
+	philo = arg;
 	while (1)
 	{
-		if (check_die(monitor))
-			break ;
-		if (monitor->must_eat_flag == 1)
+		if (check_die(philo))
 		{
-			if (check_must_eat(monitor))
-				break ;
+			sem_wait(philo->monitor->sem_print);
+			print_finish_state(philo, DIE);
+			// post는 하지 않음 (다른 출력 방지)
+			sem_post(philo->monitor->sem_finish);
 		}
+		// must eat check
 	}
 	return (0);
-}
-
-// 이걸 하나로 합친 정보를 philo에 넘긴다 (philo에 monitor 정보를 넘김)
-int	monitor_philo(t_philo *philo)
-{
-	while (1)
-	{
-		if (philo->monitor->must_eat_flag == 1)
-		{
-			// 다 먹었는지 체크에 대한 고민이 필요함
-		}
-	}
-	// 반복해서 시간 체크 (finish flag를 세우고 finish state 출력 진행)
-	// 출력 먼저 진행하고 flag 세우기
-	// 그렇지 않으면 kill될 수 있음
 }
 
 int monitor_main(t_monitor *monitor)
 {
-	int	i;
-	
+	int	finish_cnt;
+	int	full_cnt;
+
+	finish_cnt = 0;
+	full_cnt = 0;
 	while (1)
 	{
-		sem_wait(monitor->finish_flag);
-		if (monitor->finish_flag > 0)
+		if (monitor->sem_finish > 0)
 		{
-			i = 0;
-			while (i < monitor->num_of_philo)
-			{
-				if (monitor->philo[i] > 0)
-					kill(monitor->philo[i], SIGTERM);
-				i++;
-			}
-			sem_post(monitor->finish_flag);
+			sem_wait(monitor->sem_finish);
+			kill_process(monitor);
 			break ;
 		}
-		sem_post(monitor->finish_flag);
+		if (monitor->sem_full > 0)
+		{
+			sem_wait(monitor->sem_full);
+			full_cnt++;
+		}
+		if (full_cnt == monitor->num_of_philo)
+		{
+			// 문구 출력 후 전부 종료
+		}
 	}
 	return (0);
 }

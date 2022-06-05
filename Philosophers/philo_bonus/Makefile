@@ -3,21 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
+#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/04 16:57:22 by yejikim           #+#    #+#              #
-#    Updated: 2022/06/04 16:57:47 by yejikim          ###   ########.fr        #
+#    Updated: 2022/06/05 15:24:53 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 cc = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = philo
+NAME = philo_bonus
 SRC_FILE = main \
 			initialize \
 			philo_utils \
 			routine \
-			routine_one \
 			monitor \
 			print_state \
 			handle_error \
