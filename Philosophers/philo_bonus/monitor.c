@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:39:49 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:43:07 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ int monitor_main(t_monitor *monitor)
 		i++;
 	}
 	pthread_join(sub_monitor, NULL);
-	free_monitor(monitor);
+	free_monitor();
 	return (0);
 }
