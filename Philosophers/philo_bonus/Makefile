@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
+#    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/04 16:57:22 by yejikim           #+#    #+#              #
-#    Updated: 2022/06/05 20:46:31 by yejin            ###   ########.fr        #
+#    Updated: 2022/06/06 13:20:07 by yejikim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ SRC_FILE = main \
 			handle_error \
 			free_mem
 
-SRC = $(addsuffix .c, $(SRC_FILE))
-OBJ = $(addsuffix .o, $(SRC_FILE))
+SRC = $(addsuffix _bonus.c, $(SRC_FILE))
+OBJ = $(addsuffix _bonus.o, $(SRC_FILE))
 
 all : $(NAME)
 

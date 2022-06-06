@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor.c                                          :+:      :+:    :+:   */
+/*   monitor_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:49:10 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 13:21:27 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*monitor_philo(void *arg)
 	{
 		if (check_die(philo))
 		{
-			print_finish_state(philo, DIE);
+			print_finish_state(philo);
 			philo->monitor->finish_type = DIE;
 			sem_post(philo->monitor->sem_finish);
 		}

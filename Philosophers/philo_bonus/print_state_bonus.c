@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_state_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:32 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:53:26 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 13:20:17 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	print_think_state(t_philo *philo)
 	return (0);
 }
 
-int	print_finish_state(t_philo *philo, int status)
+int	print_finish_state(t_philo *philo)
 {
 	long			time_stamp;
 	struct timeval	curr_time;

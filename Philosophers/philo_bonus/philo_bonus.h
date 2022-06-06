@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:41:54 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 13:19:52 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		print_take_fork_state(t_philo *philo);
 int		print_eat_state(t_philo *philo);
 int		print_sleep_state(t_philo *philo);
 int		print_think_state(t_philo *philo);
-int		print_finish_state(t_philo *philo, int status);
+int		print_finish_state(t_philo *philo);
 
 /* philo_utils.c */
 void	finish_with_error(char *message, t_monitor *monitor);
