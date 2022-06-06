@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:43:07 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:49:10 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	check_die(t_philo *philo)
 		return (1);
 	}
 	sem_wait(philo->sem_last_eat);
-	time_gap = calc_timeval(&(philo->monitor->start_time), &curr_time) - philo->last_eat;
+	time_gap = calc_timeval(&(philo->monitor->start_time), &curr_time) \
+													- philo->last_eat;
 	sem_post(philo->sem_last_eat);
 	if (time_gap > philo->monitor->time_to_die)
 		return (1);
@@ -32,7 +33,7 @@ static int	check_die(t_philo *philo)
 
 void	*monitor_philo(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	int		dup_flag;
 
 	philo = arg;
@@ -41,7 +42,6 @@ void	*monitor_philo(void *arg)
 	{
 		if (check_die(philo))
 		{
-			sem_wait(philo->monitor->sem_print);
 			print_finish_state(philo, DIE);
 			philo->monitor->finish_type = DIE;
 			sem_post(philo->monitor->sem_finish);
@@ -89,7 +89,7 @@ void	*monitor_full(void *arg)
 	return (0);
 }
 
-int monitor_main(t_monitor *monitor)
+int	monitor_main(t_monitor *monitor)
 {
 	pthread_t	sub_monitor;
 	int			i;

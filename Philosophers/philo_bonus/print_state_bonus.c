@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:32 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 10:35:06 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:48:15 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	print_finish_state(t_philo *philo, int status)
 		return (1);
 	}
 	time_stamp = calc_timeval(&(philo->monitor->start_time), &(curr_time));
-	if (status == DIE)
-		printf("%ldms\t%d\tis died\n", time_stamp, philo->id + 1);
-	else if (status == FULL)
-		printf("%ldms\tall philosophers are full\n", time_stamp);
+	sem_wait(philo->monitor->sem_print);
+	printf("%ldms\t%d\tis died\n", time_stamp, philo->id + 1);
+	philo->monitor->finish_type = DIE;
+	sem_post(philo->monitor->sem_finish);
 	return (1);
 }
