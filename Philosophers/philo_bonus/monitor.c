@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:25 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 01:06:42 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:39:49 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int monitor_main(t_monitor *monitor)
 	pthread_t	sub_monitor;
 	int			i;
 
-	pthread_create(&sub_monitor, NULL, monitor_full, monitor);
+	if (pthread_create(&sub_monitor, NULL, monitor_full, monitor) != 0)
+		finish_with_error("fail in create in main", monitor);
 	sem_wait(monitor->sem_finish);
 	kill_process(monitor);
 	monitor->finish_type = DIE;
@@ -105,5 +106,6 @@ int monitor_main(t_monitor *monitor)
 		i++;
 	}
 	pthread_join(sub_monitor, NULL);
+	free_monitor(monitor);
 	return (0);
 }

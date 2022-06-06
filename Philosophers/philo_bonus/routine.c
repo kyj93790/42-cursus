@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:38 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 00:11:43 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:34:41 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,11 @@ void	routine(t_monitor *monitor, int i)
 {
 	pthread_t	sub_monitor;
 	
+	init_philo(monitor, &(monitor->philo[i]), i);
 	sem_wait(monitor->sem_start);
 	sem_post(monitor->sem_start);
-	monitor->philo[i].id = i;
-	monitor->philo[i].last_eat = 0;
-	monitor->philo[i].cnt_eat = 0;
-	monitor->philo[i].monitor = monitor;
-	sem_unlink("sem_last_eat");
-	monitor->philo[i].sem_last_eat = sem_open("sem_last_eat", O_CREAT | O_EXCL, 0644, 1);
-	sem_unlink("sem_cnt_eat");
-	monitor->philo[i].sem_cnt_eat = sem_open("sem_cnt_eat", O_CREAT | O_EXCL, 0644, 1);
-	
-	// 내부 sem도 바로 Unlink진행
-	pthread_create(&sub_monitor, NULL, monitor_philo, &(monitor->philo[i]));
+	if (pthread_create(&sub_monitor, NULL, monitor_philo, &(monitor->philo[i])) != 0)
+		finish_with_error("fail in create sub_monitor in philo", monitor);
 	if (monitor->philo[i].id % 2 == 1)
 		usleep(monitor->time_to_eat / 2 * 1e3);
 	while (1)

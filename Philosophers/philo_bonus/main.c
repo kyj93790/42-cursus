@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:19 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 00:49:08 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:24:14 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@ static int	generate_philos(t_monitor *monitor)
 {
 	int			i;
 
-	sem_unlink("sem_start");
-	monitor->sem_start = sem_open("sem_start", O_CREAT | O_EXCL, 0644, 1);
-	sem_unlink("sem_finish");
-	monitor->sem_finish = sem_open("sem_finish", O_CREAT | O_EXCL, 0644, 0);
-	sem_unlink("sem_print");
-	monitor->sem_print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
-	sem_unlink("sem_fork");
-	monitor->fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644, monitor->num_of_philo);
-	sem_unlink("sem_full");
-	monitor->sem_full = sem_open("sem_full", O_CREAT | O_EXCL, 0644, 0);
-	// 전부 바로 unlink진행
 	sem_wait(monitor->sem_start);
 	i = 0;
 	if (gettimeofday(&(monitor->start_time), NULL) != 0)
@@ -58,9 +47,9 @@ int	main(int argc, char *argv[])
 	}
 	if (generate_philos(&monitor) < 0)
 	{
-		sem_post(monitor.sem_finish);
+		sem_wait(monitor.sem_print);
 		printf("fail in generating philosophers\n");
-		return (0);
+		sem_post(monitor.sem_finish);
 	}
 	monitor_main(&monitor);
 	return (0);

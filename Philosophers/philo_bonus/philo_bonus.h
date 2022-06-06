@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 16:57:30 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/06 00:44:23 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/06 10:41:54 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_monitor
 }	t_monitor;
 
 /* initialize.c */
+void	init_sem(t_monitor *monitor);
+int		init_philo(t_monitor *monitor, t_philo *philo, int i);
 int		init_monitor(t_monitor *monitor, int argc, char *argv[]);
 
 /* print_state.c */
@@ -81,7 +83,9 @@ void	routine(t_monitor *monitor, int id);
 int		monitor_main(t_monitor *monitor);
 void	*monitor_philo(void *arg);
 
+/* free_mem */
 void	kill_process(t_monitor *monitor);
+void	free_monitor(void);
 
 int		print_error(char *message);
 
