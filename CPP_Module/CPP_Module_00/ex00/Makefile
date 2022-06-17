@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
+#    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/15 16:11:50 by yejin            ###   ########.fr        #
+#    Updated: 2022/06/17 15:12:42 by yejikim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ############## COMPILER ##############
-cc	= g++
+cxx	= c++
 
 ################ FLAG ################
 ifdef DEBUG
@@ -29,30 +29,42 @@ SRCS	= megaphone.cpp
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)
 
+############### Color ################
+GREEN="\033[32m"
+L_GREEN="\033[1;32m"
+RED="\033[31m"
+L_RED="\033[1;31m"
+RESET="\033[0m"
+BOLD="\033[1m"
+L_PUPLE="\033[1;35m"
+L_CYAN="\033[1;96m"
+UP = "\033[A"
+CUT = "\033[K"
+
 ################ RULE ################
 all	: $(NAME)
 
 $(NAME)	: $(OBJS)
-	@$(cc) $(FLAGS) $^ -o $@
-	@echo $(CUT)$(BOLD)complete COMPILE 🌸
+	@$(cxx) $(FLAGS) $^ -o $@
+	@echo complete $(L_GREEN)COMPILE$(RESET) 🌸
 
 %.o	: %.cpp
-	@$(cc) $(FLAGS) -c $< -o $@
-	@echo start COMPILE 🌟
+	@$(cxx) $(FLAGS) -c $< -o $@
+	@echo start $(L_GREEN)COMPILE$(RESET) 🌟
 	@echo current complie FLAGS : $(FLAGS)
 
 clean	:
 	@rm -f $(OBJS)
-	@echo remove OBJ files 🌪
+	@echo $(L_RED)remove$(RESET) OBJ files 🌪
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo remove $(NAME) a.k.a target file 🎯
+	@echo $(L_RED)remove$(RESET) $(NAME) a.k.a target file 🎯
 
 re : fclean all
 
 debug :
 	@make DEBUG=1
-	@echo start DEBUG 😱 GOOD LUCK 🍀
+	@echo start $(L_CYAN)DEBUG$(RESET) 😱 GOOD LUCK 🍀
 
 .PHONY	: all clean fclean re debug
