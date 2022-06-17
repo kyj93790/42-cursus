@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:34:33 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/17 22:01:50 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/17 22:12:54 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ std::string Contact::getNickname() const
 {
     return (this->nickname);
 }
-
 std::string Contact::getPhoneNumber() const
 {
     return (this->phoneNumber);
 }
-
 std::string Contact::getDarkestSecret() const
 {
     return (this->darkestSecret);
