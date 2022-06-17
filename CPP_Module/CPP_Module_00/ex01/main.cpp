@@ -6,56 +6,27 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:54:55 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/16 20:10:38 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/17 15:53:30 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "PhoneBook.hpp"
+#include <iostream>
 
-void	execute_add(PhoneBook phoneBook)
+int main(void)
 {
-	// first name
-	while (1)
-	{
-		
-	}
-	// last name
-	while (1)
-	{
-		
-	}
-	// nickname
-	while (1)
-	{
-		
-	}
-	// phone number
-	while (1)
-	{
-		
-	}
-	// darkest secret
-	while (1)
-	{
-		
-	}
-}
+    PhoneBook phoneBook;
+    std::string cmd;
 
-int	main(void)
-{
-	PhoneBook phoneBook;
-	std::string cmd;
-	
-	while (std::cin >> cmd)
-	{
-		if (cmd.compare("ADD") == 0) {
-			execute_add(phoneBook);
-		} else if (cmd.compare("SEARCH") == 0) {
-			
-		} else if (cmd.compare("EXIT") == 0) {
-			
-		}
-	}
-	
+    while (std::cin >> cmd)
+    {
+        if (cmd.compare("ADD") == 0)
+            phoneBook.add();
+        else if (cmd.compare("SEARCH") == 0)
+            phoneBook.search();
+        else if (cmd.compare("EXIT") == 0)
+            exit(EXIT_SUCCESS);
+    }
+    std::cout << "Error: end of file\n";
+    exit(EXIT_FAILURE);
 }

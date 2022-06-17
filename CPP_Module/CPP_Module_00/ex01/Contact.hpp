@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:47:51 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/16 20:05:01 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/17 22:09:14 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 
 class Contact
 {
-	private:
-		std::string	firstName;
-		std::string	lastName;
-		std::string	nickName;
-		std::string	phoneNumber;
-		std::string	darkestSecret;
-	public:
-		Contact();
-		~Contact();
+  private:
+    std::string firstName;
+    std::string lastName;
+    std::string nickname;
+    std::string phoneNumber;
+    std::string darkestSecret;
+
+  public:
+    Contact();
+    ~Contact();
+    void setFirstName(std::string firstName);
+    void setLastName(std::string lastName);
+    void setNickname(std::string nickname);
+    void setPhoneNumber(std::string phoneNumber);
+    void setDarkestSecret(std::string darkestSecret);
+    std::string getFirstName() const;
+    std::string getLastName() const;
+    std::string getNickname() const;
+    std::string getPhoneNumber() const;
+    std::string getDarkestSecret() const;
 };
