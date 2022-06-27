@@ -6,7 +6,7 @@
 #    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/17 15:13:06 by yejikim          ###   ########.fr        #
+#    Updated: 2022/06/27 16:55:05 by yejikim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ else
 endif
 
 ############### TARGET ###############
-NAME	= megaphone
+NAME	= phonebook
 
 ################ FILE ################
-SRCS	= megaphone.cpp
+SRCS	= main.cpp PhoneBook.cpp Contact.cpp
 
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)

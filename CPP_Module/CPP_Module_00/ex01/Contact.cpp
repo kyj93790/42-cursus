@@ -6,11 +6,12 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:34:33 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/17 22:12:54 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:23:35 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include <iostream>
 
 Contact::Contact()
 {
@@ -20,44 +21,21 @@ Contact::~Contact()
 {
 }
 
-void Contact::setFirstName(std::string firstName)
+void Contact::setFields(std::string field[5])
 {
-    this->firstName = firstName;
-}
-void Contact::setLastName(std::string lastName)
-{
-    this->firstName = lastName;
-}
-void Contact::setNickname(std::string nickname)
-{
-    this->firstName = nickname;
-}
-void Contact::setPhoneNumber(std::string phoneNumber)
-{
-    this->firstName = phoneNumber;
-}
-void Contact::setDarkestSecret(std::string darkestSecret)
-{
-    this->firstName = darkestSecret;
+    firstName = field[0];
+    lastName = field[1];
+    nickname = field[2];
+    phoneNumber = field[3];
+    darkestSecret = field[4];
 }
 
-std::string Contact::getFirstName() const
+void Contact::printFields(void)
 {
-    return (this->firstName);
-}
-std::string Contact::getLastName() const
-{
-    return (this->firstName);
-}
-std::string Contact::getNickname() const
-{
-    return (this->nickname);
-}
-std::string Contact::getPhoneNumber() const
-{
-    return (this->phoneNumber);
-}
-std::string Contact::getDarkestSecret() const
-{
-    return (this->darkestSecret);
+    std::cout << "|";
+    std::cout.width(10); std::cout << std::right << firstName << '|';
+    std::cout.width(10); std::cout << std::right << lastName << '|';
+    std::cout.width(10); std::cout << std::right << nickname << '|';
+    std::cout.width(10); std::cout << std::right << phoneNumber << '|';
+    std::cout.width(10); std::cout << std::right << darkestSecret << "|\n";
 }

@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:47:51 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/17 22:09:14 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:16:13 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ class Contact
   public:
     Contact();
     ~Contact();
-    void setFirstName(std::string firstName);
-    void setLastName(std::string lastName);
-    void setNickname(std::string nickname);
-    void setPhoneNumber(std::string phoneNumber);
-    void setDarkestSecret(std::string darkestSecret);
-    std::string getFirstName() const;
-    std::string getLastName() const;
-    std::string getNickname() const;
-    std::string getPhoneNumber() const;
-    std::string getDarkestSecret() const;
+    void  setFields(std::string field[5]);
+    void  printFields(void);
 };

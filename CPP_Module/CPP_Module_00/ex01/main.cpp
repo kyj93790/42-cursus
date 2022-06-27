@@ -6,12 +6,13 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:54:55 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/17 22:42:00 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:17:48 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <string>
 
 int main(void)
 {
@@ -20,10 +21,11 @@ int main(void)
 
     while (1)
     {
-        std::cin >> cmd;
-        if (std::cin.eof())
+        std::cout << "Input command(ADD, SEARCH, EXIT) : ";
+        std::getline(std::cin, cmd);
+        if (std::cin.eof() || std::cin.fail())
         {
-            std::cout << "Error: end of file\n";
+            std::cout << "Error\n";
             std::exit(EXIT_FAILURE);
         }
         if (cmd.compare("ADD") == 0)
@@ -31,6 +33,6 @@ int main(void)
         else if (cmd.compare("SEARCH") == 0)
             phoneBook.search();
         else if (cmd.compare("EXIT") == 0)
-            std::exit(EXIT_SUCCESS);
+            phoneBook.exit();
     }
 }
