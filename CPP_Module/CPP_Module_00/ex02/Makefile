@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
+#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/27 16:55:05 by yejikim          ###   ########.fr        #
+#    Updated: 2022/06/28 19:25:17 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ else
 endif
 
 ############### TARGET ###############
-NAME	= phonebook
+NAME	= account
 
 ################ FILE ################
-SRCS	= main.cpp PhoneBook.cpp Contact.cpp
+SRCS	= test.cpp Account.cpp
 
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)
