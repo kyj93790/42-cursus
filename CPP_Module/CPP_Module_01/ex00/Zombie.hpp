@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:28:05 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 00:34:37 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/29 00:48:17 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 class Zombie {
 	private:
 		std::string name;
-		void announce(void);
 	public:
 		Zombie();
 		Zombie(std::string name);
 		~Zombie();
+		void announce(void);
 };
 
 Zombie *newZombie(std::string name);

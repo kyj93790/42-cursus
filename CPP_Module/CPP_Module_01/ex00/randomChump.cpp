@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:28:09 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 00:29:54 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/29 00:48:29 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,6 @@
 void randomChump(std::string name)
 {
 	Zombie zombie(name);
+
+	zombie.announce();
 }

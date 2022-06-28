@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:26:21 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 00:34:03 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/29 00:48:53 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 int main(void)
 {
 	Zombie *yejikim = newZombie("yejikim");
+	yejikim->announce();
 	Zombie *mcha = newZombie("mcha");
+	mcha->announce();
 
 	randomChump("yongjule");
 	randomChump("jiskim");

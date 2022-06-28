@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:28:07 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 00:26:59 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/29 00:48:59 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ Zombie::Zombie()
 Zombie::Zombie(std::string name)
 {
 	this->name = name;
-	announce();
 }
 
 Zombie::~Zombie()
