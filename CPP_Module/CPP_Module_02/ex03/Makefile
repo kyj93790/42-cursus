@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/30 22:41:44 by yejin            ###   ########.fr        #
+#    Updated: 2022/06/30 22:50:51 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ endif
 NAME	= a.out
 
 ################ FILE ################
-SRCS	= main.cpp Fixed.cpp Point.cpp
+SRCS	= main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)
@@ -46,12 +46,11 @@ all	: $(NAME)
 
 $(NAME)	: $(OBJS)
 	@$(cxx) $(FLAGS) $^ -o $@
+	@echo current complie FLAGS : $(FLAGS)
 	@echo complete $(L_GREEN)COMPILE$(RESET) 🌸
 
 %.o	: %.cpp
 	@$(cxx) $(FLAGS) -c $< -o $@
-	@echo start $(L_GREEN)COMPILE$(RESET) 🌟
-	@echo current complie FLAGS : $(FLAGS)
 
 clean	:
 	@rm -f $(OBJS)
