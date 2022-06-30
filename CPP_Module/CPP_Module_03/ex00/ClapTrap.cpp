@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 23:00:11 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/30 23:38:29 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/30 23:53:25 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ const ClapTrap& ClapTrap::operator=(const ClapTrap& claptrap)
 void ClapTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
-		std::cout << "ClapTrap can't attack : lack of hit points\n";
+		std::cout << "ClapTrap can't attack : discharged\n";
 	else if (_energyPoints == 0)
 		std::cout << "ClapTrap can't attack : lack of energy\n";
 	else {
@@ -58,7 +58,7 @@ void ClapTrap::attack(const std::string& target)
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (_hitPoints == 0)
-		std::cout << "ClapTrap already died\n";
+		std::cout << "ClapTrap can't take damage : discharged\n";
 	else {
 		if (_hitPoints < amount) _hitPoints = 0;
 		else _hitPoints -= amount;
@@ -68,9 +68,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (_hitPoints == 0)
-		std::cout << "ClapTrap can't be repaired : lack of hit points\n";
-	else if (_energyPoints == 0) {
+	if (_energyPoints == 0) {
 		std::cout << "ClapTrap can't be repaired : lack of energy\n";
 	}
 	else {
