@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 23:00:11 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/30 23:55:16 by yejin            ###   ########.fr       */
+/*   Updated: 2022/06/30 23:56:11 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints == 0)
-		std::cout << "ClapTrap can't take damage : discharged\n";
+		std::cout << "ClapTrap can't be reparied : discharged\n";
 	else if (_energyPoints == 0) {
 		std::cout << "ClapTrap can't be repaired : lack of energy\n";
 	}
