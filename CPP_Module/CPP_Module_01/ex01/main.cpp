@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 23:26:21 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 01:06:56 by yejin            ###   ########.fr       */
+/*   Updated: 2022/07/01 12:27:36 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main(void)
 {
 	int N = 5;
-	Zombie *zombies = zombieHorde(N, "anonymous");
+	Zombie *zombies = zombieHorde(N, "friend");
 	for (int i=0; i<N; i++)
 		zombies[i].announce();
 	delete[] zombies;
