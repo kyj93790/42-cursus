@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 02:02:04 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 02:45:13 by yejin            ###   ########.fr       */
+/*   Updated: 2022/07/01 12:33:43 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ HumanB::~HumanB()
 
 void HumanB::attack(void) const
 {
-	std::cout << _name << " attacks with their " << _weapon->getType() << '\n';
+	if (_weapon == NULL) std::cout << _name << "attacks with there hand\n";
+	else std::cout << _name << " attacks with their " << _weapon->getType() << '\n';
 }
 
 void HumanB::setWeapon(Weapon& weapon)
