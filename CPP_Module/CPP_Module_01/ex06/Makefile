@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
+#    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/29 15:01:57 by yejin            ###   ########.fr        #
+#    Updated: 2022/07/01 12:21:03 by yejikim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,11 @@ all	: $(NAME)
 
 $(NAME)	: $(OBJS)
 	@$(cxx) $(FLAGS) $^ -o $@
+	@echo current complie FLAGS : $(FLAGS)
 	@echo complete $(L_GREEN)COMPILE$(RESET) 🌸
 
 %.o	: %.cpp
 	@$(cxx) $(FLAGS) -c $< -o $@
-	@echo start $(L_GREEN)COMPILE$(RESET) 🌟
-	@echo current complie FLAGS : $(FLAGS)
 
 clean	:
 	@rm -f $(OBJS)
