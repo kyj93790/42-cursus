@@ -6,7 +6,7 @@
 #    By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/06/17 15:12:42 by yejikim          ###   ########.fr        #
+#    Updated: 2022/07/01 12:09:11 by yejikim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,11 @@ all	: $(NAME)
 
 $(NAME)	: $(OBJS)
 	@$(cxx) $(FLAGS) $^ -o $@
+	@echo current complie FLAGS : $(FLAGS)
 	@echo complete $(L_GREEN)COMPILE$(RESET) 🌸
 
 %.o	: %.cpp
 	@$(cxx) $(FLAGS) -c $< -o $@
-	@echo start $(L_GREEN)COMPILE$(RESET) 🌟
-	@echo current complie FLAGS : $(FLAGS)
 
 clean	:
 	@rm -f $(OBJS)

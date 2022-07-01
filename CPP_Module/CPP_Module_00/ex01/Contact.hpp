@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:47:51 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/27 20:16:01 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/01 12:02:31 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,4 @@ class Contact
     void  printFields(void);
 };
 
-#endif;
+#endif

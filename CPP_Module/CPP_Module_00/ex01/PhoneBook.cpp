@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:48:39 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/27 17:21:43 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/01 12:06:59 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void PhoneBook::search()
     int num;
     
     num = numOfContact;
-    if (numOfContact >= 8)
-        numOfContact = 8;
+    if (numOfContact > 8)
+        num = 8;
     std::cout << " ------------------------------------------------------\n";
     std::cout << "| FirstName|  LastName|  NickName|  PhoneNum|DarkSecret|\n";
     for (int i=0; i<num; i++) {
