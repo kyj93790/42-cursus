@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 02:59:19 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 14:57:49 by yejin            ###   ########.fr       */
+/*   Updated: 2022/07/01 12:42:30 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,5 @@ void Harl::complain(std::string level)
 				+ (level == "INFO") * 2 \
 				+ (level == "WARNING") * 3 \
 				+ (level == "ERROR") * 4;
-	switch(lv)
-	{
-		case 1 :
-			(this->*fp[0])();
-			break ;
-		case 2 :
-			(this->*fp[1])();
-			break ;
-		case 3 :
-			(this->*fp[2])();
-			break ;
-		case 4 :
-			(this->*fp[3])();
-			break ;
-	}
+	(this->*fp[lv - 1])();
 }
