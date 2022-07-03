@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 02:49:47 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/29 21:12:54 by yejin            ###   ########.fr       */
+/*   Updated: 2022/07/03 17:44:43 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ int main(int argc, char *argv[])
 			std::cout << "Error : read file\n";
 			return (0);
 		}
-		size_t idx;
+		size_t idx = 0;
 		while (1) {
-			idx = str.find(s1);
+			idx = str.find(s1, idx);
 			if (idx == std::string::npos) {
 				ofs << str << '\n';
 				break ;
 			}
 			str.erase(str.begin() + idx, str.begin() + idx + s1.length());
 			str.insert(idx, s2);
+			idx += s2.length();
 		}
 	}
 	ifs.close();
