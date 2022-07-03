@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 02:59:19 by yejin             #+#    #+#             */
-/*   Updated: 2022/07/01 12:42:30 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 17:42:37 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ void Harl::complain(std::string level)
 				+ (level == "INFO") * 2 \
 				+ (level == "WARNING") * 3 \
 				+ (level == "ERROR") * 4;
+	if (lv == 0) {
+		std::cout << "Error: invalid complain\n";
+		return ;
+	}
 	(this->*fp[lv - 1])();
 }
