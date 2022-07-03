@@ -6,12 +6,13 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:48:39 by yejikim           #+#    #+#             */
-/*   Updated: 2022/07/03 16:27:01 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 19:56:48 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <sstream>
 
 PhoneBook::PhoneBook()
 {
@@ -69,20 +70,23 @@ void PhoneBook::search()
     }
     std::cout << " -------------------------------------------\n";
     
-    std::cout << "Index (get more info) : ";
-    char idx;
-    std::cin >> idx;
-    if (idx < '0' || idx > '9') {
+    std::cout << " Input index (get more info) : ";
+    std::stringstream ss;
+    std::string str;
+    std::getline(std::cin, str);
+    ss << str;
+     int idx;
+    ss >> idx;
+    if (!ss.eof() || idx < 0 || idx > 9) {
         std::cout << "Error: not a valid input\n";
         return ;
-    } else if (idx - '0' >= num) {
+    } else if (idx >= num) {
         std::cout << "Error: out of range\n";
         return ;
     }
-    std::cout << " ------------------------------------------------------\n";
-    std::cout << "| FirstName|  LastName|  NickName|  PhoneNum|DarkSecret|\n";
-    contacts[idx - '0'].printAllFields();
-    std::cout << " ------------------------------------------------------\n";
+    std::cout << " -------------------------------------------\n";
+    contacts[idx].printAllFields();
+    std::cout << " -------------------------------------------\n";
 }
 
 void PhoneBook::exit()

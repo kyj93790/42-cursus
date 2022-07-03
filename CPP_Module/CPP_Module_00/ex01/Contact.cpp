@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:34:33 by yejikim           #+#    #+#             */
-/*   Updated: 2022/07/03 16:21:01 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 19:58:53 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ void Contact::printDefaultFields(int idx)
 
 void Contact::printAllFields(void)
 {
-    std::cout << "|";
-    printField(firstName);
-    printField(lastName);
-    printField(nickname);
-    printField(phoneNumber);
-    printField(darkestSecret);
-    std::cout << "\n";
+    std::cout << "First Name : " << firstName << '\n';
+    std::cout << "Last Name : " << lastName << '\n';
+    std::cout << "Nickname : " << nickname << '\n';
+    std::cout << "Phone Number : " << phoneNumber << '\n';
+    std::cout << "Darkest Secret : " << darkestSecret << '\n';
 }
