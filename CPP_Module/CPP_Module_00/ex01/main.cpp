@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:54:55 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/27 17:17:48 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 16:28:38 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(void)
 
     while (1)
     {
+        std::cin.clear();
         std::cout << "Input command(ADD, SEARCH, EXIT) : ";
         std::getline(std::cin, cmd);
         if (std::cin.eof() || std::cin.fail())

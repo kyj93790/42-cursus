@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:34:33 by yejikim           #+#    #+#             */
-/*   Updated: 2022/06/27 18:06:19 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 16:21:01 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void printField(std::string field)
 {
     std::string s;
 
-    if (field.length() >= 10)
+    if (field.length() > 10)
     {
         s = field.substr(0, 9);
         s += '.';
@@ -45,7 +45,17 @@ static void printField(std::string field)
     std::cout << std::setw(10) << std::right << s << '|';
 }
 
-void Contact::printFields(void)
+void Contact::printDefaultFields(int idx)
+{
+    std::cout << "|";
+    std::cout << std::setw(10) << std::right << idx << '|';
+    printField(firstName);
+    printField(lastName);
+    printField(nickname);
+    std::cout << "\n";
+}
+
+void Contact::printAllFields(void)
 {
     std::cout << "|";
     printField(firstName);

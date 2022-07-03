@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:48:39 by yejikim           #+#    #+#             */
-/*   Updated: 2022/07/01 12:06:59 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 16:27:01 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,26 @@ void PhoneBook::search()
     num = numOfContact;
     if (numOfContact > 8)
         num = 8;
+    std::cout << " -------------------------------------------\n";
+    std::cout << "|     Index| FirstName|  LastName|  NickName|\n";
+    for (int i=0; i<num; i++) {
+        contacts[i].printDefaultFields(i);
+    }
+    std::cout << " -------------------------------------------\n";
+    
+    std::cout << "Index (get more info) : ";
+    char idx;
+    std::cin >> idx;
+    if (idx < '0' || idx > '9') {
+        std::cout << "Error: not a valid input\n";
+        return ;
+    } else if (idx - '0' >= num) {
+        std::cout << "Error: out of range\n";
+        return ;
+    }
     std::cout << " ------------------------------------------------------\n";
     std::cout << "| FirstName|  LastName|  NickName|  PhoneNum|DarkSecret|\n";
-    for (int i=0; i<num; i++) {
-        contacts[i].printFields();
-    }
+    contacts[idx - '0'].printAllFields();
     std::cout << " ------------------------------------------------------\n";
 }
 
