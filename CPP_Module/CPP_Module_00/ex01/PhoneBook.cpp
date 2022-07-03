@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:48:39 by yejikim           #+#    #+#             */
-/*   Updated: 2022/07/03 19:56:48 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 20:02:44 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,12 @@ void PhoneBook::search()
     std::stringstream ss;
     std::string str;
     std::getline(std::cin, str);
+    if (std::cin.eof() || std::cin.fail() || std::cin.bad()) {
+        std::cout << "Error\n";
+        std::exit(EXIT_FAILURE);
+    }
     ss << str;
-     int idx;
+    int idx;
     ss >> idx;
     if (!ss.eof() || idx < 0 || idx > 9) {
         std::cout << "Error: not a valid input\n";
