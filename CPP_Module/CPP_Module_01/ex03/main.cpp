@@ -6,7 +6,7 @@
 /*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 01:46:14 by yejin             #+#    #+#             */
-/*   Updated: 2022/07/01 12:31:15 by yejikim          ###   ########.fr       */
+/*   Updated: 2022/07/03 16:00:49 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ int main(void)
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
-	}
-	while (1) {
-		
 	}
 	return (0);
 }
