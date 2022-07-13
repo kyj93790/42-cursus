@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 22:54:06 by yejin             #+#    #+#             */
-/*   Updated: 2022/06/30 23:39:49 by yejin            ###   ########.fr       */
+/*   Updated: 2022/07/13 13:34:29 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string>
 
 class ClapTrap {
-	private:
+	protected:
 		std::string _name;
 		unsigned int _hitPoints;
 		unsigned int _energyPoints;
@@ -25,6 +25,7 @@ class ClapTrap {
 		ClapTrap();
 		ClapTrap(std::string name);
 		ClapTrap(const ClapTrap& claptrap);
+		ClapTrap(std::string name, unsigned int hitPoints, unsigned int energyPoints, unsigned int attackDamage);
 		~ClapTrap();
 		const ClapTrap& operator=(const ClapTrap& claptrap);
 		void attack(const std::string& target);
