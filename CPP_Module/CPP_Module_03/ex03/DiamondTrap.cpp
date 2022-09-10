@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:14:18 by yejin             #+#    #+#             */
-/*   Updated: 2022/07/16 11:02:51 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/10 17:25:35 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,25 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), Scav
 	std::cout << "Set attackDamage : " << _attackDamage << '\n';
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap) : ClapTrap(diamondtrap), ScavTrap(), FragTrap()
+DiamondTrap::DiamondTrap(const DiamondTrap& diamondtrap) : ClapTrap(), ScavTrap(), FragTrap()
 {
 	std::cout << "[DiamondTrap] " << _name << " : Copy constructor called\n";
+	(*this) = diamondtrap;
 }
 
 DiamondTrap::~DiamondTrap()
 {
 	std::cout << "[DiamondTrap] " << _name << " : Destructor called\n";
+}
+
+const DiamondTrap& DiamondTrap::operator=(const DiamondTrap& diamondtrap)
+{
+	ClapTrap::_name = diamondtrap.ClapTrap::_name;
+	_name = diamondtrap._name;
+	_hitPoints = diamondtrap._hitPoints;
+	_energyPoints = diamondtrap._energyPoints;
+	_attackDamage = diamondtrap._attackDamage;
+	return (*this);
 }
 
 void DiamondTrap::attack(const std::string& target)

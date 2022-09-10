@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 14:58:07 by yejin             #+#    #+#             */
-/*   Updated: 2022/07/16 10:48:03 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/10 17:15:03 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class DiamondTrap : public ScavTrap, public FragTrap {
 		DiamondTrap(std::string name);
 		DiamondTrap(const DiamondTrap& diamondtrap);
 		~DiamondTrap();
+		const DiamondTrap& operator=(const DiamondTrap& diamondtrap);
 		void attack(const std::string& target);
 		void whoAmI();
 };
