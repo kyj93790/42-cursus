@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:05:17 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:33:47 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/11 16:38:11 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void Animal::makeSound() const {
 	std::cout << "[Animal] How can I make sound ?\n"; 
 }
 
-const std::string getType() const {
+const std::string Animal::getType() const {
 	return (type);
 }
