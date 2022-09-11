@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yejikim <yejikim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 23:58:38 by yejin             #+#    #+#             */
-/*   Updated: 2022/07/13 16:36:48 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/11 13:15:51 by yejikim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class ScavTrap : public virtual ClapTrap {
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap& scavtrap);
 		virtual ~ScavTrap();
-		const ScavTrap& operator=(const ScavTrap& scavtrap);
-		void attack(const std::string& target);
+		virtual const ScavTrap& operator=(const ScavTrap& scavtrap);
+		virtual void attack(const std::string& target);
 		void guardGate();
 };
 
