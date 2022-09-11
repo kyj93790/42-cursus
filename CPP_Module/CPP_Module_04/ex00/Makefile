@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/09/11 16:12:14 by yejin            ###   ########.fr        #
+#    Updated: 2022/09/11 16:37:53 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ endif
 NAME	= ex00
 
 ################ FILE ################
-SRCS	= Animal.cpp Dog.cpp Dat.cpp main.cpp
+SRCS	= Animal.cpp Dog.cpp Cat.cpp main.cpp
 
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)
