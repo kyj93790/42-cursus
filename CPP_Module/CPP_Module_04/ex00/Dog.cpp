@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:42:15 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:30:07 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/11 16:36:34 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ const Dog& Dog::operator=(const Dog& dog) {
 }
 
 void Dog::makeSound() const {
-	"[Dog] Woof! Woof!\n";
+	std::cout << "[Dog] Woof! Woof!\n";
 }
