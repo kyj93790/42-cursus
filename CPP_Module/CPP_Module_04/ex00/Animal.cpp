@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:05:17 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:09:09 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/11 16:27:54 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,8 @@ Animal::~Animal() {
 const Animal& Animal::operator=(const Animal& animal) {
 	type = animal.type;
 	return (*this);
+}
+
+void Animal::makeSound() const {
+	std::cout << "[Animal] How can I make sound ?\n"; 
 }

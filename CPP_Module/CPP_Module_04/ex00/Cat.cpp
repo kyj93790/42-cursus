@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:42:15 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:23:01 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/11 16:29:39 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,8 @@ Cat::~Cat() {
 const Cat& Cat::operator=(const Cat& cat) {
 	type = cat.type;
 	return (*this);
+}
+
+void Cat::makeSound() const {
+	"[Cat] Meow~ Meow~\n";
 }
