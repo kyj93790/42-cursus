@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:46:13 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:35:46 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/12 11:54:21 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Animal {
 		Animal();
 		Animal(std::string type);
 		Animal(const Animal& animal);
-		~Animal();
+		virtual ~Animal();
 		const Animal& operator=(const Animal& animal);
 		virtual void makeSound() const;
 		const std::string getType() const;
