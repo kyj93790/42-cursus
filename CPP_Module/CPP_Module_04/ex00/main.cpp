@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:41:24 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:53:37 by yejin            ###   ########.fr       */
+/*   Updated: 2022/09/12 11:53:08 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int main(void) {
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
 
+	delete meta;
+	delete i;
+	delete j;
+	std::cout << '\n';
+	std::cin.getline(temp, 1);
+
 	std::cout << "-----------------compare-----------------\n";
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
@@ -54,6 +60,9 @@ int main(void) {
 	b->makeSound();
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
+
+	delete a;
+	delete b;
 
 	return 0;
 }
