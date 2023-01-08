@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:42:15 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/12 11:51:19 by yejin            ###   ########.fr       */
+/*   Updated: 2023/01/08 13:57:45 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Cat::Cat(const Cat& cat) {
 	std::cout << "[Cat] Copy constructor called\n";
 	type = cat.type;
 	brain = new Brain();
-	for (int i=0; i<100; i++) brain[i] = cat.brain[i];
+	brain->fill(cat.brain->getIdea());
 }
 
 Cat::~Cat() {
