@@ -6,7 +6,7 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 15:41:24 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/12 12:06:09 by yejin            ###   ########.fr       */
+/*   Updated: 2023/01/09 22:48:44 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(void) {
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
 
-	std::cout << "----- Deep Copy -----\n\n";
+	std::cout << "----- Deep Copy in copy constructor -----\n\n";
 	Cat a;
 	a.say();
 	std::cout << '\n';
@@ -62,16 +62,29 @@ int main(void) {
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
 
-	std::cout << "Start think\n";
 	b.think("I'm thinking differently");
-	std::cout << '\n';
-	std::cin.getline(temp, 1);
-
 	b.say();
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
 
 	a.say();
+	std::cout << '\n';
+	std::cin.getline(temp, 1);
+
+	std::cout << "----- Deep Copy in copy assignment -----\n\n";
+
+	Cat c;
+	c = b;
+	c.say();
+	std::cout << '\n';
+	std::cin.getline(temp, 1);
+
+	c.think("ccccccc");
+	c.say();
+	std::cout << '\n';
+	std::cin.getline(temp, 1);
+
+	b.say();
 	std::cout << '\n';
 	std::cin.getline(temp, 1);
 
