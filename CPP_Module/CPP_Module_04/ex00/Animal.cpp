@@ -6,14 +6,14 @@
 /*   By: yejin <yejin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 16:05:17 by yejin             #+#    #+#             */
-/*   Updated: 2022/09/11 16:38:11 by yejin            ###   ########.fr       */
+/*   Updated: 2023/01/09 22:50:54 by yejin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal() {
+Animal::Animal() : type("Animal") {
 	std::cout << "[Animal] Default constructor called\n";
 }
 
