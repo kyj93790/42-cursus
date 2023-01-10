@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2022/09/12 11:49:44 by yejin            ###   ########.fr        #
+#    Updated: 2023/01/10 14:16:08 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ else
 endif
 
 ############### TARGET ###############
-NAME	= ex01
+NAME	= ex02
 
 ################ FILE ################
 SRCS	= Animal.cpp Dog.cpp Cat.cpp main.cpp Brain.cpp
