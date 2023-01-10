@@ -14,6 +14,12 @@ Bureaucrat::Bureaucrat(const std::string name, const int grade) : _name(name)
 	else _grade = grade;
 }
 
+Bureaucrat::Bureaucrat(const Bureaucrat& b) : _name(b.getName())
+{
+	std::cout << "[Bureaucrat] Copy constructor called\n";
+	(*this) = b;
+}
+
 Bureaucrat::~Bureaucrat()
 {
 	std::cout << "[Bureaucrat] Destructor called\n";
