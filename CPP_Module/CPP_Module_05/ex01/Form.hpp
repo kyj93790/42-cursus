@@ -21,7 +21,7 @@ class Form {
 		GradeException GradeTooHighException() const;
 		GradeException GradeTooLowException() const;
 		const std::string getName() const;
-		bool getSigned() const;
+		bool isSigned() const;
 		int getGradeForSign() const;
 		int getGradeForExecute() const;
 		void beSigned(Bureaucrat b);

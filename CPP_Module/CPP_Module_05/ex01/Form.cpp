@@ -47,7 +47,7 @@ const std::string Form::getName() const
 	return (_name);
 }
 
-bool Form::getSigned() const
+bool Form::isSigned() const
 {
 	return (_isSigned);
 }
@@ -78,7 +78,7 @@ std::ostream& operator<<(std::ostream& os, const Form& f)
 	os << "----------Form info----------\n";
 	os << "Name              : " << f.getName() << '\n';
 	os << "IsSigned          : ";
-	if (f.getSigned())
+	if (f.isSigned())
 		os << "true" << '\n';
 	else
 		os << "false" << '\n';
