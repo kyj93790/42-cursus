@@ -23,7 +23,7 @@ class Bureaucrat {
 		void downGrade();
 		GradeException GradeTooHighException() const;
 		GradeException GradeTooLowException() const;
-		void signForm(Form *f);
+		void signForm(Form &f);
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);

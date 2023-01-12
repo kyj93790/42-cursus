@@ -17,8 +17,8 @@ int main(void)
 		std::cout << f1 << '\n';
 		std::cout << f2 << '\n';
 
-		a.signForm(&f1);
-		b.signForm(&f2);
+		a.signForm(f1);
+		b.signForm(f2);
 	} catch (std::exception &e) {
 		std::cout << e.what() << '\n';
 	}
