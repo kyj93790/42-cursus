@@ -1,12 +1,12 @@
 #include "Form.hpp"
 
-Form::Form() : _name("noname"), _signed(false), _gradeForSign(150), _gradeForExecute(150)
+Form::Form() : _name("noname"), _isSigned(false), _gradeForSign(150), _gradeForExecute(150)
 {
 	std::cout << "[Form] Default constructor called\n";
 }
 
 Form::Form(std::string name, int gradeForSign, int gradeForExecute) \
-	: _name(name), _signed(false), _gradeForSign(gradeForSign), _gradeForExecute(gradeForExecute)
+	: _name(name), _isSigned(false), _gradeForSign(gradeForSign), _gradeForExecute(gradeForExecute)
 {
 	std::cout << "[Form] Constructor with attributes called\n";
 
@@ -17,7 +17,7 @@ Form::Form(std::string name, int gradeForSign, int gradeForExecute) \
 	else if (_gradeForExecute > 150) throw GradeTooLowException();
 }
 
-Form::Form(const Form& f) : _name(f._name), _signed(f._signed), _gradeForSign(f._gradeForSign), _gradeForExecute(f._gradeForExecute)
+Form::Form(const Form& f) : _name(f._name), _isSigned(f._isSigned), _gradeForSign(f._gradeForSign), _gradeForExecute(f._gradeForExecute)
 {
 	std::cout << "[Form] Copy constructor with attributes called\n";
 }
@@ -49,7 +49,7 @@ const std::string Form::getName() const
 
 bool Form::getSigned() const
 {
-	return (_signed);
+	return (_isSigned);
 }
 
 int Form::getGradeForSign() const
@@ -67,7 +67,7 @@ void Form::beSigned(Bureaucrat b)
 	int grade = b.getGrade();
 
 	if (grade <= _gradeForSign) {
-		_signed = true;
+		_isSigned = true;
 	} else {
 		throw GradeTooLowException();
 	}
@@ -77,7 +77,7 @@ std::ostream& operator<<(std::ostream& os, const Form& f)
 {
 	os << "----------Form info----------\n";
 	os << "Name              : " << f.getName() << '\n';
-	os << "Signed            : ";
+	os << "IsSigned          : ";
 	if (f.getSigned())
 		os << "true" << '\n';
 	else

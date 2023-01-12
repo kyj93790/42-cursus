@@ -9,7 +9,7 @@
 class Form {
 	private:
 		const std::string _name;
-		bool _signed;
+		bool _isSigned;
 		const int _gradeForSign;
 		const int _gradeForExecute;
 		const Form& operator=(const Form& f);
