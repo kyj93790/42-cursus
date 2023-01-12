@@ -16,8 +16,8 @@ class AForm {
 		const int _gradeForSign;
 		const int _gradeForExecute;
 		const AForm& operator=(const AForm& f);
-	public:
 		AForm();
+	public:
 		AForm(std::string name, int gradeForSign, int gradeForExecute);
 		AForm(const AForm& f);
 		virtual ~AForm();
