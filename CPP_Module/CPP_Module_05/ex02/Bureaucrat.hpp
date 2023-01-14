@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "GradeException.hpp"
+#include "FormException.hpp"
 
 class AForm;
 
@@ -21,8 +21,8 @@ class Bureaucrat {
 		int getGrade() const;
 		void upGrade();
 		void downGrade();
-		GradeException GradeTooHighException() const;
-		GradeException GradeTooLowException() const;
+		FormException GradeTooHighException() const;
+		FormException GradeTooLowException() const;
 		void signForm(AForm &f);
 		void executeForm(AForm const &form);
 };

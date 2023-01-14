@@ -6,7 +6,7 @@
 #    By: yejin <yejin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/15 10:20:43 by yejin             #+#    #+#              #
-#    Updated: 2023/01/12 15:50:44 by yejin            ###   ########.fr        #
+#    Updated: 2023/01/14 19:16:56 by yejin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ endif
 NAME	= ex02
 
 ################ FILE ################
-SRCS	= main.cpp Bureaucrat.cpp GradeException.cpp SignException.cpp FileException.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS	= main.cpp Bureaucrat.cpp FormException.cpp FileException.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 ################ OBJ #################
 OBJS	= $(SRCS:%.cpp=%.o)

@@ -4,9 +4,8 @@
 #include <string>
 #include <iostream>
 # include <fstream>
-#include "GradeException.hpp"
+#include "FormException.hpp"
 #include "Bureaucrat.hpp"
-#include "SignException.hpp"
 #include "FileException.hpp"
 
 class AForm {
@@ -22,8 +21,8 @@ class AForm {
 		AForm(std::string name, std::string target, int gradeForSign, int gradeForExecute);
 		AForm(const AForm& f);
 		virtual ~AForm();
-		GradeException GradeTooHighException() const;
-		GradeException GradeTooLowException() const;
+		FormException GradeTooHighException() const;
+		FormException GradeTooLowException() const;
 		const std::string getName() const;
 		bool isSigned() const;
 		int getGradeForSign() const;
@@ -31,7 +30,7 @@ class AForm {
 		const std::string getTarget() const;
 		void beSigned(Bureaucrat b);
 		virtual void execute(Bureaucrat const &executor) const = 0;
-		SignException IsNotSignedException() const;
+		FormException IsNotSignedException() const;
 		FileException OpenFailException() const;
 };
 

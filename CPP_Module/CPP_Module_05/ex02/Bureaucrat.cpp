@@ -55,14 +55,14 @@ void Bureaucrat::downGrade()
 	else _grade = grade;
 }
 
-GradeException Bureaucrat::GradeTooHighException() const
+FormException Bureaucrat::GradeTooHighException() const
 {
-	return GradeException("Grade is too high");
+	return FormException("Grade is too high");
 }
 
-GradeException Bureaucrat::GradeTooLowException() const
+FormException Bureaucrat::GradeTooLowException() const
 {
-	return GradeException("Grade is too low");
+	return FormException("Grade is too low");
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)

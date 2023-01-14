@@ -27,14 +27,14 @@ const AForm& AForm::operator=(const AForm& f)
 	return (f);
 }
 
-GradeException AForm::GradeTooHighException() const
+FormException AForm::GradeTooHighException() const
 {
-	return GradeException("Grade is too high");
+	return FormException("Grade is too high");
 }
 
-GradeException AForm::GradeTooLowException() const
+FormException AForm::GradeTooLowException() const
 {
-	return GradeException("Grade is too low");
+	return FormException("Grade is too low");
 }
 
 const std::string AForm::getName() const
@@ -89,9 +89,9 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
 	return (os);
 }
 
-SignException AForm::IsNotSignedException() const
+FormException AForm::IsNotSignedException() const
 {
-	return SignException("Form is not signed");
+	return FormException("Form is not signed");
 }
 
 FileException AForm::OpenFailException() const
