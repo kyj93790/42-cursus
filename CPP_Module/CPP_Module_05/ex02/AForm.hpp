@@ -12,13 +12,14 @@
 class AForm {
 	private:
 		const std::string _name;
+		const std::string _target;
 		bool _isSigned;
 		const int _gradeForSign;
 		const int _gradeForExecute;
 		const AForm& operator=(const AForm& f);
 		AForm();
 	public:
-		AForm(std::string name, int gradeForSign, int gradeForExecute);
+		AForm(std::string name, std::string target, int gradeForSign, int gradeForExecute);
 		AForm(const AForm& f);
 		virtual ~AForm();
 		GradeException GradeTooHighException() const;
@@ -27,6 +28,7 @@ class AForm {
 		bool isSigned() const;
 		int getGradeForSign() const;
 		int getGradeForExecute() const;
+		const std::string getTarget() const;
 		void beSigned(Bureaucrat b);
 		virtual void execute(Bureaucrat const &executor) const = 0;
 		SignException IsNotSignedException() const;

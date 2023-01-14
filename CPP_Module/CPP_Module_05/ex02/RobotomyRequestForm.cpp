@@ -1,14 +1,14 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("noname", 72, 45) {
+RobotomyRequestForm::RobotomyRequestForm() : AForm("robotomy request", "noname", 72, 45) {
 
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm(name, 72, 45) {
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("robotomy request", target, 72, 45) {
 
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& f) : AForm(f.getName(), f.getGradeForSign(), f.getGradeForExecute()) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& f) : AForm(f.getName(), f.getTarget(), f.getGradeForSign(), f.getGradeForExecute()) {
 
 }
 
@@ -36,9 +36,9 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	unsigned char c;
 	infile >> c;
 	if (c & 1) {
-		std::cout << this->getName() << " has been robotomized successfully.\n\n";
+		std::cout << this->getTarget() << " has been robotomized successfully.\n\n";
 	} else {
-		std::cout << this->getName() << " failed to be robotomized.\n\n";
+		std::cout << this->getTarget() << " failed to be robotomized.\n\n";
 	}
 	infile.close();
 }
