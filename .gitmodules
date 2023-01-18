@@ -1,0 +1,3 @@
+[submodule "cub3D"]
+	path = cub3D
+	url = https://github.com/sprint42/cub3D
