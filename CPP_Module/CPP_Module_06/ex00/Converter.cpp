@@ -46,7 +46,7 @@ void Converter::printFloat() {
 	else if (_input == "impossible") std::cout << "impossible";
 	else {
 		std::cout << static_cast<float>(_d);
-		if (_d - static_cast<int>(_d) <= 1e-6) std::cout << ".0";
+		if (abs(_d - static_cast<int>(_d)) <= 1e-6) std::cout << ".0";
 		std::cout << 'f';
 	}
 	std::cout << '\n';
@@ -58,7 +58,7 @@ void Converter::printDouble() {
 	else if (_input == "impossible") std::cout << "impossible";
 	else {
 		std::cout << _d;
-		if (_d - static_cast<int>(_d) <= 1e-6) std::cout << ".0";
+		if (abs(_d - static_cast<int>(_d)) <= 1e-6) std::cout << ".0";
 	}
 	std::cout << '\n';
 }
