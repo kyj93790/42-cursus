@@ -6,6 +6,7 @@
 # include <cstdlib>
 # include <iostream>
 # include <climits>
+# include <cfloat>
 
 class Converter {
 	private:
@@ -19,6 +20,7 @@ class Converter {
 		void printFloat();
 		void printDouble();
 		bool isNan();
+		bool isInf();
 	public:
 		Converter(std::string arg);
 		Converter(const Converter& converter);

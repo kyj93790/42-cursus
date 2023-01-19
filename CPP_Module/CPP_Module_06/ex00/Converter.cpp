@@ -44,6 +44,8 @@ void Converter::printFloat() {
 	std::cout << "float: ";
 	if (isNan()) std::cout << "nanf";
 	else if (_input == "impossible") std::cout << "impossible";
+	else if (isInf()) std::cout << "inff";
+	else if (_d < -FLT_MAX || _d > FLT_MAX) std::cout << "impossible";
 	else {
 		std::cout << static_cast<float>(_d);
 		if (abs(_d - static_cast<int>(_d)) <= 1e-6) std::cout << ".0";
@@ -81,6 +83,11 @@ void Converter::convertToDouble() {
 
 bool Converter::isNan() {
 	if (_d != _d) return true;
+	else return false;
+}
+
+bool Converter::isInf() {
+	if (_d != 0 && _d == _d * 2) return true;
 	else return false;
 }
 
