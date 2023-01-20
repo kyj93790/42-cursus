@@ -31,12 +31,12 @@ class Array {
 			}
 		};
 		~Array() {
-			if (_arr) delete _arr;
+			delete[] _arr;
 		};
 		Array& operator=(const Array& arr) {
 			_size = arr._size;
 			if (this != &arr) {
-				if (_arr) delete _arr;
+				delete[] _arr;
 				_arr = new T[arr.size()];
 				for (int i=0; i<_size; i++)
 					_arr[i] = arr[i];
