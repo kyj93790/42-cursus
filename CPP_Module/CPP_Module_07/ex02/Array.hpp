@@ -25,7 +25,11 @@ class Array {
 		Array(const Array& arr) {
 			_size = arr._size;
 			if (this != &arr) {
-				_arr = new T[arr.size()];
+				_arr = new(std::nothrow) T[arr.size()];
+				if (_arr == NULL) {
+					std::cerr << "Error : fail to alloc";
+					std::exit(EXIT_FAILURE);
+				}
 				for (int i=0; i<_size; i++)
 					_arr[i] = arr[i];
 			}
@@ -37,7 +41,11 @@ class Array {
 			_size = arr._size;
 			if (this != &arr) {
 				delete[] _arr;
-				_arr = new T[arr.size()];
+				_arr = new(std::nothrow) T[arr.size()];
+				if (_arr == NULL) {
+					std::cerr << "Error : fail to alloc";
+					std::exit(EXIT_FAILURE);
+				}
 				for (int i=0; i<_size; i++)
 					_arr[i] = arr[i];
 			}
