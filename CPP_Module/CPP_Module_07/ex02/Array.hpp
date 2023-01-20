@@ -14,8 +14,11 @@ class Array {
 		Array(unsigned int n) : _size(n), _arr(new T[n]) { };
 		Array(const Array& arr) {
 			_size = arr._size;
-			if (this != &arr)
+			if (this != &arr) {
 				_arr = new T[arr.size()];
+				for (int i=0; i<_size; i++)
+					_arr[i] = arr[i];
+			}
 		};
 		~Array() {
 			if (_arr) delete _arr;
@@ -25,6 +28,8 @@ class Array {
 			if (this != &arr) {
 				if (_arr) delete _arr;
 				_arr = new T[arr.size()];
+				for (int i=0; i<_size; i++)
+					_arr[i] = arr[i];
 			}
 			return (*this);
 		};
