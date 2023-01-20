@@ -10,8 +10,18 @@ class Array {
 		int _size;
 		T *_arr;
 	public:
-		Array() : _size(0), _arr(new T[0]) { };
-		Array(unsigned int n) : _size(n), _arr(new T[n]) { };
+		Array() : _size(0), _arr(new(std::nothrow) T[0]) {
+			if (_arr == NULL) {
+				std::cerr << "Error : fail to alloc";
+				std::exit(EXIT_FAILURE);
+			}
+		};
+		Array(unsigned int n) : _size(n), _arr(new(std::nothrow) T[n]) { 
+			if (_arr == NULL) {
+				std::cerr << "Error : fail to alloc";
+				std::exit(EXIT_FAILURE);
+			}
+		};
 		Array(const Array& arr) {
 			_size = arr._size;
 			if (this != &arr) {
