@@ -14,9 +14,9 @@ int main(void) {
 	std::cout << sp.longestSpan() << std::endl;
 	
 	try {
-		std::vector<int> v(5);
-		for (int i=0; i<5; i++) v[i] = (i)*2; // 0 2 4 6 8
-		Span s(5);
+		std::vector<int> v(10000);
+		for (int i=0; i<10000; i++) v[i] = (i+1)*3; // 3 ~ 30000
+		Span s(10000);
 		
 		s.addNumbers(v.begin(), v.end());
 
