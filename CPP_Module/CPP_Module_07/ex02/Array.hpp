@@ -23,8 +23,8 @@ class Array {
 			}
 		};
 		Array(const Array& arr) {
-			_size = arr._size;
 			if (this != &arr) {
+				_size = arr._size;
 				_arr = new(std::nothrow) T[arr.size()];
 				if (_arr == NULL) {
 					std::cerr << "Error : fail to alloc";
@@ -38,8 +38,8 @@ class Array {
 			delete[] _arr;
 		};
 		Array& operator=(const Array& arr) {
-			_size = arr._size;
 			if (this != &arr) {
+				_size = arr._size;
 				delete[] _arr;
 				_arr = new(std::nothrow) T[arr.size()];
 				if (_arr == NULL) {
