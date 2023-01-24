@@ -33,9 +33,10 @@ int Span::shortestSpan() {
 	
 	std::vector<int> v(_v);
 	std::vector<int>::iterator it;
-	int shortestSpan = v.back() - v.front();
+	int shortestSpan;
 
 	sort(v.begin(), v.end());
+	shortestSpan = v.back() - v.front();
 	for (it = v.begin()+1; it != v.end(); ++it) {
 		shortestSpan = std::min(shortestSpan, *it - *(it-1));
 	}
