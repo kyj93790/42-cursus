@@ -4,6 +4,3 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/sprint42/minishell
-[submodule "ft_irc"]
-	path = ft_irc
-	url = https://github.com/CacaoTalk/ft_irc
