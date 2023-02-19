@@ -1,3 +1,7 @@
+# INCEPTION
+1. [Docker: concept](https://velog.io/@kyj93790/Inception-Docker-tutorial)
+
+
 ## ✅ TO DO
 
 ### Mandatory
@@ -25,3 +29,4 @@ DB와 같이 보존을 해야하는 정보가 있을 수 있다. 이런 것들�
 - [ ] A second volume that contains your WordPress website files
 - [ ] A **docker-network** that establishes the connection between your containers
 <br>
+
